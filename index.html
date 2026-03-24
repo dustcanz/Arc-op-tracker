@@ -8,305 +8,129 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07091a;
-      --surface: #0c1026;
-      --surface2: #111830;
-      --border: #1c2840;
-      --border2: #243152;
-      --accent: #00d4ff;
-      --accent-dim: rgba(0,212,255,0.12);
-      --purple: #a855f7;
-      --ftr: #9333ea;
-      --etr: #06b6d4;
-      --byd: #ef4444;
-      --text: #dde6f5;
-      --text-dim: #4e6080;
-      --text-mid: #7a94b8;
-      --c-white: #dde6f5;
-      --c-silver: #94a3b8;
-      --c-gold: #f59e0b;
-      --c-plat: #e8d87a;
-      --c-rainbow: #34d399;
+      --bg:#07091a; --surface:#0c1026; --surface2:#111830;
+      --border:#1c2840; --border2:#243152;
+      --accent:#00d4ff; --accent-dim:rgba(0,212,255,0.12);
+      --purple:#a855f7; --byd:#ef4444;
+      --text:#dde6f5; --text-dim:#4e6080; --text-mid:#7a94b8;
+      --c-white:#dde6f5; --c-silver:#94a3b8; --c-gold:#f59e0b; --c-plat:#e8d87a; --c-rainbow:#34d399;
     }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:20px;padding:0 24px;height:52px;background:rgba(7,9,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .logo{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+    .logo em{font-style:normal;color:var(--accent);}
+    nav{display:flex;gap:2px;margin-left:auto;}
+    .nav-btn{padding:6px 18px;background:transparent;border:1px solid transparent;color:var(--text-dim);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .2s,border-color .2s;}
+    .nav-btn:hover{color:var(--text);border-color:var(--border2);}
+    .nav-btn.active{color:var(--accent);border-color:var(--accent);background:var(--accent-dim);}
 
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      font-size: 13px;
-    }
+    main{max-width:1100px;margin:0 auto;padding:28px 24px;}
+    .tab-content{display:none;}.tab-content.active{display:block;}
 
-    /* ── Header ── */
-    header {
-      position: sticky; top: 0; z-index: 50;
-      display: flex; align-items: center; gap: 20px;
-      padding: 0 24px;
-      height: 52px;
-      background: rgba(7,9,26,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
+    .op-hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--surface) 0%,#0e1530 100%);border:1px solid var(--border2);padding:36px 40px 32px;margin-bottom:20px;display:flex;align-items:center;gap:48px;}
+    .op-hero::after{content:'';position:absolute;top:0;right:-80px;width:300px;height:300px;background:radial-gradient(ellipse,rgba(0,212,255,0.06) 0%,transparent 70%);pointer-events:none;}
+    .op-main{flex:1;}
+    .op-eyebrow{font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px;}
+    .op-pct{font-family:'Rajdhani',sans-serif;font-size:64px;font-weight:700;line-height:1;margin-bottom:6px;}
+    .op-raw{font-size:13px;color:var(--text-dim);font-family:'Rajdhani',sans-serif;}
+    .op-bar{height:3px;background:var(--border2);margin-top:14px;border-radius:2px;overflow:hidden;}
+    .op-bar-fill{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+    .op-stat{text-align:center;min-width:72px;}
+    .op-stat-val{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;}
+    .op-stat-lbl{font-size:10px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;}
+    .op-stat-divider{width:1px;background:var(--border);align-self:stretch;}
 
-    .logo {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 20px; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase;
-      color: var(--text);
-    }
-    .logo em { font-style: normal; color: var(--accent); }
+    .c-white{color:var(--c-white);}.c-silver{color:var(--c-silver);}.c-gold{color:var(--c-gold);}.c-plat{color:var(--c-plat);}.c-rainbow{color:var(--c-rainbow);}
 
-    nav { display: flex; gap: 2px; margin-left: auto; }
+    .section-head{font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase;margin-bottom:10px;margin-top:24px;display:flex;align-items:center;gap:12px;}
+    .section-head::after{content:'';flex:1;height:1px;background:var(--border);}
 
-    .nav-btn {
-      padding: 6px 20px;
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-dim);
-      cursor: pointer;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 13px; font-weight: 600; letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .nav-btn:hover { color: var(--text); border-color: var(--border2); }
-    .nav-btn.active { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+    .level-grid{display:grid;gap:6px;}
+    .lv-row{background:var(--surface);border:1px solid var(--border);padding:10px 16px;display:grid;grid-template-columns:64px 1fr 100px;align-items:center;gap:20px;transition:border-color .2s;}
+    .lv-row:hover{border-color:var(--border2);}
+    .lv-name{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;}
+    .lv-bar-wrap{display:flex;flex-direction:column;gap:5px;}
+    .lv-bar-bg{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;}
+    .lv-bar-fill{height:100%;border-radius:2px;transition:width .5s ease;}
+    .lv-detail{font-size:11px;color:var(--text-dim);}
+    .lv-pct{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;text-align:right;}
 
-    /* ── Layout ── */
-    main { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+    .btn{padding:7px 16px;background:var(--accent);border:none;color:var(--bg);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:background .15s;white-space:nowrap;}
+    .btn:hover{background:#33e0ff;}
+    .btn.danger{background:var(--byd);color:white;}.btn.danger:hover{background:#f87171;}
+    .btn.ghost{background:transparent;border:1px solid var(--border2);color:var(--text-mid);}.btn.ghost:hover{border-color:var(--text-mid);color:var(--text);}
+    .btn.sm{padding:4px 10px;font-size:11px;}
+    .btn.ocr{background:transparent;border:1px solid var(--purple);color:#c084fc;}.btn.ocr:hover{background:rgba(168,85,247,0.15);}
+    .btn.imp{background:transparent;border:1px solid var(--border2);color:var(--text-mid);}.btn.imp:hover{border-color:var(--accent);color:var(--accent);}
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    select,input[type="text"],input[type="number"],input[type="password"]{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:7px 10px;font-family:'Noto Sans JP',sans-serif;font-size:12px;outline:none;transition:border-color .2s;-moz-appearance:textfield;}
+    input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;}
+    select:focus,input:focus{border-color:var(--accent);}
+    select{cursor:pointer;}
 
-    /* ── Dashboard ── */
-    .op-hero {
-      position: relative; overflow: hidden;
-      background: linear-gradient(135deg, var(--surface) 0%, #0e1530 100%);
-      border: 1px solid var(--border2);
-      padding: 36px 40px 32px;
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 48px;
-    }
-    .op-hero::after {
-      content: '';
-      position: absolute; top: 0; right: -80px;
-      width: 300px; height: 300px;
-      background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
+    .toolbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+    .table-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;}
+    th{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+    td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:middle;}
+    tr:last-child td{border-bottom:none;}
+    tbody tr:hover td{background:rgba(255,255,255,.015);}
 
-    .op-main { flex: 1; }
-    .op-eyebrow {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 11px; letter-spacing: 4px; color: var(--text-dim);
-      text-transform: uppercase; margin-bottom: 4px;
-    }
-    .op-pct {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 64px; font-weight: 700; line-height: 1;
-      margin-bottom: 6px;
-    }
-    .op-raw { font-size: 13px; color: var(--text-dim); font-family: 'Rajdhani', sans-serif; }
-    .op-bar { height: 3px; background: var(--border2); margin-top: 14px; border-radius: 2px; overflow: hidden; }
-    .op-bar-fill { height: 100%; border-radius: 2px; transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+    .diff-badge{display:inline-flex;align-items:center;justify-content:center;padding:2px 7px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;}
+    .d-FTR{background:rgba(147,51,234,.25);color:#c084fc;border:1px solid #7e22ce;}
+    .d-ETR{background:rgba(6,182,212,.2);color:#67e8f9;border:1px solid #0891b2;}
+    .d-BYD{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid #b91c1c;}
 
-    .op-stats { display: flex; flex-direction: column; gap: 12px; }
-    .op-stat { text-align: center; min-width: 72px; }
-    .op-stat-val {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 28px; font-weight: 700;
-    }
-    .op-stat-lbl { font-size: 10px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
-    .op-stat-divider { width: 1px; background: var(--border); align-self: stretch; }
+    .score-inp{width:116px;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;text-align:right;}
+    .score-inp::placeholder{color:var(--text-dim);font-size:12px;font-weight:400;}
+    .mono{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;}
+    .dim{color:var(--text-dim);}
+    .badge-pm{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:1px 5px;background:rgba(52,211,153,.15);color:var(--c-rainbow);border:1px solid rgba(52,211,153,.3);margin-left:4px;}
+    .badge-fr{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:1px 5px;background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3);margin-left:4px;}
+    .fr-check{accent-color:var(--purple);width:14px;height:14px;cursor:pointer;}
+    .empty-state{text-align:center;padding:60px 24px;color:var(--text-dim);border:1px dashed var(--border2);}
+    .empty-state p{margin-top:8px;font-size:12px;}
 
-    /* Color classes */
-    .c-white  { color: var(--c-white); }
-    .c-silver { color: var(--c-silver); }
-    .c-gold   { color: var(--c-gold); }
-    .c-plat   { color: var(--c-plat); }
-    .c-rainbow{ color: var(--c-rainbow); }
+    /* Settings */
+    .settings-section{background:var(--surface);border:1px solid var(--border);padding:24px;margin-bottom:16px;}
+    .settings-title{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+    .setting-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+    .setting-label{font-size:12px;color:var(--text-mid);min-width:160px;}
+    .setting-row input{flex:1;min-width:200px;max-width:420px;}
+    .hint{font-size:11px;color:var(--text-dim);margin-top:4px;line-height:1.8;}
+    .hint a{color:var(--accent);text-decoration:none;}.hint a:hover{text-decoration:underline;}
+    .schema-box{background:var(--bg);border:1px solid var(--border2);padding:14px 16px;font-family:monospace;font-size:12px;color:#7dd3fc;line-height:1.8;overflow-x:auto;white-space:pre;margin-top:10px;}
+    .status-ok{color:var(--c-rainbow);font-size:11px;margin-left:8px;}
+    .status-err{color:#f87171;font-size:11px;margin-left:8px;}
 
-    /* ── Level Breakdown ── */
-    .section-head {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 11px; letter-spacing: 3px; color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 10px; margin-top: 24px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .section-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    /* Modal */
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;align-items:center;justify-content:center;}
+    .overlay.open{display:flex;}
+    .modal{background:var(--surface);border:1px solid var(--border2);padding:28px;width:440px;max-width:95vw;max-height:90vh;overflow-y:auto;}
+    .modal-title{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:22px;}
+    .fgroup{margin-bottom:14px;}
+    .flabel{display:block;font-size:10px;color:var(--text-dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+    .fgroup input,.fgroup select{width:100%;}
+    .modal-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:22px;}
+    .err-msg{color:#f87171;font-size:11px;margin-top:4px;}
 
-    .level-grid { display: grid; gap: 6px; }
-
-    .lv-row {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 10px 16px;
-      display: grid;
-      grid-template-columns: 64px 1fr 100px;
-      align-items: center; gap: 20px;
-      transition: border-color 0.2s;
-    }
-    .lv-row:hover { border-color: var(--border2); }
-
-    .lv-name {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 18px; font-weight: 700; color: var(--text);
-    }
-
-    .lv-bar-wrap { display: flex; flex-direction: column; gap: 5px; }
-    .lv-bar-bg { height: 4px; background: var(--border2); border-radius: 2px; overflow: hidden; }
-    .lv-bar-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
-    .lv-detail { font-size: 11px; color: var(--text-dim); }
-
-    .lv-pct {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 18px; font-weight: 700;
-      text-align: right;
-    }
-
-    /* ── Toolbar ── */
-    .toolbar {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 14px; flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 7px 16px;
-      background: var(--accent); border: none;
-      color: var(--bg);
-      cursor: pointer;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: background 0.15s;
-      white-space: nowrap;
-    }
-    .btn:hover { background: #33e0ff; }
-    .btn.danger { background: var(--byd); color: white; }
-    .btn.danger:hover { background: #f87171; }
-    .btn.ghost {
-      background: transparent;
-      border: 1px solid var(--border2);
-      color: var(--text-mid);
-    }
-    .btn.ghost:hover { border-color: var(--text-mid); color: var(--text); }
-    .btn.sm { padding: 4px 10px; font-size: 11px; }
-
-    select, input[type="text"], input[type="number"] {
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      color: var(--text);
-      padding: 7px 10px;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 12px;
-      outline: none;
-      transition: border-color 0.2s;
-      -moz-appearance: textfield;
-    }
-    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
-    select:focus, input:focus { border-color: var(--accent); }
-    select { cursor: pointer; }
-
-    /* ── Table ── */
-    .table-wrap { overflow-x: auto; }
-
-    table { width: 100%; border-collapse: collapse; }
-
-    th {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 10px; letter-spacing: 2px;
-      color: var(--text-dim); text-transform: uppercase;
-      padding: 8px 10px; text-align: left;
-      border-bottom: 1px solid var(--border2);
-      white-space: nowrap;
-    }
-    td {
-      padding: 9px 10px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-    tr:last-child td { border-bottom: none; }
-    tbody tr:hover td { background: rgba(255,255,255,0.015); }
-
-    .diff-badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 2px 7px;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 11px; font-weight: 700; letter-spacing: 1px;
-    }
-    .d-FTR { background: rgba(147,51,234,0.25); color: #c084fc; border: 1px solid #7e22ce; }
-    .d-ETR { background: rgba(6,182,212,0.2);  color: #67e8f9; border: 1px solid #0891b2; }
-    .d-BYD { background: rgba(239,68,68,0.2);  color: #fca5a5; border: 1px solid #b91c1c; }
-
-    .score-inp {
-      width: 110px;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 14px; font-weight: 600;
-      text-align: right;
-    }
-    .score-inp::placeholder { color: var(--text-dim); font-size: 12px; font-weight: 400; }
-
-    .mono { font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 600; }
-    .dim  { color: var(--text-dim); }
-
-    .badge-pm { 
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 10px; font-weight: 700; letter-spacing: 1px;
-      padding: 1px 5px; background: rgba(52,211,153,0.15);
-      color: var(--c-rainbow); border: 1px solid rgba(52,211,153,0.3);
-      margin-left: 4px;
-    }
-    .badge-fr {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 10px; font-weight: 700; letter-spacing: 1px;
-      padding: 1px 5px; background: rgba(168,85,247,0.15);
-      color: #c084fc; border: 1px solid rgba(168,85,247,0.3);
-      margin-left: 4px;
-    }
-
-    .fr-check { accent-color: var(--purple); width: 14px; height: 14px; cursor: pointer; }
-
-    .empty-state {
-      text-align: center; padding: 60px 24px;
-      color: var(--text-dim);
-      border: 1px dashed var(--border2);
-    }
-    .empty-state p { margin-top: 8px; font-size: 12px; }
-
-    /* ── Modal ── */
-    .overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: 200;
-      align-items: center; justify-content: center;
-    }
-    .overlay.open { display: flex; }
-
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      padding: 28px;
-      width: 420px; max-width: 95vw;
-    }
-    .modal-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 16px; font-weight: 700; letter-spacing: 2px;
-      color: var(--accent); text-transform: uppercase;
-      margin-bottom: 22px;
-    }
-    .fgroup { margin-bottom: 14px; }
-    .flabel {
-      display: block; font-size: 10px; color: var(--text-dim);
-      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px;
-    }
-    .fgroup input, .fgroup select { width: 100%; }
-    .modal-foot {
-      display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px;
-    }
-    .err-msg { color: #f87171; font-size: 11px; margin-top: 4px; }
+    /* OCR */
+    .ocr-drop{border:2px dashed var(--border2);padding:40px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:14px;}
+    .ocr-drop:hover{border-color:var(--purple);}
+    .ocr-drop-icon{font-size:32px;margin-bottom:8px;}
+    .ocr-drop p{color:var(--text-dim);font-size:12px;}
+    .ocr-result{background:var(--bg);border:1px solid var(--border2);padding:14px;margin-bottom:14px;}
+    .ocr-result-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);font-size:12px;}
+    .ocr-result-row:last-child{border-bottom:none;}
+    .ocr-result-key{color:var(--text-dim);font-family:'Rajdhani',sans-serif;letter-spacing:1px;font-size:11px;text-transform:uppercase;}
+    .ocr-result-val{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;}
+    .ocr-match{color:var(--c-rainbow);font-size:11px;margin-bottom:12px;}
+    .ocr-nomatch{color:#f87171;font-size:11px;margin-bottom:12px;}
+    .loading{display:flex;align-items:center;gap:8px;color:var(--text-dim);font-size:12px;padding:20px 0;}
+    .spinner{width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
   </style>
 </head>
 <body>
@@ -314,15 +138,15 @@
 <header>
   <div class="logo">ARCAEA <em>OP</em> TRACKER</div>
   <nav>
-    <button class="nav-btn active" data-tab="dashboard" onclick="switchTab(this,'dashboard')">DASHBOARD</button>
-    <button class="nav-btn" data-tab="songs" onclick="switchTab(this,'songs')">SONGS</button>
+    <button class="nav-btn active" onclick="switchTab(this,'dashboard')">DASHBOARD</button>
+    <button class="nav-btn" onclick="switchTab(this,'songs')">SONGS</button>
+    <button class="nav-btn" onclick="switchTab(this,'settings')">SETTINGS</button>
   </nav>
 </header>
 
 <main>
-  <!-- ══ DASHBOARD ══ -->
+  <!-- DASHBOARD -->
   <div id="tab-dashboard" class="tab-content active">
-
     <div class="op-hero">
       <div class="op-main">
         <div class="op-eyebrow">Total Over Power</div>
@@ -331,47 +155,28 @@
         <div class="op-bar"><div class="op-bar-fill" id="d-bar" style="width:0%"></div></div>
       </div>
       <div style="display:flex;gap:0;align-items:stretch;">
-        <div class="op-stat">
-          <div class="op-stat-val c-rainbow" id="d-pm">0</div>
-          <div class="op-stat-lbl">PM</div>
-        </div>
+        <div class="op-stat"><div class="op-stat-val c-rainbow" id="d-pm">0</div><div class="op-stat-lbl">PM</div></div>
         <div class="op-stat-divider" style="margin:0 12px"></div>
-        <div class="op-stat">
-          <div class="op-stat-val" style="color:#c084fc" id="d-fr">0</div>
-          <div class="op-stat-lbl">FR</div>
-        </div>
+        <div class="op-stat"><div class="op-stat-val" style="color:#c084fc" id="d-fr">0</div><div class="op-stat-lbl">FR</div></div>
         <div class="op-stat-divider" style="margin:0 12px"></div>
-        <div class="op-stat">
-          <div class="op-stat-val" style="color:var(--accent)" id="d-scored">0</div>
-          <div class="op-stat-lbl">入力済</div>
-        </div>
+        <div class="op-stat"><div class="op-stat-val" style="color:var(--accent)" id="d-scored">0</div><div class="op-stat-lbl">入力済</div></div>
         <div class="op-stat-divider" style="margin:0 12px"></div>
-        <div class="op-stat">
-          <div class="op-stat-val" id="d-total">0</div>
-          <div class="op-stat-lbl">譜面数</div>
-        </div>
+        <div class="op-stat"><div class="op-stat-val" id="d-total">0</div><div class="op-stat-lbl">譜面数</div></div>
       </div>
     </div>
-
     <div class="section-head">Level Breakdown</div>
-    <div class="level-grid" id="lv-grid">
-      <div class="empty-state">楽曲を登録するとレベル別の集計が表示されます</div>
-    </div>
+    <div class="level-grid" id="lv-grid"><div class="empty-state">楽曲を登録するとレベル別の集計が表示されます</div></div>
   </div>
 
-  <!-- ══ SONGS ══ -->
+  <!-- SONGS -->
   <div id="tab-songs" class="tab-content">
     <div class="toolbar">
-      <button class="btn" onclick="openAdd()">＋ 楽曲を追加</button>
-      <select id="f-diff" onchange="renderTable()">
-        <option value="">全難易度</option>
-        <option value="FTR">FTR</option>
-        <option value="ETR">ETR</option>
-        <option value="BYD">BYD</option>
-      </select>
-      <select id="f-lv" onchange="renderTable()">
-        <option value="">全レベル</option>
-      </select>
+      <button class="btn imp" onclick="triggerImport()">📁 楽曲データ読み込み (.json)</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importJSON(this)">
+      <button class="btn ocr" onclick="openOCR()">📷 スクショから入力</button>
+      <button class="btn ghost" onclick="openAdd()">＋ 手動追加</button>
+      <select id="f-diff" onchange="renderTable()"><option value="">全難易度</option><option value="FTR">FTR</option><option value="ETR">ETR</option><option value="BYD">BYD</option></select>
+      <select id="f-lv" onchange="renderTable()"><option value="">全レベル</option></select>
       <select style="margin-left:auto" id="f-sort" onchange="renderTable()">
         <option value="const-desc">定数降順</option>
         <option value="const-asc">定数昇順</option>
@@ -380,41 +185,93 @@
       </select>
     </div>
     <div class="table-wrap" id="tbl-container">
-      <div class="empty-state">
-        楽曲が登録されていません<p>「＋ 楽曲を追加」から登録してください</p>
+      <div class="empty-state">楽曲が登録されていません<p>「楽曲データ読み込み」からJSONを読み込むか、手動で追加してください</p></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div id="tab-settings" class="tab-content">
+    <div class="settings-section">
+      <div class="settings-title">スクリーンショットOCR</div>
+      <div class="setting-row">
+        <div class="setting-label">Anthropic API Key</div>
+        <input type="password" id="s-apikey" placeholder="sk-ant-..." oninput="saveApiKey(this.value)">
+        <span id="apikey-status"></span>
       </div>
+      <div class="hint">
+        スクリーンショットからスコアを自動読み取りするために使用します。<br>
+        APIキーは <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a> で取得できます。<br>
+        入力したキーはこのブラウザのlocalStorageにのみ保存され、外部には送信されません。
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">楽曲データフォーマット</div>
+      <div class="hint">以下のJSON形式のファイルをSONGSタブの「楽曲データ読み込み」から読み込めます。<br>同じtitle＋difficultyの組み合わせは上書き更新されます。</div>
+      <div class="schema-box">[
+  {
+    "title": "Tempestissimo",
+    "difficulty": "FTR",
+    "constant": 11.7,
+    "totalNotes": 1403
+  },
+  {
+    "title": "Testify",
+    "difficulty": "BYD",
+    "constant": 12.0,
+    "totalNotes": 2221
+  }
+]</div>
+      <div class="hint" style="margin-top:10px">
+        ・ <b>difficulty</b>: FTR / ETR / BYD のいずれか（対象外のPST/PRSは読み込まれません）<br>
+        ・ <b>constant</b>: 譜面定数（例: 11.7）<br>
+        ・ <b>totalNotes</b>: 総ノーツ数（整数）
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-title">データ管理</div>
+      <div class="setting-row">
+        <button class="btn ghost" onclick="exportData()">スコアデータをエクスポート</button>
+        <button class="btn ghost" onclick="triggerScoreImport()">スコアデータを復元</button>
+        <input type="file" id="score-import-file" accept=".json" style="display:none" onchange="importScoreData(this)">
+      </div>
+      <div class="hint">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データは別途JSONで読み込んでください。</div>
     </div>
   </div>
 </main>
 
-<!-- ══ Modal ══ -->
-<div class="overlay" id="modal-overlay" onclick="overlayClick(event)">
+<!-- 楽曲追加/編集 Modal -->
+<div class="overlay" id="song-modal" onclick="overlayClick(event,'song-modal')">
   <div class="modal">
     <div class="modal-title" id="modal-ttl">楽曲を追加</div>
-    <div class="fgroup">
-      <label class="flabel">楽曲名</label>
-      <input type="text" id="f-title" placeholder="例: Tempestissimo" autocomplete="off">
-    </div>
-    <div class="fgroup">
-      <label class="flabel">難易度</label>
-      <select id="f-difficulty">
-        <option value="FTR">FTR (Future)</option>
-        <option value="ETR">ETR (Eternal)</option>
-        <option value="BYD">BYD (Beyond)</option>
-      </select>
-    </div>
-    <div class="fgroup">
-      <label class="flabel">譜面定数</label>
-      <input type="number" id="f-const" step="0.1" min="1" max="12" placeholder="例: 11.7">
-    </div>
-    <div class="fgroup">
-      <label class="flabel">総ノーツ数</label>
-      <input type="number" id="f-notes" step="1" min="1" placeholder="例: 1450">
-      <div class="err-msg" id="f-err" style="display:none"></div>
-    </div>
+    <div class="fgroup"><label class="flabel">楽曲名</label><input type="text" id="f-title" placeholder="例: Tempestissimo" autocomplete="off"></div>
+    <div class="fgroup"><label class="flabel">難易度</label><select id="f-difficulty"><option value="FTR">FTR</option><option value="ETR">ETR</option><option value="BYD">BYD</option></select></div>
+    <div class="fgroup"><label class="flabel">譜面定数</label><input type="number" id="f-const" step="0.1" min="1" max="12.9" placeholder="例: 11.7"></div>
+    <div class="fgroup"><label class="flabel">総ノーツ数</label><input type="number" id="f-notes" step="1" min="1" placeholder="例: 1450"><div class="err-msg" id="f-err" style="display:none"></div></div>
     <div class="modal-foot">
-      <button class="btn ghost" onclick="closeModal()">キャンセル</button>
+      <button class="btn ghost" onclick="closeModal('song-modal')">キャンセル</button>
       <button class="btn" onclick="saveModal()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- OCR Modal -->
+<div class="overlay" id="ocr-modal" onclick="overlayClick(event,'ocr-modal')">
+  <div class="modal" style="width:480px">
+    <div class="modal-title">スクショからスコア入力</div>
+    <div id="ocr-drop" class="ocr-drop" onclick="document.getElementById('ocr-file').click()">
+      <div class="ocr-drop-icon">📷</div>
+      <p>リザルト画面のスクリーンショットをクリックして選択</p>
+      <p style="margin-top:4px;font-size:11px">対応形式: PNG / JPG</p>
+    </div>
+    <input type="file" id="ocr-file" accept="image/*" style="display:none" onchange="runOCR(this)">
+    <div id="ocr-preview" style="display:none"></div>
+    <div id="ocr-loading" style="display:none"><div class="loading"><div class="spinner"></div>AIが画像を解析中...</div></div>
+    <div id="ocr-result-area" style="display:none"></div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('ocr-modal')">閉じる</button>
+      <button class="btn" id="ocr-apply-btn" style="display:none" onclick="applyOCR()">このスコアを適用</button>
     </div>
   </div>
 </div>
@@ -423,341 +280,350 @@
 // ════ State ════
 let songs  = JSON.parse(localStorage.getItem('aop_songs')  || '[]');
 let scores = JSON.parse(localStorage.getItem('aop_scores') || '{}');
-let editId = null;
+let editSongId = null;
+let ocrData    = null;
 
-function persist() {
-  localStorage.setItem('aop_songs',  JSON.stringify(songs));
-  localStorage.setItem('aop_scores', JSON.stringify(scores));
-}
-function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+function persist(){localStorage.setItem('aop_songs',JSON.stringify(songs));localStorage.setItem('aop_scores',JSON.stringify(scores));}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
 
-// ════ OP Calculation ════
-function potential(score, c) {
-  if (score >= 10000000) return c + 1;
-  if (score >= 9800000)  return c + (score - 9800000)  / 200000;
-  if (score >= 9500000)  return c - 0.5 + (score - 9500000) / 600000;
-  if (score >= 9200000)  return c - 1.0 + (score - 9200000) / 600000;
-  if (score >= 8900000)  return c - 1.5 + (score - 8900000) / 600000;
-  return Math.max(0, c - 2.0 + score / 8900000 * 0.5);
+// ════ OP Calc ════
+function potential(score,c){
+  if(score>=10000000) return c+1;
+  if(score>=9800000)  return c+(score-9800000)/200000;
+  if(score>=9500000)  return c-0.5+(score-9500000)/600000;
+  if(score>=9200000)  return c-1.0+(score-9200000)/600000;
+  if(score>=8900000)  return c-1.5+(score-8900000)/600000;
+  return Math.max(0,c-2.0+score/8900000*0.5);
 }
 
-function calcOP(score, c, notes) {
-  if (!score || score <= 0) return 0;
-  const pot = potential(score, c);
-  let rb = 0, pb = 0;
-  if (score >= 10000000) {
-    rb = 0.5;
-    pb = notes > 0 ? 0.75 * (score - 10000000) / notes : 0;
-  } else if (score >= 9800000) {
-    rb = (score - 9800000) / 200000 * 0.5;
+function calcOP(score,c,notes){
+  if(!score||score<=0) return 0;
+  const pot=potential(score,c);
+  let rb=0,pb=0;
+  if(score>=10000000){
+    rb=0.5;
+    // PMボーナス: 無印PURE数/totalNotesで0〜0.75
+    // 無印PURE数 = score - 10000000（ただしtotalNotes以下に制限）
+    if(notes>0) pb=0.75*Math.min(score-10000000,notes)/notes;
+  } else if(score>=9800000){
+    rb=(score-9800000)/200000*0.5;
   }
-  return pot * 5 + rb + pb;
+  return pot*5+rb+pb;
 }
 
-function maxOP(c) { return (c + 1) * 5 + 0.5 + 0.75; }
+function maxOP(c){return(c+1)*5+0.5+0.75;}
 
-function levelStr(c) {
-  const f = Math.floor(c), d = c - f;
-  if (f < 7)  return String(f);
-  if (f === 12) return '12';
-  if (f === 11) return d >= 0.8 ? '11+' : '11';
-  return d >= 0.7 ? `${f}+` : `${f}`;
+function levelStr(c){
+  const f=Math.floor(c),d=c-f;
+  if(f<=6) return String(f);
+  if(f===12) return '12';
+  if(f===11) return d>=0.8?'11+':'11';
+  return d>=0.7?`${f}+`:String(f);
 }
 
-const LV_ORDER = ['1','2','3','4','5','6','7','7+','8','8+','9','9+','10','10+','11','11+','12'];
-function lvOrd(l) { const i = LV_ORDER.indexOf(l); return i >= 0 ? i : 99; }
+const LV_ORDER=['1','2','3','4','5','6','7','7+','8','8+','9','9+','10','10+','11','11+','12'];
+function lvOrd(l){const i=LV_ORDER.indexOf(l);return i>=0?i:99;}
 
-function colorClass(pct) {
-  if (pct >= 95) return 'c-rainbow';
-  if (pct >= 90) return 'c-plat';
-  if (pct >= 80) return 'c-gold';
-  if (pct >= 70) return 'c-silver';
+// 切り捨て2桁（0.9999...が100.00%に見えないよう）
+function fmtPct(pct){return(Math.floor(pct*100)/100).toFixed(2)+'%';}
+
+function colorClass(pct){
+  if(pct>=95) return 'c-rainbow';
+  if(pct>=90) return 'c-plat';
+  if(pct>=80) return 'c-gold';
+  if(pct>=70) return 'c-silver';
   return 'c-white';
 }
-
-function barColor(pct) {
-  if (pct >= 95) return '#34d399';
-  if (pct >= 90) return '#e2d067';
-  if (pct >= 80) return '#f59e0b';
-  if (pct >= 70) return '#94a3b8';
+function barColor(pct){
+  if(pct>=95) return '#34d399';
+  if(pct>=90) return '#e2d067';
+  if(pct>=80) return '#f59e0b';
+  if(pct>=70) return '#94a3b8';
   return '#00d4ff';
 }
-
-function isPM(score) { return score >= 10000000; }
+function isPM(score){return score>=10000000;}
 
 // ════ Dashboard ════
-function updateDashboard() {
-  let tot = 0, totMax = 0, pm = 0, fr = 0, scored = 0;
-
-  songs.forEach(s => {
-    const sc = scores[s.id];
-    const v  = sc?.score || 0;
-    totMax += maxOP(s.constant);
-    if (v > 0) {
-      scored++;
-      tot += calcOP(v, s.constant, s.totalNotes);
-      if (isPM(v)) { pm++; fr++; }
-      else if (sc?.fr) fr++;
-    }
+function updateDashboard(){
+  let tot=0,totMax=0,pm=0,fr=0,scored=0;
+  songs.forEach(s=>{
+    const sc=scores[s.id],v=sc?.score||0;
+    totMax+=maxOP(s.constant);
+    if(v>0){scored++;tot+=calcOP(v,s.constant,s.totalNotes);if(isPM(v)){pm++;fr++;}else if(sc?.fr)fr++;}
   });
+  const pct=totMax>0?tot/totMax*100:-1;
+  const cc=pct>=0?colorClass(pct):'c-white';
+  const pctEl=document.getElementById('d-pct');
+  pctEl.textContent=pct>=0?fmtPct(pct):'—';
+  pctEl.className='op-pct '+cc;
+  document.getElementById('d-raw').textContent=pct>=0?`${tot.toFixed(2)} / ${totMax.toFixed(2)}`:'スコアを入力すると表示されます';
+  const bar=document.getElementById('d-bar');
+  bar.style.width=(pct>=0?Math.min(100,pct):0)+'%';
+  bar.style.background=pct>=0?barColor(pct):'#00d4ff';
+  document.getElementById('d-pm').textContent=pm;
+  document.getElementById('d-fr').textContent=fr;
+  document.getElementById('d-scored').textContent=scored;
+  document.getElementById('d-total').textContent=songs.length;
 
-  const pct = totMax > 0 ? tot / totMax * 100 : -1;
-  const cc  = pct >= 0 ? colorClass(pct) : 'c-white';
-
-  const pctEl = document.getElementById('d-pct');
-  pctEl.textContent = pct >= 0 ? pct.toFixed(2) + '%' : '—';
-  pctEl.className = 'op-pct ' + cc;
-
-  document.getElementById('d-raw').textContent = pct >= 0
-    ? `${tot.toFixed(2)} / ${totMax.toFixed(2)}`
-    : 'スコアを入力すると表示されます';
-
-  const bar = document.getElementById('d-bar');
-  bar.style.width   = (pct >= 0 ? Math.min(100, pct) : 0) + '%';
-  bar.style.background = pct >= 0 ? barColor(pct) : '#00d4ff';
-
-  document.getElementById('d-pm').textContent     = pm;
-  document.getElementById('d-fr').textContent     = fr;
-  document.getElementById('d-scored').textContent = scored;
-  document.getElementById('d-total').textContent  = songs.length;
-
-  // Level breakdown
-  const map = {};
-  songs.forEach(s => {
-    const lv = levelStr(s.constant);
-    if (!map[lv]) map[lv] = { op: 0, max: 0, n: 0, sc: 0 };
-    map[lv].max += maxOP(s.constant);
-    map[lv].n++;
-    const v = scores[s.id]?.score || 0;
-    if (v > 0) { map[lv].op += calcOP(v, s.constant, s.totalNotes); map[lv].sc++; }
+  const map={};
+  songs.forEach(s=>{
+    const lv=levelStr(s.constant);
+    if(!map[lv])map[lv]={op:0,max:0,n:0,sc:0};
+    map[lv].max+=maxOP(s.constant);map[lv].n++;
+    const v=scores[s.id]?.score||0;
+    if(v>0){map[lv].op+=calcOP(v,s.constant,s.totalNotes);map[lv].sc++;}
   });
-
-  const levels = Object.keys(map).sort((a, b) => lvOrd(b) - lvOrd(a));
-  const grid   = document.getElementById('lv-grid');
-
-  if (levels.length === 0) {
-    grid.innerHTML = '<div class="empty-state">楽曲を登録するとレベル別の集計が表示されます</div>';
-    return;
-  }
-
-  grid.innerHTML = levels.map(lv => {
-    const d   = map[lv];
-    const p   = d.max > 0 ? d.op / d.max * 100 : 0;
-    const cc  = colorClass(p);
-    const bc  = barColor(p);
-    return `
-      <div class="lv-row">
-        <div class="lv-name">Lv ${lv}</div>
-        <div class="lv-bar-wrap">
-          <div class="lv-bar-bg">
-            <div class="lv-bar-fill" style="width:${Math.min(100,p).toFixed(1)}%;background:${bc}"></div>
-          </div>
-          <div class="lv-detail">${d.op.toFixed(2)} / ${d.max.toFixed(2)} &nbsp;·&nbsp; ${d.sc} / ${d.n} 曲入力済</div>
-        </div>
-        <div class="lv-pct ${cc}">${d.sc > 0 ? p.toFixed(1) + '%' : '—'}</div>
-      </div>`;
+  const levels=Object.keys(map).sort((a,b)=>lvOrd(b)-lvOrd(a));
+  const grid=document.getElementById('lv-grid');
+  if(!levels.length){grid.innerHTML='<div class="empty-state">楽曲を登録するとレベル別の集計が表示されます</div>';return;}
+  grid.innerHTML=levels.map(lv=>{
+    const d=map[lv],p=d.max>0?d.op/d.max*100:0;
+    return `<div class="lv-row">
+      <div class="lv-name">Lv ${lv}</div>
+      <div class="lv-bar-wrap">
+        <div class="lv-bar-bg"><div class="lv-bar-fill" style="width:${Math.min(100,p).toFixed(1)}%;background:${barColor(p)}"></div></div>
+        <div class="lv-detail">${d.op.toFixed(2)} / ${d.max.toFixed(2)} &nbsp;·&nbsp; ${d.sc} / ${d.n} 曲入力済</div>
+      </div>
+      <div class="lv-pct ${colorClass(p)}">${d.sc>0?fmtPct(p):'—'}</div>
+    </div>`;
   }).join('');
 }
 
 // ════ Song Table ════
-function renderTable() {
-  const fd = document.getElementById('f-diff').value;
-  const fl = document.getElementById('f-lv').value;
-  const fs = document.getElementById('f-sort').value;
-
-  // Update level filter list
-  const allLvs = [...new Set(songs.map(s => levelStr(s.constant)))].sort((a,b)=>lvOrd(b)-lvOrd(a));
-  const flEl = document.getElementById('f-lv');
-  const prev = flEl.value;
-  flEl.innerHTML = '<option value="">全レベル</option>' +
-    allLvs.map(l => `<option value="${l}" ${l===prev?'selected':''}>${l}</option>`).join('');
-
-  let list = songs.filter(s => {
-    if (fd && s.difficulty !== fd) return false;
-    if (fl && levelStr(s.constant) !== fl) return false;
-    return true;
-  });
-
-  list.sort((a, b) => {
-    if (fs === 'const-asc')  return a.constant - b.constant;
-    if (fs === 'const-desc') return b.constant - a.constant;
-    if (fs === 'gap-desc') {
-      const ga = maxOP(a.constant) - calcOP(scores[a.id]?.score||0, a.constant, a.totalNotes);
-      const gb = maxOP(b.constant) - calcOP(scores[b.id]?.score||0, b.constant, b.totalNotes);
-      return gb - ga;
-    }
-    if (fs === 'pct-asc') {
-      const pa = calcOP(scores[a.id]?.score||0, a.constant, a.totalNotes) / maxOP(a.constant);
-      const pb = calcOP(scores[b.id]?.score||0, b.constant, b.totalNotes) / maxOP(b.constant);
-      return pa - pb;
-    }
+function renderTable(){
+  const fd=document.getElementById('f-diff').value;
+  const fl=document.getElementById('f-lv').value;
+  const fs=document.getElementById('f-sort').value;
+  const allLvs=[...new Set(songs.map(s=>levelStr(s.constant)))].sort((a,b)=>lvOrd(b)-lvOrd(a));
+  const flEl=document.getElementById('f-lv');
+  const prev=flEl.value;
+  flEl.innerHTML='<option value="">全レベル</option>'+allLvs.map(l=>`<option value="${l}" ${l===prev?'selected':''}>${l}</option>`).join('');
+  let list=songs.filter(s=>{if(fd&&s.difficulty!==fd)return false;if(fl&&levelStr(s.constant)!==fl)return false;return true;});
+  list.sort((a,b)=>{
+    if(fs==='const-asc') return a.constant-b.constant;
+    if(fs==='const-desc') return b.constant-a.constant;
+    if(fs==='gap-desc'){const ga=maxOP(a.constant)-calcOP(scores[a.id]?.score||0,a.constant,a.totalNotes);const gb=maxOP(b.constant)-calcOP(scores[b.id]?.score||0,b.constant,b.totalNotes);return gb-ga;}
+    if(fs==='pct-asc'){const pa=calcOP(scores[a.id]?.score||0,a.constant,a.totalNotes)/maxOP(a.constant);const pb=calcOP(scores[b.id]?.score||0,b.constant,b.totalNotes)/maxOP(b.constant);return pa-pb;}
     return 0;
   });
-
-  const cont = document.getElementById('tbl-container');
-  if (list.length === 0) {
-    cont.innerHTML = songs.length === 0
-      ? '<div class="empty-state">楽曲が登録されていません<p>「＋ 楽曲を追加」から登録してください</p></div>'
-      : '<div class="empty-state">条件に一致する楽曲がありません</div>';
-    return;
-  }
-
-  const rows = list.map(s => {
-    const sc   = scores[s.id] || { score: 0, fr: false };
-    const v    = sc.score || 0;
-    const op   = v > 0 ? calcOP(v, s.constant, s.totalNotes) : null;
-    const mx   = maxOP(s.constant);
-    const pct  = op != null ? op / mx * 100 : null;
-    const cc   = pct != null ? colorClass(pct) : 'dim';
-    const pm   = isPM(v);
-    const fr   = sc.fr || pm;
-    const lv   = levelStr(s.constant);
-    const t    = esc(s.title);
-
+  const cont=document.getElementById('tbl-container');
+  if(!list.length){cont.innerHTML=songs.length===0?'<div class="empty-state">楽曲が登録されていません<p>「楽曲データ読み込み」からJSONを読み込んでください</p></div>':'<div class="empty-state">条件に一致する楽曲がありません</div>';return;}
+  const rows=list.map(s=>{
+    const sc=scores[s.id]||{score:0,fr:false};
+    const v=sc.score||0;
+    const op=v>0?calcOP(v,s.constant,s.totalNotes):null;
+    const mx=maxOP(s.constant);
+    const pct=op!=null?op/mx*100:null;
+    const cc=pct!=null?colorClass(pct):'dim';
+    const pm=isPM(v);const fr=sc.fr||pm;
     return `<tr>
       <td><span class="diff-badge d-${s.difficulty}">${s.difficulty}</span></td>
-      <td>${t}${pm ? '<span class="badge-pm">PM</span>' : fr ? '<span class="badge-fr">FR</span>' : ''}</td>
-      <td class="dim" style="font-family:'Rajdhani',sans-serif">Lv ${lv} / ${s.constant.toFixed(1)}</td>
-      <td>
-        <input type="number" class="score-inp"
-          value="${v || ''}" min="0" max="${10000000 + s.totalNotes}"
-          placeholder="Score"
-          onchange="onScoreChange('${s.id}', this.value, ${s.totalNotes})">
-      </td>
-      <td>
-        <input type="checkbox" class="fr-check" ${fr ? 'checked' : ''} ${pm ? 'disabled' : ''}
-          onchange="onFRChange('${s.id}', this.checked)" title="Full Recall（LOSTなし）">
-      </td>
-      <td class="mono ${cc}">${op != null ? op.toFixed(2) : '—'}</td>
+      <td>${esc(s.title)}${pm?'<span class="badge-pm">PM</span>':fr?'<span class="badge-fr">FR</span>':''}</td>
+      <td class="dim" style="font-family:'Rajdhani',sans-serif">Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}</td>
+      <td><input type="number" class="score-inp" value="${v||''}" min="0" max="${10000000+s.totalNotes}" placeholder="Score" onchange="onScoreChange('${s.id}',this.value,${s.totalNotes})"></td>
+      <td><input type="checkbox" class="fr-check" ${fr?'checked':''} ${pm?'disabled':''} onchange="onFRChange('${s.id}',this.checked)" title="Full Recall（LOSTなし）"></td>
+      <td class="mono ${cc}">${op!=null?op.toFixed(2):'—'}</td>
       <td class="mono dim">${mx.toFixed(2)}</td>
-      <td class="mono ${cc}">${pct != null ? pct.toFixed(1) + '%' : '—'}</td>
+      <td class="mono ${cc}">${pct!=null?fmtPct(pct):'—'}</td>
       <td style="white-space:nowrap">
         <button class="btn sm" onclick="openEdit('${s.id}')">編集</button>
         <button class="btn sm danger" style="margin-left:4px" onclick="delSong('${s.id}')">削除</button>
       </td>
     </tr>`;
   }).join('');
-
-  cont.innerHTML = `
-    <table>
-      <thead><tr>
-        <th>難易度</th><th>楽曲名</th><th>Lv / 定数</th>
-        <th>スコア</th><th>FR</th>
-        <th>OP値</th><th>理論値</th><th>達成率</th><th></th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
+  cont.innerHTML=`<table><thead><tr><th>難易度</th><th>楽曲名</th><th>Lv / 定数</th><th>スコア</th><th>FR</th><th>OP値</th><th>理論値</th><th>達成率</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function onScoreChange(id,val,notes){
+  const v=parseInt(val)||0;
+  if(!scores[id])scores[id]={score:0,fr:false};
+  scores[id].score=v;
+  if(isPM(v))scores[id].fr=true;
+  persist();updateDashboard();renderTable();
+}
+function onFRChange(id,checked){if(!scores[id])scores[id]={score:0,fr:false};scores[id].fr=checked;persist();updateDashboard();}
+function delSong(id){if(!confirm('この楽曲を削除しますか？\nスコアデータも削除されます。'))return;songs=songs.filter(s=>s.id!==id);delete scores[id];persist();updateDashboard();renderTable();}
+
+// ════ JSON Import ════
+function triggerImport(){document.getElementById('import-file').click();}
+function importJSON(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!Array.isArray(data))throw new Error('配列形式ではありません');
+      let added=0,updated=0,skipped=0;
+      data.forEach(item=>{
+        const title=item.title?.trim();
+        const diff=(item.difficulty||'').toUpperCase();
+        const c=parseFloat(item.constant);
+        const n=parseInt(item.totalNotes);
+        if(!title||!['FTR','ETR','BYD'].includes(diff)||isNaN(c)||isNaN(n)){skipped++;return;}
+        const existing=songs.find(s=>s.title===title&&s.difficulty===diff);
+        if(existing){existing.constant=c;existing.totalNotes=n;updated++;}
+        else{songs.push({id:uid(),title,difficulty:diff,constant:c,totalNotes:n});added++;}
+      });
+      persist();updateDashboard();renderTable();
+      alert(`読み込み完了\n新規: ${added} 件  更新: ${updated} 件  スキップ: ${skipped} 件`);
+    }catch(err){alert('JSONの読み込みに失敗しました:\n'+err.message);}
+    input.value='';
+  };
+  reader.readAsText(file);
 }
 
-function onScoreChange(id, val, notes) {
-  const v = parseInt(val) || 0;
-  if (!scores[id]) scores[id] = { score: 0, fr: false };
-  scores[id].score = v;
-  if (isPM(v)) scores[id].fr = true;
-  persist();
-  updateDashboard();
-  renderTable();
+// ════ Score Export/Import ════
+function exportData(){
+  const blob=new Blob([JSON.stringify({songs,scores},null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='arcaea-op-scores.json';a.click();
+}
+function triggerScoreImport(){document.getElementById('score-import-file').click();}
+function importScoreData(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{const data=JSON.parse(e.target.result);if(data.songs)songs=data.songs;if(data.scores)scores=data.scores;persist();updateDashboard();renderTable();alert('復元しました');}
+    catch(err){alert('復元に失敗しました: '+err.message);}
+    input.value='';
+  };
+  reader.readAsText(file);
 }
 
-function onFRChange(id, checked) {
-  if (!scores[id]) scores[id] = { score: 0, fr: false };
-  scores[id].fr = checked;
-  persist();
-  updateDashboard();
+// ════ Song Modal ════
+function openAdd(){editSongId=null;document.getElementById('modal-ttl').textContent='楽曲を追加';document.getElementById('f-title').value='';document.getElementById('f-difficulty').value='FTR';document.getElementById('f-const').value='';document.getElementById('f-notes').value='';hideErr();document.getElementById('song-modal').classList.add('open');setTimeout(()=>document.getElementById('f-title').focus(),50);}
+function openEdit(id){const s=songs.find(x=>x.id===id);if(!s)return;editSongId=id;document.getElementById('modal-ttl').textContent='楽曲を編集';document.getElementById('f-title').value=s.title;document.getElementById('f-difficulty').value=s.difficulty;document.getElementById('f-const').value=s.constant;document.getElementById('f-notes').value=s.totalNotes;hideErr();document.getElementById('song-modal').classList.add('open');}
+function saveModal(){
+  const title=document.getElementById('f-title').value.trim();
+  const diff=document.getElementById('f-difficulty').value;
+  const c=parseFloat(document.getElementById('f-const').value);
+  const n=parseInt(document.getElementById('f-notes').value);
+  if(!title){showErr('楽曲名を入力してください');return;}
+  if(isNaN(c)||c<0||c>12.9){showErr('譜面定数は 0.0〜12.9 の範囲で入力してください');return;}
+  if(isNaN(n)||n<1){showErr('総ノーツ数を正の整数で入力してください');return;}
+  if(editSongId){const s=songs.find(x=>x.id===editSongId);Object.assign(s,{title,difficulty:diff,constant:c,totalNotes:n});}
+  else songs.push({id:uid(),title,difficulty:diff,constant:c,totalNotes:n});
+  persist();closeModal('song-modal');updateDashboard();renderTable();
+}
+function showErr(msg){const el=document.getElementById('f-err');el.textContent=msg;el.style.display='block';}
+function hideErr(){document.getElementById('f-err').style.display='none';}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function overlayClick(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+
+// ════ Settings ════
+function saveApiKey(val){
+  localStorage.setItem('aop_apikey',val.trim());
+  const el=document.getElementById('apikey-status');
+  el.textContent=val.trim()?'✓ 保存済':'';el.className=val.trim()?'status-ok':'';
 }
 
-function delSong(id) {
-  if (!confirm('この楽曲を削除しますか？\nスコアデータも削除されます。')) return;
-  songs = songs.filter(s => s.id !== id);
-  delete scores[id];
-  persist();
-  updateDashboard();
-  renderTable();
+// ════ OCR ════
+function openOCR(){
+  document.getElementById('ocr-drop').style.display='block';
+  document.getElementById('ocr-preview').style.display='none';
+  document.getElementById('ocr-loading').style.display='none';
+  document.getElementById('ocr-result-area').style.display='none';
+  document.getElementById('ocr-apply-btn').style.display='none';
+  document.getElementById('ocr-file').value='';
+  ocrData=null;
+  document.getElementById('ocr-modal').classList.add('open');
 }
 
-// ════ Modal ════
-function openAdd() {
-  editId = null;
-  document.getElementById('modal-ttl').textContent = '楽曲を追加';
-  document.getElementById('f-title').value = '';
-  document.getElementById('f-difficulty').value = 'FTR';
-  document.getElementById('f-const').value = '';
-  document.getElementById('f-notes').value = '';
-  hideErr();
-  document.getElementById('modal-overlay').classList.add('open');
-  setTimeout(() => document.getElementById('f-title').focus(), 50);
+async function runOCR(input){
+  const file=input.files[0];if(!file)return;
+  const apiKey=localStorage.getItem('aop_apikey')||'';
+  if(!apiKey){alert('APIキーが設定されていません。\nSETTINGSタブでAnthropicのAPIキーを入力してください。');return;}
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const b64=e.target.result.split(',')[1];
+    const mime=file.type||'image/jpeg';
+    document.getElementById('ocr-drop').style.display='none';
+    document.getElementById('ocr-preview').innerHTML=`<img src="${e.target.result}" style="max-width:100%;max-height:180px;border:1px solid var(--border2);margin-bottom:14px;display:block">`;
+    document.getElementById('ocr-preview').style.display='block';
+    document.getElementById('ocr-loading').style.display='block';
+    document.getElementById('ocr-result-area').style.display='none';
+    try{
+      const res=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body:JSON.stringify({
+          model:'claude-opus-4-6',max_tokens:300,
+          messages:[{role:'user',content:[
+            {type:'image',source:{type:'base64',media_type:mime,data:b64}},
+            {type:'text',text:'これはArcaea（リズムゲーム）のリザルト画面の画像です。以下の情報をJSONのみで返してください（前後のテキスト・コードブロック不要）:\n{"title":"楽曲名","difficulty":"PST/PRS/FTR/ETR/BYDのいずれか","score":数値,"pure":PURE数値,"far":FAR数値,"lost":LOST数値}\n読み取れない場合はnullにしてください。楽曲名は原文のまま抽出してください。'}
+          ]}]
+        })
+      });
+      const data=await res.json();
+      if(!res.ok)throw new Error(data.error?.message||res.statusText);
+      const raw=data.content.map(c=>c.text||'').join('');
+      const clean=raw.replace(/```json|```/g,'').trim();
+      const parsed=JSON.parse(clean);
+      document.getElementById('ocr-loading').style.display='none';
+      showOCRResult(parsed);
+    }catch(err){
+      document.getElementById('ocr-loading').style.display='none';
+      document.getElementById('ocr-result-area').innerHTML=`<div class="err-msg" style="padding:8px">読み取りに失敗しました: ${esc(String(err.message))}</div>`;
+      document.getElementById('ocr-result-area').style.display='block';
+    }
+  };
+  reader.readAsDataURL(file);
 }
 
-function openEdit(id) {
-  const s = songs.find(x => x.id === id);
-  if (!s) return;
-  editId = id;
-  document.getElementById('modal-ttl').textContent = '楽曲を編集';
-  document.getElementById('f-title').value = s.title;
-  document.getElementById('f-difficulty').value = s.difficulty;
-  document.getElementById('f-const').value = s.constant;
-  document.getElementById('f-notes').value = s.totalNotes;
-  hideErr();
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-}
-
-function overlayClick(e) {
-  if (e.target === document.getElementById('modal-overlay')) closeModal();
-}
-
-function showErr(msg) {
-  const el = document.getElementById('f-err');
-  el.textContent = msg; el.style.display = 'block';
-}
-function hideErr() { document.getElementById('f-err').style.display = 'none'; }
-
-function saveModal() {
-  const title = document.getElementById('f-title').value.trim();
-  const diff  = document.getElementById('f-difficulty').value;
-  const c     = parseFloat(document.getElementById('f-const').value);
-  const n     = parseInt(document.getElementById('f-notes').value);
-
-  if (!title) { showErr('楽曲名を入力してください'); return; }
-  if (isNaN(c) || c < 0 || c > 12.9) { showErr('譜面定数は 0.0〜12.9 の範囲で入力してください'); return; }
-  if (isNaN(n) || n < 1) { showErr('総ノーツ数を正の整数で入力してください'); return; }
-
-  if (editId) {
-    const s = songs.find(x => x.id === editId);
-    Object.assign(s, { title, difficulty: diff, constant: c, totalNotes: n });
-  } else {
-    songs.push({ id: uid(), title, difficulty: diff, constant: c, totalNotes: n });
+function showOCRResult(parsed){
+  ocrData=parsed;
+  let match=null;
+  if(parsed.title&&parsed.difficulty){
+    const d=(parsed.difficulty||'').toUpperCase();
+    match=songs.find(s=>s.title.toLowerCase()===parsed.title.toLowerCase()&&s.difficulty===d);
+    if(!match)match=songs.find(s=>s.title.toLowerCase().includes(parsed.title.toLowerCase())||parsed.title.toLowerCase().includes(s.title.toLowerCase()));
   }
-
-  persist();
-  closeModal();
-  updateDashboard();
-  renderTable();
+  const pm=parsed.lost===0&&parsed.far===0;
+  const fr=parsed.lost===0;
+  let matchHTML='';
+  if(match){matchHTML=`<div class="ocr-match">✓ マッチ: ${esc(match.title)} [${match.difficulty}]</div>`;ocrData._matchId=match.id;}
+  else matchHTML=`<div class="ocr-nomatch">⚠ 楽曲が見つかりません。先に楽曲データを読み込んでください。</div>`;
+  const area=document.getElementById('ocr-result-area');
+  area.innerHTML=`${matchHTML}<div class="ocr-result">
+    <div class="ocr-result-row"><span class="ocr-result-key">楽曲名</span><span class="ocr-result-val">${esc(parsed.title||'—')}</span></div>
+    <div class="ocr-result-row"><span class="ocr-result-key">難易度</span><span class="ocr-result-val">${esc(parsed.difficulty||'—')}</span></div>
+    <div class="ocr-result-row"><span class="ocr-result-key">スコア</span><span class="ocr-result-val" style="color:var(--accent)">${parsed.score?.toLocaleString()||'—'}</span></div>
+    <div class="ocr-result-row"><span class="ocr-result-key">PURE / FAR / LOST</span><span class="ocr-result-val">${parsed.pure??'—'} / ${parsed.far??'—'} / ${parsed.lost??'—'}</span></div>
+    <div class="ocr-result-row"><span class="ocr-result-key">判定</span><span class="ocr-result-val">${pm?'<span class="badge-pm">PM</span>':fr?'<span class="badge-fr">FR</span>':''}</span></div>
+  </div>`;
+  area.style.display='block';
+  document.getElementById('ocr-apply-btn').style.display=match?'block':'none';
 }
 
-// ════ Tab switching ════
-function switchTab(btn, name) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
+function applyOCR(){
+  if(!ocrData||!ocrData._matchId)return;
+  const id=ocrData._matchId;
+  if(!scores[id])scores[id]={score:0,fr:false};
+  scores[id].score=ocrData.score||0;
+  if(isPM(ocrData.score)||ocrData.lost===0)scores[id].fr=true;
+  persist();updateDashboard();renderTable();
+  closeModal('ocr-modal');
+  switchTab(document.querySelectorAll('.nav-btn')[1],'songs');
+}
+
+// ════ Tab ════
+function switchTab(btn,name){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
-  if (name === 'songs') renderTable();
+  if(name==='songs')renderTable();
 }
 
-// Enter key in modal
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.getElementById('modal-overlay').classList.contains('open')) saveModal();
-  if (e.key === 'Escape') closeModal();
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('song-modal').classList.contains('open'))saveModal();
+  if(e.key==='Escape'){closeModal('song-modal');closeModal('ocr-modal');}
 });
 
-// ════ Init ════
+// Init
+const savedKey=localStorage.getItem('aop_apikey')||'';
+if(savedKey){document.getElementById('s-apikey').value=savedKey;document.getElementById('apikey-status').textContent='✓ 保存済';document.getElementById('apikey-status').className='status-ok';}
 updateDashboard();
 renderTable();
 </script>
