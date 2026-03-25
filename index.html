@@ -87,6 +87,8 @@
     .score-inp::placeholder{color:var(--text-dim);font-size:12px;font-weight:400;}
     .mono{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;}
     .dim{color:var(--text-dim);}
+    .song-title{font-size:13px;}
+    .song-artist{font-size:11px;color:var(--text-dim);margin-top:1px;}
     .badge-pm{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:1px 5px;background:rgba(52,211,153,.15);color:var(--c-rainbow);border:1px solid rgba(52,211,153,.3);margin-left:4px;}
     .badge-fr{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:1px 5px;background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3);margin-left:4px;}
     .fr-check{accent-color:var(--purple);width:14px;height:14px;cursor:pointer;}
@@ -211,18 +213,21 @@
       <div class="schema-box">[
   {
     "title": "Tempestissimo",
+    "artist": "t+pazolite",
     "difficulty": "FTR",
     "constant": 11.7,
     "totalNotes": 1403
   },
   {
     "title": "Testify",
+    "artist": "void (Mournfinale) feat. 星熊南巫",
     "difficulty": "BYD",
     "constant": 12.0,
     "totalNotes": 2221
   }
 ]</div>
       <div class="hint" style="margin-top:10px">
+        ・ <b>artist</b>: アーティスト名（省略可）<br>
         ・ <b>difficulty</b>: FTR / ETR / BYD のいずれか（対象外のPST/PRSは読み込まれません）<br>
         ・ <b>constant</b>: 譜面定数（例: 11.7）<br>
         ・ <b>totalNotes</b>: 総ノーツ数（整数）
@@ -246,6 +251,7 @@
   <div class="modal">
     <div class="modal-title" id="modal-ttl">楽曲を追加</div>
     <div class="fgroup"><label class="flabel">楽曲名</label><input type="text" id="f-title" placeholder="例: Tempestissimo" autocomplete="off"></div>
+    <div class="fgroup"><label class="flabel">アーティスト名</label><input type="text" id="f-artist" placeholder="例: t+pazolite" autocomplete="off"></div>
     <div class="fgroup"><label class="flabel">難易度</label><select id="f-difficulty"><option value="FTR">FTR</option><option value="ETR">ETR</option><option value="BYD">BYD</option></select></div>
     <div class="fgroup"><label class="flabel">譜面定数</label><input type="number" id="f-const" step="0.1" min="1" max="12.9" placeholder="例: 11.7"></div>
     <div class="fgroup"><label class="flabel">総ノーツ数</label><input type="number" id="f-notes" step="1" min="1" placeholder="例: 1450"><div class="err-msg" id="f-err" style="display:none"></div></div>
@@ -418,7 +424,7 @@ function renderTable(){
     const pm=isPM(v);const fr=sc.fr||pm;
     return `<tr>
       <td><span class="diff-badge d-${s.difficulty}">${s.difficulty}</span></td>
-      <td>${esc(s.title)}${pm?'<span class="badge-pm">PM</span>':fr?'<span class="badge-fr">FR</span>':''}</td>
+      <td><div class="song-title">${esc(s.title)}${pm?'<span class="badge-pm">PM</span>':fr?'<span class="badge-fr">FR</span>':''}</div>${s.artist?`<div class="song-artist">${esc(s.artist)}</div>`:''}</td>
       <td class="dim" style="font-family:'Rajdhani',sans-serif">Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}</td>
       <td><input type="number" class="score-inp" value="${v||''}" min="0" max="${10000000+s.totalNotes}" placeholder="Score" onchange="onScoreChange('${s.id}',this.value,${s.totalNotes})"></td>
       <td><input type="checkbox" class="fr-check" ${fr?'checked':''} ${pm?'disabled':''} onchange="onFRChange('${s.id}',this.checked)" title="Full Recall（LOSTなし）"></td>
@@ -458,13 +464,14 @@ function importJSON(input){
       let added=0,updated=0,skipped=0;
       data.forEach(item=>{
         const title=item.title?.trim();
+        const artist=(item.artist||'').trim();
         const diff=(item.difficulty||'').toUpperCase();
         const c=parseFloat(item.constant);
         const n=parseInt(item.totalNotes);
         if(!title||!['FTR','ETR','BYD'].includes(diff)||isNaN(c)||isNaN(n)){skipped++;return;}
         const existing=songs.find(s=>s.title===title&&s.difficulty===diff);
-        if(existing){existing.constant=c;existing.totalNotes=n;updated++;}
-        else{songs.push({id:uid(),title,difficulty:diff,constant:c,totalNotes:n});added++;}
+        if(existing){existing.artist=artist;existing.constant=c;existing.totalNotes=n;updated++;}
+        else{songs.push({id:uid(),title,artist,difficulty:diff,constant:c,totalNotes:n});added++;}
       });
       persist();updateDashboard();renderTable();
       alert(`読み込み完了\n新規: ${added} 件  更新: ${updated} 件  スキップ: ${skipped} 件`);
@@ -492,18 +499,19 @@ function importScoreData(input){
 }
 
 // ════ Song Modal ════
-function openAdd(){editSongId=null;document.getElementById('modal-ttl').textContent='楽曲を追加';document.getElementById('f-title').value='';document.getElementById('f-difficulty').value='FTR';document.getElementById('f-const').value='';document.getElementById('f-notes').value='';hideErr();document.getElementById('song-modal').classList.add('open');setTimeout(()=>document.getElementById('f-title').focus(),50);}
-function openEdit(id){const s=songs.find(x=>x.id===id);if(!s)return;editSongId=id;document.getElementById('modal-ttl').textContent='楽曲を編集';document.getElementById('f-title').value=s.title;document.getElementById('f-difficulty').value=s.difficulty;document.getElementById('f-const').value=s.constant;document.getElementById('f-notes').value=s.totalNotes;hideErr();document.getElementById('song-modal').classList.add('open');}
+function openAdd(){editSongId=null;document.getElementById('modal-ttl').textContent='楽曲を追加';document.getElementById('f-title').value='';document.getElementById('f-artist').value='';document.getElementById('f-difficulty').value='FTR';document.getElementById('f-const').value='';document.getElementById('f-notes').value='';hideErr();document.getElementById('song-modal').classList.add('open');setTimeout(()=>document.getElementById('f-title').focus(),50);}
+function openEdit(id){const s=songs.find(x=>x.id===id);if(!s)return;editSongId=id;document.getElementById('modal-ttl').textContent='楽曲を編集';document.getElementById('f-title').value=s.title;document.getElementById('f-artist').value=s.artist||'';document.getElementById('f-difficulty').value=s.difficulty;document.getElementById('f-const').value=s.constant;document.getElementById('f-notes').value=s.totalNotes;hideErr();document.getElementById('song-modal').classList.add('open');}
 function saveModal(){
   const title=document.getElementById('f-title').value.trim();
+  const artist=document.getElementById('f-artist').value.trim();
   const diff=document.getElementById('f-difficulty').value;
   const c=parseFloat(document.getElementById('f-const').value);
   const n=parseInt(document.getElementById('f-notes').value);
   if(!title){showErr('楽曲名を入力してください');return;}
   if(isNaN(c)||c<0||c>12.9){showErr('譜面定数は 0.0〜12.9 の範囲で入力してください');return;}
   if(isNaN(n)||n<1){showErr('総ノーツ数を正の整数で入力してください');return;}
-  if(editSongId){const s=songs.find(x=>x.id===editSongId);Object.assign(s,{title,difficulty:diff,constant:c,totalNotes:n});}
-  else songs.push({id:uid(),title,difficulty:diff,constant:c,totalNotes:n});
+  if(editSongId){const s=songs.find(x=>x.id===editSongId);Object.assign(s,{title,artist,difficulty:diff,constant:c,totalNotes:n});}
+  else songs.push({id:uid(),title,artist,difficulty:diff,constant:c,totalNotes:n});
   persist();closeModal('song-modal');updateDashboard();renderTable();
 }
 function showErr(msg){const el=document.getElementById('f-err');el.textContent=msg;el.style.display='block';}
