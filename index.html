@@ -23,31 +23,21 @@ header{position:sticky;top:0;z-index:100;height:52px;background:rgba(7,9,26,0.95
 .logo{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;}
 .logo em{font-style:normal;color:var(--accent);}
 .spacer{flex:1;}
-
-/* Desktop nav */
 .nav-desktop{display:flex;gap:2px;}
 .nav-btn{padding:6px 16px;background:transparent;border:1px solid transparent;color:var(--text-dim);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .2s,border-color .2s;white-space:nowrap;}
 .nav-btn:hover{color:var(--text);border-color:var(--border2);}
 .nav-btn.active{color:var(--accent);border-color:var(--accent);background:var(--accent-dim);}
-
-/* Hamburger */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:transparent;border:none;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--text-mid);transition:all .25s;}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .hamburger.open span:nth-child(2){opacity:0;}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-
-/* Mobile drawer */
 .nav-drawer{display:none;position:fixed;top:52px;right:0;width:200px;background:var(--surface);border-left:1px solid var(--border2);border-bottom:1px solid var(--border2);z-index:99;flex-direction:column;padding:8px;}
 .nav-drawer.open{display:flex;}
 .nav-drawer .nav-btn{text-align:left;border:none;border-bottom:1px solid var(--border);}
 .nav-drawer .nav-btn:last-child{border-bottom:none;}
 .nav-drawer .nav-btn.active{background:var(--accent-dim);color:var(--accent);}
-
-@media(max-width:600px){
-  .nav-desktop{display:none;}
-  .hamburger{display:flex;}
-}
+@media(max-width:600px){.nav-desktop{display:none;}.hamburger{display:flex;}}
 
 /* ── Main ── */
 main{max-width:1100px;margin:0 auto;padding:24px 16px;}
@@ -66,7 +56,7 @@ main{max-width:1100px;margin:0 auto;padding:24px 16px;}
 .op-stat{text-align:center;min-width:60px;padding:0 4px;}
 .op-stat-val{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;}
 .op-stat-lbl{font-size:10px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;}
-.op-stat-divider{width:1px;background:var(--border);align-self:stretch;margin:0 8px;}
+.op-stat-div{width:1px;background:var(--border);align-self:stretch;margin:0 8px;}
 
 .c-white{color:var(--c-white);}.c-silver{color:var(--c-silver);}.c-gold{color:var(--c-gold);}.c-plat{color:var(--c-plat);}.c-rainbow{color:var(--c-rainbow);}
 
@@ -76,27 +66,42 @@ main{max-width:1100px;margin:0 auto;padding:24px 16px;}
 
 /* ── Level grid ── */
 .level-grid{display:grid;gap:5px;}
-.lv-row{background:var(--surface);border:1px solid var(--border);padding:9px 14px;display:grid;grid-template-columns:58px 1fr 90px;align-items:center;gap:16px;}
+.lv-row{background:var(--surface);border:1px solid var(--border);padding:9px 14px;display:grid;grid-template-columns:58px 1fr 96px;align-items:center;gap:16px;}
 .lv-name{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;}
 .lv-bar-wrap{display:flex;flex-direction:column;gap:4px;}
 .lv-bar-bg{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;}
 .lv-bar-fill{height:100%;border-radius:2px;transition:width .5s ease;}
 .lv-detail{font-size:10px;color:var(--text-dim);}
-.lv-pct{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;text-align:right;}
+.lv-pct{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;text-align:right;}
 
-/* ── Toolbar ── */
-.toolbar{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
-.sort-group{display:flex;align-items:center;gap:0;margin-left:auto;}
-.sort-dir-btn{padding:7px 10px;background:var(--surface2);border:1px solid var(--border2);color:var(--text-mid);cursor:pointer;font-size:13px;transition:color .15s,border-color .15s;line-height:1;}
-.sort-dir-btn:hover{color:var(--accent);border-color:var(--accent);}
+/* ── Toolbar (2-row) ── */
+.toolbar{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.toolbar-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 
-/* ── Inputs ── */
-select,input[type="text"],input[type="number"]{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:7px 10px;font-family:'Noto Sans JP',sans-serif;font-size:12px;outline:none;transition:border-color .2s;-moz-appearance:textfield;}
+/* ── Inputs / Selects ── */
+select,input[type="text"],input[type="number"]{
+  background:var(--surface2);border:1px solid var(--border2);color:var(--text);
+  padding:7px 10px;font-family:'Noto Sans JP',sans-serif;font-size:12px;
+  outline:none;transition:border-color .2s;-moz-appearance:textfield;height:34px;
+}
 input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;}
 select:focus,input:focus{border-color:var(--accent);}
 select{cursor:pointer;}
-.search-input{width:180px;}
-@media(max-width:500px){.search-input{width:130px;}}
+.search-input{flex:1;min-width:120px;}
+
+/* Unified action button style */
+.ctrl-btn{
+  height:34px;padding:0 14px;
+  background:var(--surface2);border:1px solid var(--border2);
+  color:var(--text-mid);cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;white-space:nowrap;
+  transition:color .15s,border-color .15s,background .15s;
+}
+.ctrl-btn:hover{color:var(--text);border-color:var(--text-mid);}
+.ctrl-btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg);}
+.ctrl-btn.primary:hover{background:#33e0ff;border-color:#33e0ff;}
+.ctrl-btn.active-dir{color:var(--accent);border-color:var(--accent);}
 
 /* ── Table ── */
 .table-wrap{overflow-x:auto;}
@@ -113,7 +118,7 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
 
 .song-title{font-size:13px;}
 .song-artist{font-size:11px;color:var(--text-dim);margin-top:1px;}
-.score-inp{width:116px;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;text-align:right;}
+.score-inp{width:112px;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;text-align:right;}
 .score-inp::placeholder{color:var(--text-dim);font-size:12px;font-weight:400;}
 .mono{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;}
 .dim{color:var(--text-dim);}
@@ -121,14 +126,14 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
 .badge-fr{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:1px 5px;background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3);margin-left:4px;}
 .fr-check{accent-color:#a855f7;width:14px;height:14px;cursor:pointer;}
 .empty-state{text-align:center;padding:60px 24px;color:var(--text-dim);border:1px dashed var(--border2);}
+.err-state{text-align:center;padding:40px 24px;color:#f87171;border:1px dashed #7f1d1d;}
 
 /* ── Settings ── */
 .settings-section{background:var(--surface);border:1px solid var(--border);padding:22px;margin-bottom:14px;}
 .settings-title{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
 .hint{font-size:11px;color:var(--text-dim);line-height:1.8;}
-.schema-box{background:var(--bg);border:1px solid var(--border2);padding:12px 14px;font-family:monospace;font-size:11px;color:#7dd3fc;line-height:1.8;overflow-x:auto;white-space:pre;margin-top:8px;}
 .btn-row{display:flex;gap:8px;flex-wrap:wrap;}
-.btn{padding:7px 14px;background:var(--accent);border:none;color:var(--bg);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:background .15s;white-space:nowrap;}
+.btn{padding:7px 14px;height:34px;background:var(--accent);border:none;color:var(--bg);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:background .15s;white-space:nowrap;}
 .btn:hover{background:#33e0ff;}
 .btn.ghost{background:transparent;border:1px solid var(--border2);color:var(--text-mid);}.btn.ghost:hover{border-color:var(--text-mid);color:var(--text);}
 </style>
@@ -139,9 +144,9 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
   <div class="logo">ARCAEA <em>OP</em> TRACKER</div>
   <div class="spacer"></div>
   <nav class="nav-desktop">
-    <button class="nav-btn active" onclick="switchTab(this,'dashboard')">DASHBOARD</button>
-    <button class="nav-btn" onclick="switchTab(this,'songs')">SONGS</button>
-    <button class="nav-btn" onclick="switchTab(this,'settings')">SETTINGS</button>
+    <button class="nav-btn" data-tab="dashboard" onclick="navTo('dashboard')">DASHBOARD</button>
+    <button class="nav-btn" data-tab="songs" onclick="navTo('songs')">SONGS</button>
+    <button class="nav-btn" data-tab="settings" onclick="navTo('settings')">SETTINGS</button>
   </nav>
   <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="メニュー">
     <span></span><span></span><span></span>
@@ -149,14 +154,14 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
 </header>
 
 <nav class="nav-drawer" id="drawer">
-  <button class="nav-btn active" onclick="switchTab(this,'dashboard');closeMenu()">DASHBOARD</button>
-  <button class="nav-btn" onclick="switchTab(this,'songs');closeMenu()">SONGS</button>
-  <button class="nav-btn" onclick="switchTab(this,'settings');closeMenu()">SETTINGS</button>
+  <button class="nav-btn" data-tab="dashboard" onclick="navTo('dashboard');closeMenu()">DASHBOARD</button>
+  <button class="nav-btn" data-tab="songs" onclick="navTo('songs');closeMenu()">SONGS</button>
+  <button class="nav-btn" data-tab="settings" onclick="navTo('settings');closeMenu()">SETTINGS</button>
 </nav>
 
 <main>
   <!-- ═══ DASHBOARD ═══ -->
-  <div id="tab-dashboard" class="tab-content active">
+  <div id="tab-dashboard" class="tab-content">
     <div class="op-hero">
       <div class="op-main">
         <div class="op-eyebrow">Total Over Power</div>
@@ -166,11 +171,11 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
       </div>
       <div class="op-stats">
         <div class="op-stat"><div class="op-stat-val c-rainbow" id="d-pm">0</div><div class="op-stat-lbl">PM</div></div>
-        <div class="op-stat-divider"></div>
+        <div class="op-stat-div"></div>
         <div class="op-stat"><div class="op-stat-val" style="color:#c084fc" id="d-fr">0</div><div class="op-stat-lbl">FR</div></div>
-        <div class="op-stat-divider"></div>
+        <div class="op-stat-div"></div>
         <div class="op-stat"><div class="op-stat-val" style="color:var(--accent)" id="d-scored">0</div><div class="op-stat-lbl">入力済</div></div>
-        <div class="op-stat-divider"></div>
+        <div class="op-stat-div"></div>
         <div class="op-stat"><div class="op-stat-val" id="d-total">0</div><div class="op-stat-lbl">譜面数</div></div>
       </div>
     </div>
@@ -180,27 +185,32 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
 
   <!-- ═══ SONGS ═══ -->
   <div id="tab-songs" class="tab-content">
+    <!-- Row 1: Search -->
     <div class="toolbar">
-      <input type="text" class="search-input" id="f-search" placeholder="🔍 曲名・アーティスト" oninput="renderTable()">
-      <select id="f-diff" onchange="renderTable()">
-        <option value="">全難易度</option>
-        <option value="FTR">FTR</option>
-        <option value="ETR">ETR</option>
-        <option value="BYD">BYD</option>
-      </select>
-      <select id="f-lv" onchange="renderTable()"><option value="">全レベル</option></select>
-      <div class="sort-group">
-        <select id="f-sort" onchange="renderTable()" style="border-right:none">
-          <option value="const">定数</option>
-          <option value="level">レベル</option>
-          <option value="score">スコア</option>
-          <option value="pct">達成率</option>
+      <div class="toolbar-row">
+        <input type="text" class="search-input" id="f-search" placeholder="曲名・アーティスト検索" onkeydown="if(event.key==='Enter')applySearch()">
+        <button class="ctrl-btn primary" onclick="applySearch()">決定</button>
+      </div>
+      <!-- Row 2: Filters + Sort -->
+      <div class="toolbar-row">
+        <select id="f-diff" onchange="renderTable()">
+          <option value="">難易度</option>
+          <option value="FTR">FTR</option>
+          <option value="ETR">ETR</option>
+          <option value="BYD">BYD</option>
         </select>
-        <button class="sort-dir-btn" id="sort-dir-btn" onclick="toggleSortDir()" title="昇順/降順切替">↓</button>
+        <select id="f-lv" onchange="renderTable()"><option value="">レベル</option></select>
+        <select id="f-sort" onchange="renderTable()">
+          <option value="const">ソート: 定数</option>
+          <option value="level">ソート: レベル</option>
+          <option value="score">ソート: スコア</option>
+          <option value="pct">ソート: 達成率</option>
+        </select>
+        <button class="ctrl-btn" id="sort-dir-btn" onclick="toggleSortDir()" title="昇順/降順切替">↓ 降順</button>
       </div>
     </div>
     <div class="table-wrap" id="tbl-container">
-      <div class="empty-state">楽曲データを読み込んでいます…</div>
+      <div class="empty-state">楽曲データを読み込み中…</div>
     </div>
   </div>
 
@@ -210,289 +220,369 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
       <div class="settings-title">データ管理</div>
       <div class="btn-row">
         <button class="btn ghost" onclick="exportData()">スコアデータをエクスポート</button>
-        <button class="btn ghost" onclick="triggerScoreImport()">スコアデータを復元</button>
+        <button class="btn ghost" onclick="document.getElementById('score-import-file').click()">スコアデータを復元</button>
         <input type="file" id="score-import-file" accept=".json" style="display:none" onchange="importScoreData(this)">
       </div>
-      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データはHTMLに内蔵されているため移行不要です。</div>
+      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データは <code>songdata.json</code> を編集して管理してください。</div>
     </div>
     <div class="settings-section">
-      <div class="settings-title">OP計算式について</div>
+      <div class="settings-title">楽曲データの更新</div>
       <div class="hint">
-        <b>OP値</b> = potential(score, 定数) × 5 + ランクボーナス + PMボーナス<br>
-        ・EX帯（9,800,000〜9,999,999）: ランクボーナス = (score - 9,800,000) / 200,000 × 0.5（0〜0.5）<br>
-        ・PM（score ≥ 10,000,000）: ランクボーナス = 0.5、PMボーナス = 0.75 × 無印PURE数 / 総ノーツ数<br>
-        ・9,800,000未満はOP = 0（EX未満は集計対象外）<br><br>
-        <b>達成率</b> = OP値 / 基準理論値 × 100（%）<br>
-        ・基準理論値（100%）= (定数+1) × 5 + 0.5（PMスコアかつ無印PUREなし）<br>
-        ・101%満点 = 基準理論値 + 0.75（全ノーツ無印PURE）
+        リポジトリ内の <code>songdata.json</code> を編集すると楽曲リストに反映されます。<br>
+        フォーマット: <code>[{"title":"…","artist":"…","difficulty":"FTR/ETR/BYD","constant":0.0,"totalNotes":0}, …]</code>
+      </div>
+    </div>
+    <div class="settings-section">
+      <div class="settings-title">OP計算式</div>
+      <div class="hint">
+        <b>対象グレード:</b> A (9,200,000) 以上<br>
+        <b>Potential:</b><br>
+        &nbsp;PM (≥10,000,000): c+1 &nbsp;|&nbsp; EX+/EX (9,800,000〜): c+(s-9,800,000)/200,000<br>
+        &nbsp;AA (9,500,000〜): c-0.5+(s-9,500,000)/600,000 &nbsp;|&nbsp; A (9,200,000〜): c-1.0+(s-9,200,000)/600,000<br><br>
+        <b>OP値</b> = potential × 5 + ランクボーナス + PMボーナス<br>
+        &nbsp;ランクボーナス: EX〜EX+は(s-9,800,000)/200,000×0.5、PMは固定0.5<br>
+        &nbsp;PMボーナス: 0.75 × min(s-10,000,000, 総ノーツ数) / 総ノーツ数<br><br>
+        <b>達成率:</b><br>
+        &nbsp;〜EX+: OP / base100 × 100 &nbsp;(base100 = (c+1)×5 + 0.5)<br>
+        &nbsp;PM: 100 + PMボーナス / 0.75 &nbsp;(最大101.0000%)
       </div>
     </div>
   </div>
 </main>
 
 <script>
-// ════ Song data (embedded) ════
-const RAW_SONGS = [{"title":"Testify","artist":"void (Mournfinale) feat. 星熊南巫","difficulty":"BYD","constant":12.0,"totalNotes":2221},{"title":"Designant.","artist":"Designant","difficulty":"BYD","constant":11.9,"totalNotes":2184},{"title":"Tempestissimo","artist":"t+pazolite","difficulty":"BYD","constant":11.7,"totalNotes":1540},{"title":"Arcana Eden","artist":"Team Grimoire vs Sakuzyo vs Laur","difficulty":"BYD","constant":11.6,"totalNotes":2134},{"title":"Aether Crest: Astral","artist":"void (Mournfinale) × 水野健治","difficulty":"ETR","constant":11.5,"totalNotes":1941},{"title":"Pentiment","artist":"Nothing But Reqiuem with Museo","difficulty":"BYD","constant":11.5,"totalNotes":1741},{"title":"Lament Rain","artist":"Ashrount vs. 打打だいず","difficulty":"BYD","constant":11.4,"totalNotes":1637},{"title":"Abstruse Dilemma","artist":"Ashrount vs. 打打だいず","difficulty":"FTR","constant":11.3,"totalNotes":1467},{"title":"Arghena","artist":"Feryquitous vs Laur","difficulty":"FTR","constant":11.3,"totalNotes":1444},{"title":"ALTER EGO","artist":"Yuta Imai vs Qlarabelle","difficulty":"ETR","constant":11.3,"totalNotes":1644},{"title":"多次元宇宙融合論","artist":"TAKIO feat. つぐ","difficulty":"ETR","constant":11.3,"totalNotes":1726},{"title":"Axium Divergence","artist":"ak+q (lowiro)","difficulty":"BYD","constant":11.3,"totalNotes":1682},{"title":"Aegleseeker","artist":"Silentroom vs Frums","difficulty":"FTR","constant":11.2,"totalNotes":1568},{"title":"PRAGMATISM -RESSURECTION-","artist":"Laur","difficulty":"BYD","constant":11.2,"totalNotes":1502},{"title":"Vicious [ANTi] Heroism","artist":"Kobaryo","difficulty":"BYD","constant":11.2,"totalNotes":1772},{"title":"#1f1e33","artist":"かめりあ(EDP)","difficulty":"FTR","constant":11.1,"totalNotes":1576},{"title":"Fracture Ray","artist":"Sakuzyo","difficulty":"FTR","constant":11.1,"totalNotes":1279},{"title":"Grievous Lady","artist":"Team Grimoire vs Laur","difficulty":"FTR","constant":11.1,"totalNotes":1450},{"title":"魔王","artist":"sasakure.UK × TJ.hangneil","difficulty":"BYD","constant":11.1,"totalNotes":1661},{"title":"LAMIA","artist":"BlackY","difficulty":"FTR","constant":11.0,"totalNotes":1385},{"title":"最強STRONGER","artist":"REDALiCE vs USAO","difficulty":"FTR","constant":11.0,"totalNotes":1384},{"title":"Undying Macula","artist":"Ashrount","difficulty":"ETR","constant":11.0,"totalNotes":1461},{"title":"And Revive The Melody","artist":"黒魔","difficulty":"FTR","constant":10.9,"totalNotes":1710},{"title":"CHAOS","artist":"Æsir","difficulty":"FTR","constant":10.9,"totalNotes":1369},{"title":"DA'AT -The First Seeker of Souls-","artist":"水野健治 VS 大國奏音","difficulty":"FTR","constant":10.9,"totalNotes":1500},{"title":"Designant.","artist":"Designant","difficulty":"FTR","constant":10.9,"totalNotes":1768},{"title":"業 -善なる神とこの世の悪について-","artist":"光吉猛修 VS 穴山大輔","difficulty":"FTR","constant":10.9,"totalNotes":1522},{"title":"TEmPTaTiON","artist":"かねこちはる","difficulty":"FTR","constant":10.9,"totalNotes":1099},{"title":"Testify","artist":"void (Mournfinale) feat. 星熊南巫","difficulty":"FTR","constant":10.9,"totalNotes":1766},{"title":"Vulcānus","artist":"Team Grimoire vs Aoi","difficulty":"FTR","constant":10.9,"totalNotes":1542},{"title":"Code: Oblivion","artist":"Kobaryo × Gram","difficulty":"ETR","constant":10.9,"totalNotes":1503},{"title":"MEGALOVANIA (Camellia Remix)","artist":"Camellia","difficulty":"ETR","constant":10.9,"totalNotes":1468},{"title":"ViRTUS","artist":"Hiro","difficulty":"ETR","constant":10.9,"totalNotes":1341},{"title":"We're All Gonna Die","artist":"Paul Bazooka","difficulty":"ETR","constant":10.9,"totalNotes":1335},{"title":"Welcome, Queen of Fiction.","artist":"打打だいず","difficulty":"ETR","constant":10.9,"totalNotes":1442},{"title":"Breach of Faith","artist":"Supire feat.eili","difficulty":"BYD","constant":10.9,"totalNotes":1448},{"title":"Einherjar Joker","artist":"DJ Genki vs Gram","difficulty":"BYD","constant":10.9,"totalNotes":1857},{"title":"Heavenly caress","artist":"Noah","difficulty":"BYD","constant":10.9,"totalNotes":1717},{"title":"Infinite Strife,","artist":"BlackYooh vs. siromaru","difficulty":"BYD","constant":10.9,"totalNotes":1633},{"title":"Nhelv","artist":"Silentroom","difficulty":"BYD","constant":10.9,"totalNotes":1474},{"title":"͟͝͞Ⅱ́̕","artist":"Cytus","difficulty":"FTR","constant":10.8,"totalNotes":1051},{"title":"Black MInD","artist":"COSIO","difficulty":"FTR","constant":10.8,"totalNotes":1274},{"title":"BUCHiGiRE Berserker","artist":"REDALiCE vs MASAKI","difficulty":"FTR","constant":10.8,"totalNotes":1412},{"title":"光速神授説 - Divine Light of Myriad -","artist":"yoho","difficulty":"FTR","constant":10.8,"totalNotes":1021},{"title":"Dantalion","artist":"Team Grimoire","difficulty":"FTR","constant":10.8,"totalNotes":1476},{"title":"GENOCIDER","artist":"DJ Myosuke","difficulty":"FTR","constant":10.8,"totalNotes":1483},{"title":"Meta-Mysteria","artist":"DJ Noriken","difficulty":"FTR","constant":10.8,"totalNotes":1309},{"title":"PRIMITIVE LIGHTS","artist":"TAG","difficulty":"FTR","constant":10.8,"totalNotes":1524},{"title":"Ringed Genesis","artist":"Edelritter","difficulty":"FTR","constant":10.8,"totalNotes":1146},{"title":"蜘蛛の糸","artist":"きくお×cosMo＠暴走P feat.影縫英","difficulty":"FTR","constant":10.8,"totalNotes":1203},{"title":"Stasis","artist":"Maozon","difficulty":"FTR","constant":10.8,"totalNotes":1521},{"title":"TeraVolt","artist":"Katali","difficulty":"FTR","constant":10.8,"totalNotes":1008},{"title":"ω4","artist":"穴山大輔 VS 光吉猛修 VS Kai","difficulty":"FTR","constant":10.8,"totalNotes":1393},{"title":"ANDORXOR","artist":"Sobrem","difficulty":"ETR","constant":10.8,"totalNotes":1404},{"title":"Distorted Fate","artist":"Sakuzyo","difficulty":"ETR","constant":10.8,"totalNotes":1402},{"title":"Désive","artist":"MisomyL","difficulty":"ETR","constant":10.8,"totalNotes":1340},{"title":"Lilly","artist":"Jaggernaut.","difficulty":"ETR","constant":10.8,"totalNotes":1353},{"title":"Nightmare","artist":"M2U","difficulty":"ETR","constant":10.8,"totalNotes":1116},{"title":"MARENYX","artist":"BlackY × Aoi","difficulty":"ETR","constant":10.8,"totalNotes":1500},{"title":"Heavensdoor","artist":"LeaF","difficulty":"BYD","constant":10.8,"totalNotes":1534},{"title":"AlterGate","artist":"MisoilePunch♪ ~タケノコ添え~","difficulty":"FTR","constant":10.7,"totalNotes":1324},{"title":"AMAZING MIGHTYYYY!!!!","artist":"WAiKURO","difficulty":"FTR","constant":10.7,"totalNotes":1249},{"title":"Cyaegha","artist":"USAO","difficulty":"FTR","constant":10.7,"totalNotes":1368},{"title":"狂恋ROMANCE","artist":"REDALiCE vs DJ Myosuke feat. DELUTAYA","difficulty":"FTR","constant":10.7,"totalNotes":1519},{"title":"NULL APOPHENIA","artist":"N²","difficulty":"FTR","constant":10.7,"totalNotes":1299},{"title":"ouroboros -twin stroke of the end-","artist":"Cranky VS MASAKI","difficulty":"FTR","constant":10.7,"totalNotes":1369},{"title":"烈華RESONANCE","artist":"REDALiCE vs Kobaryo","difficulty":"FTR","constant":10.7,"totalNotes":1212},{"title":"Tempestissimo","artist":"t+pazolite","difficulty":"FTR","constant":10.7,"totalNotes":1254},{"title":"World Vanquisher","artist":"void (Mournfinale)","difficulty":"FTR","constant":10.7,"totalNotes":1452},{"title":"Don't Fight The Music","artist":"黒魔","difficulty":"ETR","constant":10.7,"totalNotes":1385},{"title":"Inverted World","artist":"ARForest","difficulty":"ETR","constant":10.7,"totalNotes":1065},{"title":"Signal","artist":"rejection feat. Such","difficulty":"ETR","constant":10.7,"totalNotes":1245},{"title":"Xterfusion","artist":"REDALiCE × t+pazolite","difficulty":"ETR","constant":10.7,"totalNotes":1441},{"title":"[X]","artist":"Blacklolita","difficulty":"FTR","constant":10.6,"totalNotes":1190},{"title":"Aether Crest: Astral","artist":"void (Mournfinale) × 水野健治","difficulty":"FTR","constant":10.6,"totalNotes":1508},{"title":"Astral Quantization","artist":"DJ Grimoire","difficulty":"FTR","constant":10.6,"totalNotes":1388},{"title":"AttraqtiA","artist":"かめりあ","difficulty":"FTR","constant":10.6,"totalNotes":1433},{"title":"Axium Crisis","artist":"ak+q","difficulty":"FTR","constant":10.6,"totalNotes":1094},{"title":"Back to Basics","artist":"m1dy","difficulty":"FTR","constant":10.6,"totalNotes":1544},{"title":"corps-sans-organs","artist":"cybermiso","difficulty":"FTR","constant":10.6,"totalNotes":1077},{"title":"Crimson Throne","artist":"Dimier√Lisb","difficulty":"FTR","constant":10.6,"totalNotes":1313},{"title":"cyanine","artist":"jioyi","difficulty":"FTR","constant":10.6,"totalNotes":1171},{"title":"Desertrealm","artist":"Masahiro \"Godspeed\" Aoki","difficulty":"FTR","constant":10.6,"totalNotes":1460},{"title":"多次元宇宙融合論","artist":"TAKIO feat. つぐ","difficulty":"FTR","constant":10.6,"totalNotes":1422},{"title":"Good bye, Merry-Go-Round.","artist":"Yooh","difficulty":"FTR","constant":10.6,"totalNotes":1084},{"title":"Lament Rain","artist":"Ashrount vs. 打打だいず","difficulty":"FTR","constant":10.6,"totalNotes":1380},{"title":"Live Fast Die Younger","artist":"anubasu-anubasu","difficulty":"FTR","constant":10.6,"totalNotes":1292},{"title":"Manic Jeer","artist":"ルゼ","difficulty":"FTR","constant":10.6,"totalNotes":1286},{"title":"MVURBD","artist":"ETIA.","difficulty":"FTR","constant":10.6,"totalNotes":1497},{"title":"Overwhelm","artist":"xi","difficulty":"FTR","constant":10.6,"totalNotes":1251},{"title":"Seclusion","artist":"Laur feat. Sennzai","difficulty":"FTR","constant":10.6,"totalNotes":1132},{"title":"UNKNOWN LEVELS","artist":"Yuta Imai","difficulty":"FTR","constant":10.6,"totalNotes":1149},{"title":"Dies irae","artist":"お月さま交響曲","difficulty":"ETR","constant":10.6,"totalNotes":1263},{"title":"羽化する亜球体","artist":"窓辺リカ","difficulty":"ETR","constant":10.6,"totalNotes":1327},{"title":"Purple Verse","artist":"Hommarju","difficulty":"BYD","constant":10.6,"totalNotes":1202},{"title":"妖艶魔女 -trappola bewitching-","artist":"gmtn.","difficulty":"BYD","constant":10.6,"totalNotes":1086},{"title":"Aleph-0","artist":"LeaF","difficulty":"FTR","constant":10.5,"totalNotes":919},{"title":"ALTER EGO","artist":"Yuta Imai vs Qlarabelle","difficulty":"FTR","constant":10.5,"totalNotes":1466},{"title":"Arcana Eden","artist":"Team Grimoire vs Sakuzyo vs Laur","difficulty":"FTR","constant":10.5,"totalNotes":1792},{"title":"Aurgelmir","artist":"溝口ゆうま feat. 大瀬良あい","difficulty":"FTR","constant":10.5,"totalNotes":1100},{"title":"Chronicle","artist":"Lime","difficulty":"FTR","constant":10.5,"totalNotes":1264},{"title":"Dull Blade","artist":"stuv","difficulty":"FTR","constant":10.5,"totalNotes":1199},{"title":"eden","artist":"\"漆黒\"の堕天使《Gram》†Versus†\"聖刻\"の熾天使《Gram》","difficulty":"FTR","constant":10.5,"totalNotes":1365},{"title":"Ego Eimi","artist":"BlackY feat. Risa Yuzuki","difficulty":"FTR","constant":10.5,"totalNotes":1233},{"title":"GIMME DA BLOOD","artist":"C-Show","difficulty":"FTR","constant":10.5,"totalNotes":1093},{"title":"GLORY：ROAD","artist":"uma vs. モリモリあつし","difficulty":"FTR","constant":10.5,"totalNotes":1479},{"title":"Halcyon","artist":"xi","difficulty":"FTR","constant":10.5,"totalNotes":1227},{"title":"Judgement","artist":"Tatsunoshin","difficulty":"FTR","constant":10.5,"totalNotes":1432},{"title":"Lightning Screw","artist":"HiTECH NINJA","difficulty":"FTR","constant":10.5,"totalNotes":1192},{"title":"Lucid Traveler","artist":"Akira Complex vs 3R2","difficulty":"FTR","constant":10.5,"totalNotes":1341},{"title":"Rise of the World","artist":"cosMo@暴走P","difficulty":"FTR","constant":10.5,"totalNotes":1176},{"title":"Sheriruth (Laur Remix)","artist":"Laur","difficulty":"FTR","constant":10.5,"totalNotes":1134},{"title":"Singularity","artist":"ETIA.","difficulty":"FTR","constant":10.5,"totalNotes":1105},{"title":"Spirit of the Dauntless","artist":"KO3 & Relect","difficulty":"FTR","constant":10.5,"totalNotes":1207},{"title":"Wish Upon a Snow","artist":"打打だいず","difficulty":"FTR","constant":10.5,"totalNotes":1309},{"title":"XTREME","artist":"USAO","difficulty":"FTR","constant":10.5,"totalNotes":1258},{"title":"10pt8ion","artist":"Lite Show Magic","difficulty":"ETR","constant":10.5,"totalNotes":1087},{"title":"BlythE","artist":"M2U","difficulty":"ETR","constant":10.5,"totalNotes":1207},{"title":"CHAOSBLAST","artist":"QURELESS + 柚子花","difficulty":"ETR","constant":10.5,"totalNotes":1539},{"title":"MEGALOVANIA","artist":"Toby Fox","difficulty":"ETR","constant":10.5,"totalNotes":1202},{"title":"Paranoid Arc","artist":"t+pazolite","difficulty":"ETR","constant":10.5,"totalNotes":1412},{"title":"Rain of Conflict in a Radiant Abyss","artist":"ak+q","difficulty":"ETR","constant":10.5,"totalNotes":1247},{"title":"Straight into the lights","artist":"Cosmograph","difficulty":"ETR","constant":10.5,"totalNotes":1280},{"title":"黄昏の協奏曲","artist":"Scarlette","difficulty":"ETR","constant":10.5,"totalNotes":962},{"title":"Xxium and Purple haze","artist":"D.watt","difficulty":"ETR","constant":10.5,"totalNotes":1096},{"title":"Be There","artist":"PSYQUI","difficulty":"BYD","constant":10.5,"totalNotes":1127},{"title":"Libertas","artist":"Zekk","difficulty":"BYD","constant":10.5,"totalNotes":1048},{"title":"overdead.","artist":"fn","difficulty":"BYD","constant":10.5,"totalNotes":1503},{"title":"Climax","artist":"USAO","difficulty":"FTR","constant":10.4,"totalNotes":1367},{"title":"Felis","artist":"M2U","difficulty":"FTR","constant":10.4,"totalNotes":1153},{"title":"Garakuta Doll Play","artist":"t+pazolite","difficulty":"FTR","constant":10.4,"totalNotes":1035},{"title":"Kissing Lucifer","artist":"ETIA.","difficulty":"FTR","constant":10.4,"totalNotes":1183},{"title":"Last Celebration","artist":"Laur vs CK","difficulty":"FTR","constant":10.4,"totalNotes":1475},{"title":"Lethal Voltage","artist":"siqlo","difficulty":"FTR","constant":10.4,"totalNotes":1497},{"title":"MIRINAE","artist":"TAK × Zekk","difficulty":"FTR","constant":10.4,"totalNotes":1277},{"title":"Pentiment","artist":"Nothing But Reqiuem with Museo","difficulty":"FTR","constant":10.4,"totalNotes":1345},{"title":"プラシイボ♥バトラー","artist":"OSTER project","difficulty":"FTR","constant":10.4,"totalNotes":1194},{"title":"PUPA","artist":"モリモリあつし","difficulty":"FTR","constant":10.4,"totalNotes":1099},{"title":"Qovat","artist":"owl＊tree","difficulty":"FTR","constant":10.4,"totalNotes":1299},{"title":"To the Milky Way","artist":"黒魔","difficulty":"FTR","constant":10.4,"totalNotes":1392},{"title":"γuarδina","artist":"Aoi","difficulty":"FTR","constant":10.4,"totalNotes":1120},{"title":"Dual Dependency","artist":"seatrus","difficulty":"ETR","constant":10.4,"totalNotes":1162},{"title":"Eternity Break","artist":"Puru","difficulty":"ETR","constant":10.4,"totalNotes":1155},{"title":"INCARNATOR₀₀","artist":"Silentroom × N²","difficulty":"ETR","constant":10.4,"totalNotes":1355},{"title":"メルティーラプソディー","artist":"lapix feat. PANXI","difficulty":"ETR","constant":10.4,"totalNotes":1185},{"title":"No Way Back","artist":"Nhato","difficulty":"ETR","constant":10.4,"totalNotes":1008},{"title":"［筏］は云う。幾ら漂流すれど不撓の心さえ有れば軈て行到ると。","artist":"庭師","difficulty":"ETR","constant":10.4,"totalNotes":1193},{"title":"IMPACT","artist":"USAO feat. 光吉猛修","difficulty":"BYD","constant":10.4,"totalNotes":1392},{"title":"Rays of Remnant","artist":"May × Felysrator","difficulty":"BYD","constant":10.4,"totalNotes":1118},{"title":"Saint or Sinner","artist":"crayvxn","difficulty":"BYD","constant":10.4,"totalNotes":1124},{"title":"Singularity VVVIP","artist":"Arcaea Sound Team against. ETIA.","difficulty":"BYD","constant":10.4,"totalNotes":1114},{"title":"99 Glooms","artist":"Stag","difficulty":"FTR","constant":10.3,"totalNotes":1294},{"title":"Breach of Faith","artist":"Supire feat.eili","difficulty":"FTR","constant":10.3,"totalNotes":1373},{"title":"Ether Strike","artist":"Akira Complex","difficulty":"FTR","constant":10.3,"totalNotes":1170},{"title":"緋色月下、狂咲ノ絶 (nayuta 2017 ver.)","artist":"nayuta x 黒鳥(EastNewSound)","difficulty":"FTR","constant":10.3,"totalNotes":1126},{"title":"怒槌","artist":"光吉猛修","difficulty":"FTR","constant":10.3,"totalNotes":1347},{"title":"IZANA","artist":"t+pazolite vs P*Light","difficulty":"FTR","constant":10.3,"totalNotes":976},{"title":"Metallic Punisher","artist":"INNOCENT NOISE","difficulty":"FTR","constant":10.3,"totalNotes":1238},{"title":"ROST PAGE GENE","artist":"MYUKKE.","difficulty":"FTR","constant":10.3,"totalNotes":1028},{"title":"SUPER AMBULANCE","artist":"AJURIKA","difficulty":"FTR","constant":10.3,"totalNotes":1371},{"title":"Tiferet","artist":"xi + sta","difficulty":"FTR","constant":10.3,"totalNotes":1086},{"title":"アリス・リデルに捧ぐ","artist":"モリモリあつし","difficulty":"FTR","constant":10.3,"totalNotes":998},{"title":"ultradiaxon-N3","artist":"nitro (lowiro)","difficulty":"FTR","constant":10.3,"totalNotes":1228},{"title":"Viyella's Tears","artist":"Laur","difficulty":"FTR","constant":10.3,"totalNotes":1403},{"title":"8-EM","artist":"Sampling Masters AYA","difficulty":"ETR","constant":10.3,"totalNotes":1201},{"title":"BREaK! BREaK! BREaK!","artist":"HiTECH NINJA","difficulty":"ETR","constant":10.3,"totalNotes":1251},{"title":"Dual Doom Deathmatch","artist":"Kobaryo vs Hyun","difficulty":"ETR","constant":10.3,"totalNotes":1292},{"title":"zephyrlasting","artist":"s-don × nitro","difficulty":"ETR","constant":10.3,"totalNotes":1166},{"title":"ENERGY SYNERGY MATRIX","artist":"Tanchiky","difficulty":"BYD","constant":10.3,"totalNotes":1011},{"title":"OMAKENO Stroke","artist":"t+pazolite","difficulty":"BYD","constant":10.3,"totalNotes":931},{"title":"Party Vinyl","artist":"モリモリあつし","difficulty":"BYD","constant":10.3,"totalNotes":946},{"title":"Small Cloud Sugar Candy","artist":"テヅカ × Aoi feat.桃雛なの","difficulty":"BYD","constant":10.3,"totalNotes":1158},{"title":"Angel's Boundary","artist":"MEMODEMO","difficulty":"FTR","constant":10.2,"totalNotes":1246},{"title":"Capella","artist":"ARForest","difficulty":"FTR","constant":10.2,"totalNotes":1159},{"title":"conflict","artist":"siromaru + cranky","difficulty":"FTR","constant":10.2,"totalNotes":1056},{"title":"Grandspell","artist":"Hylen","difficulty":"FTR","constant":10.2,"totalNotes":1289},{"title":"Löschen","artist":"BlackY feat. Risa Yuzuki","difficulty":"FTR","constant":10.2,"totalNotes":1235},{"title":"Logos","artist":"polysha feat. 高城みよ","difficulty":"FTR","constant":10.2,"totalNotes":1040},{"title":"Magnolia","artist":"M2U Vocal by Guriri","difficulty":"FTR","constant":10.2,"totalNotes":895},{"title":"Malicious Mischance","artist":"s-don","difficulty":"FTR","constant":10.2,"totalNotes":1126},{"title":"NEO WINGS","artist":"SOUND HOLIC feat. Nana Takahashi","difficulty":"FTR","constant":10.2,"totalNotes":1328},{"title":"Nirv lucE","artist":"しーけー","difficulty":"FTR","constant":10.2,"totalNotes":980},{"title":"Redolent Shape","artist":"Sanaas","difficulty":"FTR","constant":10.2,"totalNotes":1088},{"title":"Valhalla:0","artist":"Jaggernaut.","difficulty":"FTR","constant":10.2,"totalNotes":1173},{"title":"αterlβus","artist":"Aoi","difficulty":"FTR","constant":10.2,"totalNotes":1030},{"title":"GOODRAGE","artist":"EBIMAYO","difficulty":"ETR","constant":10.2,"totalNotes":1035},{"title":"lastendconductor","artist":"zts","difficulty":"BYD","constant":10.2,"totalNotes":1339},{"title":"Quon","artist":"DJ Noriken","difficulty":"BYD","constant":10.2,"totalNotes":1044},{"title":"Red and Blue and Green","artist":"fn(ArcaeaSoundTeam)","difficulty":"BYD","constant":10.2,"totalNotes":1194},{"title":"Renegade","artist":"sky_delta","difficulty":"BYD","constant":10.2,"totalNotes":1165},{"title":"最高の悪夢","artist":"Toby Fox","difficulty":"BYD","constant":10.2,"totalNotes":1451},{"title":"G e n g a o z o","artist":"-45","difficulty":"FTR","constant":10.1,"totalNotes":1353},{"title":"患部で止まってすぐ溶ける　～ 狂気の優曇華院","artist":"ARM + 夕野ヨシミ (IOSYS) feat. miko","difficulty":"FTR","constant":10.1,"totalNotes":1108},{"title":"Medusa","artist":"HiTECH NINJA","difficulty":"FTR","constant":10.1,"totalNotes":931},{"title":"PRAGMATISM","artist":"Laur","difficulty":"FTR","constant":10.1,"totalNotes":942},{"title":"Trrricksters!!","artist":"s-don vs. 翡乃イスカ","difficulty":"FTR","constant":10.1,"totalNotes":1183},{"title":"Undying Macula","artist":"Ashrount","difficulty":"FTR","constant":10.1,"totalNotes":1250},{"title":"We're All Gonna Die","artist":"Paul Bazooka","difficulty":"FTR","constant":10.1,"totalNotes":1147},{"title":"Welcome, Queen of Fiction.","artist":"打打だいず","difficulty":"FTR","constant":10.1,"totalNotes":1172},{"title":"BlazinG Air","artist":"kanone","difficulty":"ETR","constant":10.1,"totalNotes":1129},{"title":"Cryogenic","artist":"Camellia ft. Petra Gurin","difficulty":"ETR","constant":10.1,"totalNotes":1014},{"title":"Don't Die","artist":"Paul Bazooka","difficulty":"ETR","constant":10.1,"totalNotes":1004},{"title":"幻想のサテライト","artist":"豚乙女","difficulty":"ETR","constant":10.1,"totalNotes":1139},{"title":"INFINITE DIMENSION","artist":"DJ Noriken × P*Light","difficulty":"ETR","constant":10.1,"totalNotes":1111},{"title":"My life is mine alone!","artist":"Mylta feat. ねんね","difficulty":"ETR","constant":10.1,"totalNotes":1075},{"title":"OBLIVION","artist":"ESTi","difficulty":"ETR","constant":10.1,"totalNotes":871},{"title":"Alexandrite","artist":"WAiKURO","difficulty":"FTR","constant":10.0,"totalNotes":1040},{"title":"竹","artist":"立秋 feat. ちょこ","difficulty":"FTR","constant":10.0,"totalNotes":1050},{"title":"Chromafill","artist":"ていぬ","difficulty":"FTR","constant":10.0,"totalNotes":1130},{"title":"Free Myself","artist":"lapix feat. mami","difficulty":"FTR","constant":10.0,"totalNotes":1132},{"title":"HIVEMIND","artist":"かたぎり","difficulty":"FTR","constant":10.0,"totalNotes":1252},{"title":"Liar","artist":"zts","difficulty":"FTR","constant":10.0,"totalNotes":919},{"title":"Masquerade Legion","artist":"Srav3R & DJ Noriken","difficulty":"FTR","constant":10.0,"totalNotes":1064},{"title":"Oshama Scramble!","artist":"t+pazolite","difficulty":"FTR","constant":10.0,"totalNotes":1073},{"title":"Scarlet Lance","artist":"MASAKI (ZUNTATA)","difficulty":"FTR","constant":10.0,"totalNotes":1130},{"title":"Sheriruth","artist":"Team Grimoire","difficulty":"FTR","constant":10.0,"totalNotes":1151},{"title":"TRPNO","artist":"Nauts","difficulty":"FTR","constant":10.0,"totalNotes":897},{"title":"Vicious Heroism","artist":"Kobaryo","difficulty":"FTR","constant":10.0,"totalNotes":1150},{"title":"魔王","artist":"sasakure.UK × TJ.hangneil","difficulty":"FTR","constant":10.0,"totalNotes":1225},{"title":"Xanatos","artist":"Tatsh","difficulty":"FTR","constant":10.0,"totalNotes":1232},{"title":"Third Sun","artist":"Ash Astral","difficulty":"ETR","constant":10.0,"totalNotes":1043},{"title":"ΛZΛLEΛ","artist":"ak+q × onoken","difficulty":"ETR","constant":10.0,"totalNotes":1075},{"title":"Altale","artist":"Sakuzyo","difficulty":"BYD","constant":10.0,"totalNotes":1074},{"title":"Bookmaker (2D Version)","artist":"Kobaryo","difficulty":"BYD","constant":10.0,"totalNotes":1287},{"title":"La'qryma of the Wasteland","artist":"DJ Noriken","difficulty":"BYD","constant":10.0,"totalNotes":1161},{"title":"INTERNET YAMERO","artist":"Aiobahn feat. KOTOKO","difficulty":"FTR","constant":9.9,"totalNotes":1222},{"title":"7thSense","artist":"削除","difficulty":"FTR","constant":9.9,"totalNotes":925},{"title":"雨神楽","artist":"荒谷サトル","difficulty":"FTR","constant":9.9,"totalNotes":1076},{"title":"ANDORXOR","artist":"Sobrem","difficulty":"FTR","constant":9.9,"totalNotes":1055},{"title":"Antagonism","artist":"Yooh vs. siromaru","difficulty":"FTR","constant":9.9,"totalNotes":1142},{"title":"Arcahv","artist":"Feryquitous","difficulty":"FTR","constant":9.9,"totalNotes":1065},{"title":"Ashen 6oundary","artist":"YUKIYANAGI","difficulty":"FTR","constant":9.9,"totalNotes":1183},{"title":"Astra walkthrough","artist":"paraoka","difficulty":"FTR","constant":9.9,"totalNotes":1191},{"title":"Beautiful Dreamer","artist":"M-Project","difficulty":"FTR","constant":9.9,"totalNotes":1139},{"title":"Code: Oblivion","artist":"Kobaryo × Gram","difficulty":"FTR","constant":9.9,"totalNotes":1281},{"title":"Devillic Sphere","artist":"3R2","difficulty":"FTR","constant":9.9,"totalNotes":1129},{"title":"ディストーション・ニンゲン","artist":"DJ Myosuke & KAJI","difficulty":"FTR","constant":9.9,"totalNotes":1317},{"title":"Désive","artist":"MisomyL","difficulty":"FTR","constant":9.9,"totalNotes":1273},{"title":"Galaxy Friends","artist":"Kobaryo","difficulty":"FTR","constant":9.9,"totalNotes":1013},{"title":"Heavensdoor","artist":"LeaF","difficulty":"FTR","constant":9.9,"totalNotes":1101},{"title":"Infinite Strife,","artist":"BlackYooh vs. siromaru","difficulty":"FTR","constant":9.9,"totalNotes":1511},{"title":"Lilly","artist":"Jaggernaut.","difficulty":"FTR","constant":9.9,"totalNotes":1312},{"title":"MAXRAGE","artist":"EBIMAYO","difficulty":"FTR","constant":9.9,"totalNotes":1184},{"title":"Mirzam","artist":"Aoi vs. siqlo","difficulty":"FTR","constant":9.9,"totalNotes":1303},{"title":"Modelista","artist":"HiTECH NINJA","difficulty":"FTR","constant":9.9,"totalNotes":1010},{"title":"New York Back Raise","artist":"saaa + kei_iwata + stuv + わかどり","difficulty":"FTR","constant":9.9,"totalNotes":1091},{"title":"Nhelv","artist":"Silentroom","difficulty":"FTR","constant":9.9,"totalNotes":1108},{"title":"彩る夏の恋花火","artist":"karatoPαnchii feat. はるの","difficulty":"FTR","constant":9.9,"totalNotes":1088},{"title":"Swan Song","artist":"void (Mournfinale)","difficulty":"FTR","constant":9.9,"totalNotes":1225},{"title":"Syriana","artist":"BEXTER","difficulty":"FTR","constant":9.9,"totalNotes":886},{"title":"The Survivor (Game Edit)","artist":"Taishi","difficulty":"FTR","constant":9.9,"totalNotes":1100},{"title":"Trap Crow","artist":"Puru","difficulty":"FTR","constant":9.9,"totalNotes":1074},{"title":"妖艶魔女 -trappola bewitching-","artist":"gmtn.","difficulty":"FTR","constant":9.9,"totalNotes":1044},{"title":"Ultimate Taste","artist":"ぱらどっと","difficulty":"FTR","constant":9.9,"totalNotes":1405},{"title":"ViRTUS","artist":"Hiro","difficulty":"FTR","constant":9.9,"totalNotes":1222},{"title":"Xxium and Purple Haze","artist":"D.watt","difficulty":"FTR","constant":9.9,"totalNotes":1182},{"title":"~\\_+","artist":"AQUASINE ~ MEMODEMO + METAROOM","difficulty":"FTR","constant":9.9,"totalNotes":1201},{"title":"CHAIN2NITE","artist":"asuzora feat. cyber milk ちゃん","difficulty":"ETR","constant":9.9,"totalNotes":1037},{"title":"Hypnotize","artist":"rejection","difficulty":"ETR","constant":9.9,"totalNotes":1164},{"title":"incomplete the one","artist":"Halv feat.Kuroa*","difficulty":"ETR","constant":9.9,"totalNotes":1008},{"title":"Paradox Palette","artist":"Aethoro","difficulty":"ETR","constant":9.9,"totalNotes":1043},{"title":"進捗どうですか?","artist":"sumijun feat. ななひら","difficulty":"ETR","constant":9.9,"totalNotes":1162},{"title":"STARGATE EXTREME","artist":"KARUT","difficulty":"ETR","constant":9.9,"totalNotes":915},{"title":"Tic! Tac! Toe!","artist":"TAK x Corbin","difficulty":"ETR","constant":9.9,"totalNotes":907},{"title":"Vainspire","artist":"satella","difficulty":"ETR","constant":9.9,"totalNotes":1133},{"title":"Anökumene","artist":"Jun Kuroda","difficulty":"BYD","constant":9.9,"totalNotes":971},{"title":"Dement ~after legend~","artist":"Cosmograph","difficulty":"BYD","constant":9.9,"totalNotes":1040},{"title":"Eccentric Tale","artist":"Yamajet","difficulty":"BYD","constant":9.9,"totalNotes":995},{"title":"狂言綺語","artist":"影虎。& ikaruga_nex","difficulty":"BYD","constant":9.9,"totalNotes":1325},{"title":"Ignotus Afterburn","artist":"Arcaea Sound Team","difficulty":"BYD","constant":9.9,"totalNotes":1077},{"title":"10pt8ion","artist":"Lite Show Magic","difficulty":"FTR","constant":9.8,"totalNotes":906},{"title":"Ai Drew","artist":"Feryquitous","difficulty":"FTR","constant":9.8,"totalNotes":1066},{"title":"Altale","artist":"Sakuzyo","difficulty":"FTR","constant":9.8,"totalNotes":690},{"title":"Ascent","artist":"TANUKI","difficulty":"FTR","constant":9.8,"totalNotes":1023},{"title":"Black Territory","artist":"DJ Myosuke","difficulty":"FTR","constant":9.8,"totalNotes":1195},{"title":"Callima Karma","artist":"t+pazolite vs Feryquitous","difficulty":"FTR","constant":9.8,"totalNotes":1222},{"title":"Corruption","artist":"3R2","difficulty":"FTR","constant":9.8,"totalNotes":1293},{"title":"Defection","artist":"TeddyLoid feat. DELTA","difficulty":"FTR","constant":9.8,"totalNotes":1141},{"title":"Einherjar Joker","artist":"DJ Genki vs Gram","difficulty":"FTR","constant":9.8,"totalNotes":1159},{"title":"Far Away Light","artist":"technoplanet feat. はるの&黒沢ダイスケ","difficulty":"FTR","constant":9.8,"totalNotes":1322},{"title":"FLUFFY FLUSH","artist":"Kobaryo","difficulty":"FTR","constant":9.8,"totalNotes":1329},{"title":"Genesis","artist":"Morrigan feat.Lily","difficulty":"FTR","constant":9.8,"totalNotes":867},{"title":"Got hive of Ra","artist":"E.G.G.","difficulty":"FTR","constant":9.8,"totalNotes":794},{"title":"秋の陽炎","artist":"karatoPαnchii feat. はるの","difficulty":"FTR","constant":9.8,"totalNotes":1077},{"title":"Heavenly caress","artist":"Noah","difficulty":"FTR","constant":9.8,"totalNotes":1560},{"title":"ヒュブリスの頂に聳えるのは","artist":"qfeileadh feat.のあ","difficulty":"FTR","constant":9.8,"totalNotes":1196},{"title":"HYPER VISION","artist":"VOLTA","difficulty":"FTR","constant":9.8,"totalNotes":1040},{"title":"Ignition","artist":"パソコン音楽クラブ","difficulty":"FTR","constant":9.8,"totalNotes":994},{"title":"init()","artist":"kamome sano","difficulty":"FTR","constant":9.8,"totalNotes":1204},{"title":"感情の摩天楼 ～Arr.Demetori","artist":"Demetori","difficulty":"FTR","constant":9.8,"totalNotes":1294},{"title":"LIVHT MY W​Δ​Y","artist":"かめりあ feat. STΔRLIVHT","difficulty":"FTR","constant":9.8,"totalNotes":954},{"title":"Linear Accelerator","artist":"THE SHAFT","difficulty":"FTR","constant":9.8,"totalNotes":905},{"title":"Lost Desire","artist":"Powerless feat. Sennzai","difficulty":"FTR","constant":9.8,"totalNotes":1154},{"title":"Macrocosmic Modulation","artist":"JAKAZiD","difficulty":"FTR","constant":9.8,"totalNotes":1117},{"title":"Mazy Metroplex","artist":"aran","difficulty":"FTR","constant":9.8,"totalNotes":952},{"title":"MEGALOVANIA (Camellia Remix)","artist":"Camellia","difficulty":"FTR","constant":9.8,"totalNotes":1345},{"title":"Memory Forest","artist":"ETIA.","difficulty":"FTR","constant":9.8,"totalNotes":978},{"title":"Nameless Passion","artist":"天束 feat.Sennzai","difficulty":"FTR","constant":9.8,"totalNotes":1223},{"title":"Nightmare","artist":"M2U","difficulty":"FTR","constant":9.8,"totalNotes":901},{"title":"Old School Salvage","artist":"DJ SHARPNEL","difficulty":"FTR","constant":9.8,"totalNotes":1316},{"title":"Ouvertüre","artist":"USAO & DJ Genki feat. ルーン(CV:河瀬茉希)","difficulty":"FTR","constant":9.8,"totalNotes":913},{"title":"Protoflicker","artist":"Silentroom","difficulty":"FTR","constant":9.8,"totalNotes":1042},{"title":"RGB","artist":"MEMODEMO X AQUASINE","difficulty":"FTR","constant":9.8,"totalNotes":1131},{"title":"Scarlet Cage","artist":"Daisuke Kurosawa","difficulty":"FTR","constant":9.8,"totalNotes":1195},{"title":"朱月ノ姫","artist":"technoplanet feat. 夕月ティア","difficulty":"FTR","constant":9.8,"totalNotes":1037},{"title":"shrink","artist":"Shohei Tsuchiya(ZUNTATA)","difficulty":"FTR","constant":9.8,"totalNotes":939},{"title":"Signal","artist":"rejection feat. Such","difficulty":"FTR","constant":9.8,"totalNotes":1151},{"title":"SOUNDWiTCH","artist":"HATE","difficulty":"FTR","constant":9.8,"totalNotes":785},{"title":"Technicolour","artist":"Maozon","difficulty":"FTR","constant":9.8,"totalNotes":1140},{"title":"THE ULTIMACY","artist":"aran vs Massive New Krew","difficulty":"FTR","constant":9.8,"totalNotes":1304},{"title":"彼方の夢へと","artist":"ii/night feat. 綺良雪","difficulty":"FTR","constant":9.8,"totalNotes":1102},{"title":"Won't Back Down","artist":"Pure 100% / KASA","difficulty":"FTR","constant":9.8,"totalNotes":1015},{"title":"World Fragments III(radio edit)","artist":"xi","difficulty":"FTR","constant":9.8,"totalNotes":1387},{"title":"Xeraphinite","artist":"BlackY","difficulty":"FTR","constant":9.8,"totalNotes":1048},{"title":"Xterfusion","artist":"REDALiCE × t+pazolite","difficulty":"FTR","constant":9.8,"totalNotes":1138},{"title":"ヨミビトシラズ","artist":"Limonène (サノカモメ+月島春果)","difficulty":"FTR","constant":9.8,"totalNotes":1075},{"title":"Crimson Quartz","artist":"DiGiTAL WiNG with 空音","difficulty":"ETR","constant":9.8,"totalNotes":1200},{"title":"disintegration","artist":"ひゅ〜ぶ","difficulty":"ETR","constant":9.8,"totalNotes":821},{"title":"LiftOff","artist":"MAYA AKAI","difficulty":"ETR","constant":9.8,"totalNotes":988},{"title":"Miles","artist":"Electronic Boutique","difficulty":"ETR","constant":9.8,"totalNotes":829},{"title":"MORNINGLOOM","artist":"saaa","difficulty":"ETR","constant":9.8,"totalNotes":1035},{"title":"taboo tears you up 2017","artist":"REDALiCE","difficulty":"ETR","constant":9.8,"totalNotes":1125},{"title":"U.A.D","artist":"HAYAKO","difficulty":"ETR","constant":9.8,"totalNotes":836},{"title":"Waltz for Lorelei","artist":"Sobrem & 庭師","difficulty":"ETR","constant":9.8,"totalNotes":999},{"title":"Cybernecia Catharsis","artist":"Tanchiky","difficulty":"BYD","constant":9.8,"totalNotes":991},{"title":"FREEF4LL","artist":"YUKIYANAGI","difficulty":"BYD","constant":9.8,"totalNotes":1336},{"title":"GOODTEK (Arcaea Edit)","artist":"EBIMAYO","difficulty":"BYD","constant":9.8,"totalNotes":1103},{"title":"神奈川電脳暗渠","artist":"南ゆに","difficulty":"BYD","constant":9.8,"totalNotes":1121},{"title":"Lost Civilization","artist":"Laur vs CK","difficulty":"BYD","constant":9.8,"totalNotes":1061},{"title":"qualia -ideaesthesia-","artist":"nitro","difficulty":"BYD","constant":9.8,"totalNotes":1288},{"title":"+1(UNKNOWN)-NUMBER","artist":"MEMODEMO × AQUASINE ^ (hackerling)","difficulty":"FTR","constant":9.7,"totalNotes":882},{"title":"Acheron","artist":"KARUT","difficulty":"FTR","constant":9.7,"totalNotes":1024},{"title":"AlterAle","artist":"Arik Kau Delay (アラ&かゆき&でり)","difficulty":"FTR","constant":9.7,"totalNotes":1277},{"title":"amygdata","artist":"nitro","difficulty":"FTR","constant":9.7,"totalNotes":1199},{"title":"Awaken In Ruins","artist":"Supa7onyz","difficulty":"FTR","constant":9.7,"totalNotes":754},{"title":"B.B.K.K.B.K.K.","artist":"nora2r","difficulty":"FTR","constant":9.7,"totalNotes":976},{"title":"BADTEK","artist":"EBIMAYO","difficulty":"FTR","constant":9.7,"totalNotes":916},{"title":"BATTLE No.1","artist":"TANO*C Sound Team","difficulty":"FTR","constant":9.7,"totalNotes":1042},{"title":"Black Lotus","artist":"wa.","difficulty":"FTR","constant":9.7,"totalNotes":965},{"title":"BLRINK","artist":"Sta","difficulty":"FTR","constant":9.7,"totalNotes":1015},{"title":"Dazzle hop","artist":"Sampling Masters MEGA","difficulty":"FTR","constant":9.7,"totalNotes":1022},{"title":"Dreadnought","artist":"Mastermind (xi + nora2r)","difficulty":"FTR","constant":9.7,"totalNotes":1099},{"title":"DX超性能フルメタル少女","artist":"IOSYS TRAX (uno with.ちよこ)","difficulty":"FTR","constant":9.7,"totalNotes":808},{"title":"Fallensquare","artist":"Silentroom","difficulty":"FTR","constant":9.7,"totalNotes":703},{"title":"Filament","artist":"Puru","difficulty":"FTR","constant":9.7,"totalNotes":991},{"title":"goldenslaughterer","artist":"zts","difficulty":"FTR","constant":9.7,"totalNotes":1326},{"title":"Hailstone","artist":"Kazki Misora","difficulty":"FTR","constant":9.7,"totalNotes":1002},{"title":"Heart Jackin'","artist":"Yu_Asahina","difficulty":"FTR","constant":9.7,"totalNotes":1112},{"title":"蛍火の雪","artist":"Endorfin.","difficulty":"FTR","constant":9.7,"totalNotes":991},{"title":"Let's Rock (Arcaea mix)","artist":"ikaruga_nex vs FALCHiON","difficulty":"FTR","constant":9.7,"totalNotes":1177},{"title":"Lethaeus","artist":"Silentroom","difficulty":"FTR","constant":9.7,"totalNotes":900},{"title":"Lost in the Abyss","artist":"FELT","difficulty":"FTR","constant":9.7,"totalNotes":1179},{"title":"Loveless Dress","artist":"かねこちはる","difficulty":"FTR","constant":9.7,"totalNotes":850},{"title":"Luna Rossa","artist":"r0y","difficulty":"FTR","constant":9.7,"totalNotes":920},{"title":"Monochrome Princess","artist":"polysha","difficulty":"FTR","constant":9.7,"totalNotes":974},{"title":"nέο κόsmo","artist":"ak+q × Street","difficulty":"FTR","constant":9.7,"totalNotes":979},{"title":"Rays of Remnant","artist":"May × Felysrator","difficulty":"FTR","constant":9.7,"totalNotes":982},{"title":"SACRIFICE feat. ayame","artist":"Masayoshi Minoshima(ALR)","difficulty":"FTR","constant":9.7,"totalNotes":958},{"title":"Sulfur","artist":"ぺのれり","difficulty":"FTR","constant":9.7,"totalNotes":1045},{"title":"SUPERNOVA","artist":"BACO","difficulty":"FTR","constant":9.7,"totalNotes":1123},{"title":"森奥虚跡","artist":"ShiBa","difficulty":"FTR","constant":9.7,"totalNotes":1065},{"title":"The Message","artist":"Jun Kuroda","difficulty":"FTR","constant":9.7,"totalNotes":992},{"title":"Vandalism","artist":"Ashrount","difficulty":"FTR","constant":9.7,"totalNotes":1087},{"title":"Vallista","artist":"Sakuzyo","difficulty":"FTR","constant":9.7,"totalNotes":869},{"title":"μ","artist":"Frums","difficulty":"FTR","constant":9.7,"totalNotes":1256},{"title":"τ (tau)","artist":"Wooden","difficulty":"FTR","constant":9.7,"totalNotes":1057},{"title":"Black Mirror on the Wall","artist":"暁Records","difficulty":"ETR","constant":9.7,"totalNotes":894},{"title":"Innocence","artist":"Powerless feat. Sennzai","difficulty":"ETR","constant":9.7,"totalNotes":1157},{"title":"IONOSTREAM","artist":"Tatsh","difficulty":"ETR","constant":9.7,"totalNotes":871},{"title":"これでホントにサヨナラ","artist":"Toby Fox","difficulty":"ETR","constant":9.7,"totalNotes":911},{"title":"Particle","artist":"Lime / Kankitsu","difficulty":"ETR","constant":9.7,"totalNotes":881},{"title":"Last｜Eternity","artist":"onoken","difficulty":"BYD","constant":9.7,"totalNotes":790},{"title":"Moonheart","artist":"翡乃イスカ","difficulty":"BYD","constant":9.7,"totalNotes":1139},{"title":"Oblivia","artist":"Saiph","difficulty":"BYD","constant":9.7,"totalNotes":1021},{"title":"Snow White","artist":"Puru","difficulty":"BYD","constant":9.7,"totalNotes":1031},{"title":"Teriqma","artist":"owl＊tree","difficulty":"BYD","constant":9.7,"totalNotes":954},{"title":"迷える音色は恋の唄","artist":"からとPαnchii少年 feat. はるの","difficulty":"FTR","constant":9.6,"totalNotes":931},{"title":"アローンアンドローン","artist":"Ponchi♪ feat. はぁち","difficulty":"FTR","constant":9.6,"totalNotes":970},{"title":"Astral tale","artist":"Noah","difficulty":"FTR","constant":9.6,"totalNotes":884},{"title":"Avant Raze","artist":"Sampling Masters MEGA","difficulty":"FTR","constant":9.6,"totalNotes":1125},{"title":"carmine:scythe","artist":"かゆき","difficulty":"FTR","constant":9.6,"totalNotes":1164},{"title":"CHAOSBLAST","artist":"QURELESS + 柚子花","difficulty":"FTR","constant":9.6,"totalNotes":1290},{"title":"Distorted Fate","artist":"Sakuzyo","difficulty":"FTR","constant":9.6,"totalNotes":1172},{"title":"ENERGY SYNERGY MATRIX","artist":"Tanchiky","difficulty":"FTR","constant":9.6,"totalNotes":922},{"title":"Eternity Break","artist":"Puru","difficulty":"FTR","constant":9.6,"totalNotes":1056},{"title":"心","artist":"削除 (Violin: Katali)","difficulty":"FTR","constant":9.6,"totalNotes":872},{"title":"IMPACT","artist":"USAO feat. 光吉猛修","difficulty":"FTR","constant":9.6,"totalNotes":1231},{"title":"Lazy Addiction","artist":"sky_delta","difficulty":"FTR","constant":9.6,"totalNotes":1031},{"title":"白道、多希望羊と信じありく。","artist":"Apo11o program ft. 大瀬良あい","difficulty":"FTR","constant":9.6,"totalNotes":1058},{"title":"メルティーラプソディー","artist":"lapix feat. PANXI","difficulty":"FTR","constant":9.6,"totalNotes":975},{"title":"Paranoid Arc","artist":"t+pazolite","difficulty":"FTR","constant":9.6,"totalNotes":1204},{"title":"Purple Verse","artist":"Hommarju","difficulty":"FTR","constant":9.6,"totalNotes":1023},{"title":"Quon","artist":"Feryquitous","difficulty":"FTR","constant":9.6,"totalNotes":991},{"title":"Remind the Souls (Short Version)","artist":"Nhato","difficulty":"FTR","constant":9.6,"totalNotes":945},{"title":"Renegade","artist":"sky_delta","difficulty":"FTR","constant":9.6,"totalNotes":994},{"title":"Stratoliner","artist":"C-Show","difficulty":"FTR","constant":9.6,"totalNotes":877},{"title":"羽化する亜球体","artist":"窓辺リカ","difficulty":"FTR","constant":9.6,"totalNotes":1177},{"title":"Vindication","artist":"Laur","difficulty":"FTR","constant":9.6,"totalNotes":1075},{"title":"epitaxy","artist":"Camellia","difficulty":"ETR","constant":9.6,"totalNotes":1410},{"title":"Factorder","artist":"瀬名 feat. 梨雛","difficulty":"ETR","constant":9.6,"totalNotes":1015},{"title":"See the Lights!","artist":"polysha feat. しろさきあや","difficulty":"ETR","constant":9.6,"totalNotes":844},{"title":"Antithese","artist":"Blacklolita","difficulty":"BYD","constant":9.6,"totalNotes":968},{"title":"Infinity Heaven","artist":"HyuN","difficulty":"BYD","constant":9.6,"totalNotes":986},{"title":"Last｜Moment","artist":"onoken","difficulty":"BYD","constant":9.6,"totalNotes":888},{"title":"next to you","artist":"uma feat. 橘花音","difficulty":"BYD","constant":9.6,"totalNotes":954},{"title":"Purgatorium","artist":"お月さま交響曲","difficulty":"BYD","constant":9.6,"totalNotes":1051},{"title":"8-EM","artist":"Sampling Masters AYA","difficulty":"FTR","constant":9.5,"totalNotes":1081},{"title":"astral.exe","artist":"Synzak & Laxeno57","difficulty":"FTR","constant":9.5,"totalNotes":1059},{"title":"Cybernecia Catharsis","artist":"Tanchiky","difficulty":"FTR","constant":9.5,"totalNotes":946},{"title":"DataErr0r","artist":"Cosmograph","difficulty":"FTR","constant":9.5,"totalNotes":955},{"title":"Dies irae","artist":"お月さま交響曲","difficulty":"FTR","constant":9.5,"totalNotes":1052},{"title":"Dual Dependency","artist":"seatrus","difficulty":"FTR","constant":9.5,"totalNotes":987},{"title":"Dynitikós","artist":"Prower","difficulty":"FTR","constant":9.5,"totalNotes":986},{"title":"End of The Moonlight","artist":"Forte Escape","difficulty":"FTR","constant":9.5,"totalNotes":738},{"title":"緋纏いの宵","artist":"Freezer feat. 妃苺","difficulty":"FTR","constant":9.5,"totalNotes":922},{"title":"felys final remix","artist":"onoken","difficulty":"FTR","constant":9.5,"totalNotes":1130},{"title":"GIMMICK","artist":"Ms.Sill","difficulty":"FTR","constant":9.5,"totalNotes":733},{"title":"堕落の園","artist":"gmtn. (witch's slave)","difficulty":"FTR","constant":9.5,"totalNotes":1061},{"title":"In Vain","artist":"ryhki","difficulty":"FTR","constant":9.5,"totalNotes":1111},{"title":"Inverted World","artist":"ARForest","difficulty":"FTR","constant":9.5,"totalNotes":940},{"title":"MAHOROBA","artist":"Zekk","difficulty":"FTR","constant":9.5,"totalNotes":828},{"title":"MARENYX","artist":"BlackY × Aoi","difficulty":"FTR","constant":9.5,"totalNotes":1307},{"title":"MEGALOVANIA","artist":"Toby Fox","difficulty":"FTR","constant":9.5,"totalNotes":1064},{"title":"NULCTRL","artist":"Silentroom","difficulty":"FTR","constant":9.5,"totalNotes":715},{"title":"OBLIVION","artist":"ESTi","difficulty":"FTR","constant":9.5,"totalNotes":759},{"title":"OMAKENO Stroke","artist":"t+pazolite","difficulty":"FTR","constant":9.5,"totalNotes":869},{"title":"On And On!! feat. Jenga","artist":"ETIA.","difficulty":"FTR","constant":9.5,"totalNotes":836},{"title":"One Step Closer","artist":"Mameyudoufu × 藍月なくる","difficulty":"FTR","constant":9.5,"totalNotes":752},{"title":"Particle","artist":"Lime","difficulty":"FTR","constant":9.5,"totalNotes":890},{"title":"Rain of Conflict in a Radiant Abyss","artist":"ak+q","difficulty":"FTR","constant":9.5,"totalNotes":1164},{"title":"Someday","artist":"NieN","difficulty":"FTR","constant":9.5,"totalNotes":673},{"title":"STAGER (ALL STAGE CLEAR)","artist":"Ras","difficulty":"FTR","constant":9.5,"totalNotes":1004},{"title":"Straight into the lights","artist":"Cosmograph","difficulty":"FTR","constant":9.5,"totalNotes":1226},{"title":"［筏］は云う。幾ら漂流すれど不撓の心さえ有れば軈て行到ると。","artist":"庭師","difficulty":"FTR","constant":9.5,"totalNotes":999},{"title":"Transient Space","artist":"sleepless, Gardens, aspect","difficulty":"FTR","constant":9.5,"totalNotes":805},{"title":"黄昏の協奏曲","artist":"Scarlette","difficulty":"FTR","constant":9.5,"totalNotes":803},{"title":"Viola Illyria","artist":"Kolaa","difficulty":"FTR","constant":9.5,"totalNotes":927},{"title":"zephyrlasting","artist":"s-don × nitro","difficulty":"FTR","constant":9.5,"totalNotes":1027},{"title":"ΟΔΥΣΣΕΙΑ","artist":"Sober Bear","difficulty":"FTR","constant":9.5,"totalNotes":1092},{"title":"○、","artist":"Kolaa & 熊子","difficulty":"FTR","constant":9.5,"totalNotes":708},{"title":"Jingle","artist":"DJ Noriken","difficulty":"ETR","constant":9.5,"totalNotes":1047},{"title":"SATISFACTION","artist":"P*Light & DJ Noriken feat. KMNZ","difficulty":"ETR","constant":9.5,"totalNotes":1047},{"title":"Fairytale","artist":"chitose","difficulty":"BYD","constant":9.5,"totalNotes":932},{"title":"Lumia","artist":"sky_delta","difficulty":"BYD","constant":9.5,"totalNotes":814},{"title":"AI[UE]OON","artist":"MYUKKE.","difficulty":"FTR","constant":9.4,"totalNotes":989},{"title":"Be There","artist":"PSYQUI","difficulty":"FTR","constant":9.4,"totalNotes":982},{"title":"BlythE","artist":"M2U","difficulty":"FTR","constant":9.4,"totalNotes":1000},{"title":"CROSS†OVER","artist":"HyuN feat. LyuU","difficulty":"FTR","constant":9.4,"totalNotes":1094},{"title":"CROSS†SOUL","artist":"HyuN feat. Syepias","difficulty":"FTR","constant":9.4,"totalNotes":1081},{"title":"Crystal Gravity","artist":"Tanchiky vs. siromaru","difficulty":"FTR","constant":9.4,"totalNotes":872},{"title":"Don't Die","artist":"Paul Bazooka","difficulty":"FTR","constant":9.4,"totalNotes":793},{"title":"Dreamin' Attraction!!","artist":"翡乃イスカ","difficulty":"FTR","constant":9.4,"totalNotes":1129},{"title":"DRG","artist":"onoken","difficulty":"FTR","constant":9.4,"totalNotes":872},{"title":"Equilibrium","artist":"Maozon","difficulty":"FTR","constant":9.4,"totalNotes":951},{"title":"FANTA5Y","artist":"Moon Jelly & YUKIYANAGI","difficulty":"FTR","constant":9.4,"totalNotes":965},{"title":"Final Step!","artist":"Lime","difficulty":"FTR","constant":9.4,"totalNotes":1056},{"title":"Head BONK ache","artist":"saaa ft. MC iwata Bros.","difficulty":"FTR","constant":9.4,"totalNotes":1061},{"title":"不浄な白い鳥","artist":"MIssionary","difficulty":"FTR","constant":9.4,"totalNotes":805},{"title":"Lapis","artist":"SHIKI","difficulty":"FTR","constant":9.4,"totalNotes":920},{"title":"lastendconductor","artist":"zts","difficulty":"FTR","constant":9.4,"totalNotes":1209},{"title":"Let you DIVE! (nitro rmx)","artist":"nitro (lowiro)","difficulty":"FTR","constant":9.4,"totalNotes":1049},{"title":"MANTIS (Arcaea Ultra-Bloodrush VIP)","artist":"Akira Complex feat. kiraku","difficulty":"FTR","constant":9.4,"totalNotes":1014},{"title":"mod","artist":"kalsoer","difficulty":"FTR","constant":9.4,"totalNotes":853},{"title":"おまじない","artist":"Tsubusare BOZZ × Madoka*","difficulty":"FTR","constant":9.4,"totalNotes":886},{"title":"Party Vinyl","artist":"モリモリあつし","difficulty":"FTR","constant":9.4,"totalNotes":800},{"title":"ピコPico*とらんすれーしょんっ！","artist":"t+pazolite,ななひら,Cranky,Pico*","difficulty":"FTR","constant":9.4,"totalNotes":1049},{"title":"レイヴンズ・プライド","artist":"みーに feat. はらもりよしな","difficulty":"FTR","constant":9.4,"totalNotes":1030},{"title":"Red and Blue","artist":"Silentroom","difficulty":"FTR","constant":9.4,"totalNotes":845},{"title":"無機質世界に彩を","artist":"MisomyL","difficulty":"FTR","constant":9.4,"totalNotes":886},{"title":"Sakura Fubuki","artist":"Street","difficulty":"FTR","constant":9.4,"totalNotes":837},{"title":"Specta","artist":"Junk","difficulty":"FTR","constant":9.4,"totalNotes":1096},{"title":"Third Sun","artist":"Ash Astral","difficulty":"FTR","constant":9.4,"totalNotes":811},{"title":"Teriqma","artist":"owl＊tree","difficulty":"FTR","constant":9.4,"totalNotes":873},{"title":"undefined","artist":"planless & 乃花こより","difficulty":"FTR","constant":9.4,"totalNotes":896},{"title":"VECTOЯ","artist":"WHITEFISTS","difficulty":"FTR","constant":9.4,"totalNotes":1299},{"title":"with U","artist":"t+pazolite & Massive New Krew feat. リリィ(CV:青木志貴)","difficulty":"FTR","constant":9.4,"totalNotes":932},{"title":"夜桜吹雪","artist":"A.SAKA","difficulty":"FTR","constant":9.4,"totalNotes":931},{"title":"Your voice so... feat. Such","artist":"PSYQUI","difficulty":"FTR","constant":9.4,"totalNotes":1013},{"title":"ΛZΛLEΛ","artist":"ak+q × onoken","difficulty":"FTR","constant":9.4,"totalNotes":1144},{"title":"華麗なる死闘","artist":"Toby Fox","difficulty":"ETR","constant":9.4,"totalNotes":912},{"title":"フレテミタイ","artist":"みきとP","difficulty":"ETR","constant":9.4,"totalNotes":841},{"title":"I want You","artist":"Lin-G","difficulty":"ETR","constant":9.4,"totalNotes":660},{"title":"inkar-usi","artist":"DIA","difficulty":"BYD","constant":9.4,"totalNotes":857},{"title":"MERLIN","artist":"REDALiCE","difficulty":"BYD","constant":9.4,"totalNotes":881},{"title":"Auxesia","artist":"ginkiha","difficulty":"FTR","constant":9.3,"totalNotes":1000},{"title":"Blaster","artist":"Massive New Krew","difficulty":"FTR","constant":9.3,"totalNotes":1002},{"title":"Blocked Library","artist":"影虎。","difficulty":"FTR","constant":9.3,"totalNotes":850},{"title":"ベースラインやってる？w","artist":"かめりあ feat. ななひら","difficulty":"FTR","constant":9.3,"totalNotes":861},{"title":"Don't Fight The Music","artist":"黒魔","difficulty":"FTR","constant":9.3,"totalNotes":1043},{"title":"狂言綺語","artist":"影虎。& ikaruga_nex","difficulty":"FTR","constant":9.3,"totalNotes":969},{"title":"Feels So Right feat. Renko","artist":"Mysteka","difficulty":"FTR","constant":9.3,"totalNotes":947},{"title":"Floating World","artist":"baker feat. botan","difficulty":"FTR","constant":9.3,"totalNotes":1047},{"title":"Glow","artist":"SPACELECTRO","difficulty":"FTR","constant":9.3,"totalNotes":916},{"title":"GOODTEK (Arcaea Edit)","artist":"EBIMAYO","difficulty":"FTR","constant":9.3,"totalNotes":968},{"title":"GOODRAGE","artist":"EBIMAYO","difficulty":"FTR","constant":9.3,"totalNotes":834},{"title":"Ignotus","artist":"ak+q","difficulty":"FTR","constant":9.3,"totalNotes":1225},{"title":"Lost Emotion feat. nomico","artist":"Masayoshi Minoshima(ALR)","difficulty":"FTR","constant":9.3,"totalNotes":1123},{"title":"Oracle","artist":"TQ☆","difficulty":"FTR","constant":9.3,"totalNotes":963},{"title":"Small Cloud Sugar Candy","artist":"テヅカ × Aoi feat.桃雛なの","difficulty":"FTR","constant":9.3,"totalNotes":919},{"title":"STARGATE EXTREME","artist":"KARUT","difficulty":"FTR","constant":9.3,"totalNotes":724},{"title":"Syro","artist":"Mitomoro","difficulty":"FTR","constant":9.3,"totalNotes":1150},{"title":"The Formula","artist":"Junk","difficulty":"FTR","constant":9.3,"totalNotes":957},{"title":"HELLOHELL","artist":"暁Records","difficulty":"ETR","constant":9.3,"totalNotes":770},{"title":"3rd Avenue","artist":"Sound Souler","difficulty":"FTR","constant":9.2,"totalNotes":748},{"title":"Alice à la mode","artist":"Masanori Akita","difficulty":"FTR","constant":9.2,"totalNotes":872},{"title":"Anökumene","artist":"Jun Kuroda","difficulty":"FTR","constant":9.2,"totalNotes":851},{"title":"cocoro*cosmetic","artist":"KOTONOHOUSE","difficulty":"FTR","constant":9.2,"totalNotes":1025},{"title":"Cryogenic","artist":"Camellia ft. Petra Gurin","difficulty":"FTR","constant":9.2,"totalNotes":831},{"title":"ネコノテ・カリタガール","artist":"Ino(chronoize)","difficulty":"FTR","constant":9.2,"totalNotes":891},{"title":"Leave All Behind","artist":"rider","difficulty":"FTR","constant":9.2,"totalNotes":828},{"title":"Libertas","artist":"Zekk","difficulty":"FTR","constant":9.2,"totalNotes":947},{"title":"Lost Civilization","artist":"Laur vs CK","difficulty":"FTR","constant":9.2,"totalNotes":986},{"title":"Phantasia","artist":"Yunosuke","difficulty":"FTR","constant":9.2,"totalNotes":952},{"title":"Rugie","artist":"Feryquitous feat. Sennzai","difficulty":"FTR","constant":9.2,"totalNotes":975},{"title":"Sign of \"10.5km\"","artist":"渡部恭久","difficulty":"FTR","constant":9.2,"totalNotes":735},{"title":"Strongholds","artist":"Yooh","difficulty":"FTR","constant":9.2,"totalNotes":922},{"title":"Used to be","artist":"KIVΛ","difficulty":"FTR","constant":9.2,"totalNotes":799},{"title":"Ladymade Star","artist":"ESTi","difficulty":"ETR","constant":9.2,"totalNotes":753},{"title":"Alice's Suitcase","artist":"Endorfin.","difficulty":"FTR","constant":9.1,"totalNotes":999},{"title":"Blue Rose","artist":"Cosmograph","difficulty":"FTR","constant":9.1,"totalNotes":955},{"title":"Coastal Highway","artist":"Glitch Droids","difficulty":"FTR","constant":9.1,"totalNotes":732},{"title":"Empire of Winter","artist":"Street","difficulty":"FTR","constant":9.1,"totalNotes":920},{"title":"Essence of Twilight","artist":"ak+q","difficulty":"FTR","constant":9.1,"totalNotes":1204},{"title":"Faint Light (Arcaea Edit)","artist":"Taishi","difficulty":"FTR","constant":9.1,"totalNotes":809},{"title":"Iconoclast","artist":"Yamajet","difficulty":"FTR","constant":9.1,"totalNotes":795},{"title":"Journey","artist":"ARForest","difficulty":"FTR","constant":9.1,"totalNotes":997},{"title":"La'qryma of the Wasteland","artist":"DJ Noriken","difficulty":"FTR","constant":9.1,"totalNotes":956},{"title":"Life is PIANO","artist":"Junk","difficulty":"FTR","constant":9.1,"totalNotes":674},{"title":"qualia -ideaesthesia-","artist":"nitro","difficulty":"FTR","constant":9.1,"totalNotes":1022},{"title":"ReviXy","artist":"ikaruga_nex","difficulty":"FTR","constant":9.1,"totalNotes":1047},{"title":"キャラメルポップコーンたべたいよ～","artist":"ヤミナベレコーズ feat. 繭糸","difficulty":"ETR","constant":9.1,"totalNotes":959},{"title":"プレヤ","artist":"qfeileadh&レゾナンスもえこ","difficulty":"ETR","constant":9.1,"totalNotes":714},{"title":"Shades of Light in a Transcendent Realm","artist":"ak+q","difficulty":"BYD","constant":9.1,"totalNotes":1042},{"title":"フライブルクとエンドロウル","artist":"アリスシャッハと魔法の楽団","difficulty":"FTR","constant":9.0,"totalNotes":930},{"title":"Galactic Love","artist":"La prière","difficulty":"FTR","constant":9.0,"totalNotes":813},{"title":"Jump","artist":"Rasmus Faber","difficulty":"FTR","constant":9.0,"totalNotes":841},{"title":"神奈川電脳暗渠","artist":"南ゆに","difficulty":"FTR","constant":9.0,"totalNotes":1111},{"title":"Last","artist":"onoken","difficulty":"FTR","constant":9.0,"totalNotes":831},{"title":"無法地点","artist":"La prière","difficulty":"FTR","constant":9.0,"totalNotes":838},{"title":"Primeval Texture","artist":"くるぶっこちゃん","difficulty":"FTR","constant":9.0,"totalNotes":810},{"title":"Turbocharger","artist":"A/I","difficulty":"FTR","constant":9.0,"totalNotes":979},{"title":"Vexaria","artist":"ak+q","difficulty":"BYD","constant":9.0,"totalNotes":785},{"title":"dropdead","artist":"Frums","difficulty":"FTR","constant":9.1,"totalNotes":823},{"title":"BlazinG AIR","artist":"kanone","difficulty":"FTR","constant":8.9,"totalNotes":757},{"title":"Chelsea","artist":"7mai","difficulty":"FTR","constant":8.9,"totalNotes":650},{"title":"Chronostasis","artist":"黒皇帝","difficulty":"FTR","constant":8.9,"totalNotes":916},{"title":"Dual Doom Deathmatch","artist":"Kobaryo vs Hyun","difficulty":"FTR","constant":8.9,"totalNotes":1094},{"title":"Evoltex (poppi'n mix)","artist":"Arch vs n3pu","difficulty":"FTR","constant":8.9,"totalNotes":775},{"title":"Flashback","artist":"ARForest","difficulty":"FTR","constant":8.9,"totalNotes":856},{"title":"Give Me a Nightmare","artist":"アリスシャッハと魔法の楽団","difficulty":"FTR","constant":8.9,"totalNotes":948},{"title":"Hypnotize","artist":"rejection","difficulty":"FTR","constant":8.9,"totalNotes":993},{"title":"INCARNATOR₀₀","artist":"Silentroom × N²","difficulty":"FTR","constant":8.9,"totalNotes":1565},{"title":"Lights of Muse","artist":"Ayatsugu_Otowa","difficulty":"FTR","constant":8.9,"totalNotes":580},{"title":"九番目の迷路","artist":"アリスシャッハと魔法の楽団","difficulty":"FTR","constant":8.9,"totalNotes":775},{"title":"memoryfactory.lzh","artist":"Frums","difficulty":"FTR","constant":8.9,"totalNotes":672},{"title":"MERLIN","artist":"REDALiCE","difficulty":"FTR","constant":8.9,"totalNotes":712},{"title":"No Way Back","artist":"Nhato","difficulty":"FTR","constant":8.9,"totalNotes":837},{"title":"最高の悪夢","artist":"Toby Fox","difficulty":"FTR","constant":8.9,"totalNotes":1086},{"title":"Suomi","artist":"Aire","difficulty":"ETR","constant":8.9,"totalNotes":732},{"title":"Antithese","artist":"Blacklolita","difficulty":"FTR","constant":8.8,"totalNotes":877},{"title":"BREaK! BREaK! BREaK!","artist":"HiTECH NINJA","difficulty":"FTR","constant":8.8,"totalNotes":894},{"title":"Cosmica","artist":"Nhato","difficulty":"FTR","constant":8.8,"totalNotes":773},{"title":"コスモポップファンクラブ","artist":"ナユタン星人","difficulty":"FTR","constant":8.8,"totalNotes":809},{"title":"Crimson Quartz","artist":"DiGiTAL WiNG with 空音","difficulty":"FTR","constant":8.8,"totalNotes":861},{"title":"CYCLES","artist":"Masayoshi Minoshima feat. 綾倉盟","difficulty":"FTR","constant":8.8,"totalNotes":695},{"title":"だいあるのーと","artist":"七草くりむ","difficulty":"FTR","constant":8.8,"totalNotes":684},{"title":"incomplete the one","artist":"Halv feat.Kuroa*","difficulty":"FTR","constant":8.8,"totalNotes":912},{"title":"MORNINGLOOM","artist":"saaa","difficulty":"FTR","constant":8.8,"totalNotes":940},{"title":"My life is mine alone!","artist":"Mylta feat. ねんね","difficulty":"FTR","constant":8.8,"totalNotes":933},{"title":"next to you","artist":"uma feat. 橘花音","difficulty":"FTR","constant":8.8,"totalNotes":824},{"title":"Paradox Palette","artist":"Aethoro","difficulty":"FTR","constant":8.8,"totalNotes":814},{"title":"Saint or Sinner","artist":"crayvxn","difficulty":"FTR","constant":8.8,"totalNotes":906},{"title":"進捗どうですか?","artist":"sumijun feat. ななひら","difficulty":"FTR","constant":8.8,"totalNotes":957},{"title":"虚空の夢","artist":"ak+q feat. Sennzai","difficulty":"FTR","constant":8.8,"totalNotes":972},{"title":"Surrender","artist":"void","difficulty":"FTR","constant":8.8,"totalNotes":925},{"title":"Tic! Tac! Toe!","artist":"TAK x Corbin","difficulty":"FTR","constant":8.8,"totalNotes":760},{"title":"Vivid Theory","artist":"ak+q","difficulty":"FTR","constant":8.8,"totalNotes":885},{"title":"Waltz for Lorelei","artist":"Sobrem & 庭師","difficulty":"FTR","constant":8.8,"totalNotes":916},{"title":"クロートーと星の観測者","artist":"しーけー","difficulty":"ETR","constant":8.8,"totalNotes":1031},{"title":"エピクロスの虹はもう見えない","artist":"SYNC․ART'S feat.Misato","difficulty":"ETR","constant":8.8,"totalNotes":884},{"title":"Beside You","artist":"江口孝宏","difficulty":"FTR","constant":8.7,"totalNotes":703},{"title":"Call My Name feat. Yukacco","artist":"Mameyudoufu","difficulty":"FTR","constant":8.7,"totalNotes":921},{"title":"cry of viyella","artist":"Laur","difficulty":"FTR","constant":8.7,"totalNotes":791},{"title":"幻想のサテライト","artist":"豚乙女","difficulty":"FTR","constant":8.7,"totalNotes":992},{"title":"Grimheart","artist":"Puru","difficulty":"FTR","constant":8.7,"totalNotes":959},{"title":"IONOSTREAM","artist":"Tatsh","difficulty":"FTR","constant":8.7,"totalNotes":818},{"title":"Paper Witch","artist":"Yu-dachi","difficulty":"FTR","constant":8.7,"totalNotes":793},{"title":"Quon","artist":"DJ Noriken","difficulty":"FTR","constant":8.7,"totalNotes":749},{"title":"Senkyou","artist":"MYTK","difficulty":"FTR","constant":8.7,"totalNotes":964},{"title":"月に叢雲華に風","artist":"幽閉サテライト","difficulty":"FTR","constant":8.7,"totalNotes":740},{"title":"U.A.D","artist":"HAYAKO","difficulty":"FTR","constant":8.7,"totalNotes":643},{"title":"WAIT FOR DAWN","artist":"U-ske feat. 棗いつき","difficulty":"FTR","constant":8.7,"totalNotes":861},{"title":"心の痛み","artist":"Toby Fox","difficulty":"ETR","constant":8.7,"totalNotes":851},{"title":"始マリノ詩","artist":"有村京悟 feat. July","difficulty":"ETR","constant":8.7,"totalNotes":726},{"title":"四月の雨","artist":"cubesato","difficulty":"FTR","constant":8.6,"totalNotes":697},{"title":"Black Mirror on the Wall","artist":"暁Records","difficulty":"FTR","constant":8.6,"totalNotes":735},{"title":"CHAIN2NITE","artist":"asuzora feat. cyber milk ちゃん","difficulty":"FTR","constant":8.6,"totalNotes":883},{"title":"enchanted love","artist":"linear ring","difficulty":"FTR","constant":8.6,"totalNotes":759},{"title":"epitaxy","artist":"Camellia","difficulty":"FTR","constant":8.6,"totalNotes":1177},{"title":"Factorder","artist":"瀬名 feat. 梨雛","difficulty":"FTR","constant":8.6,"totalNotes":849},{"title":"FREEF4LL","artist":"YUKIYANAGI","difficulty":"FTR","constant":8.6,"totalNotes":1023},{"title":"Gekka (Short Version)","artist":"Nhato","difficulty":"FTR","constant":8.6,"totalNotes":817},{"title":"INFINITE DIMENSION","artist":"DJ Noriken × P*Light","difficulty":"FTR","constant":8.6,"totalNotes":947},{"title":"See the Lights!","artist":"polysha feat. しろさきあや","difficulty":"FTR","constant":8.6,"totalNotes":692},{"title":"Slient Rush","artist":"Soleily","difficulty":"FTR","constant":8.6,"totalNotes":941},{"title":"Altair (feat. *spiLa*)","artist":"kamome sano & you","difficulty":"FTR","constant":8.5,"totalNotes":830},{"title":"Babaroque","artist":"cYsmix","difficulty":"FTR","constant":8.5,"totalNotes":808},{"title":"Dandelion","artist":"Farhan","difficulty":"FTR","constant":8.5,"totalNotes":921},{"title":"DDD","artist":"はがね","difficulty":"FTR","constant":8.5,"totalNotes":653},{"title":"ハルトピア ~Utopia of Spring~","artist":"A-zu-ra","difficulty":"FTR","constant":8.5,"totalNotes":1061},{"title":"Innocence","artist":"Powerless feat. Sennzai","difficulty":"FTR","constant":8.5,"totalNotes":1023},{"title":"Reinvent","artist":"Sound Souler","difficulty":"FTR","constant":8.5,"totalNotes":852},{"title":"SATISFACTION","artist":"P*Light & DJ Noriken feat. KMNZ","difficulty":"FTR","constant":8.5,"totalNotes":890},{"title":"syūten","artist":"Apo11o\"COLLAPSAR\"program ft. 大瀬良あい","difficulty":"FTR","constant":8.5,"totalNotes":592},{"title":"Sayonara Hatsukoi","artist":"REDSHiFT","difficulty":"ETR","constant":8.5,"totalNotes":728},{"title":"Eccentric Tale","artist":"Yamajet","difficulty":"FTR","constant":8.4,"totalNotes":732},{"title":"フレテミタイ","artist":"みきとP","difficulty":"FTR","constant":8.4,"totalNotes":763},{"title":"INTERNET OVERDOSE","artist":"Aiobahn feat. KOTOKO","difficulty":"FTR","constant":8.4,"totalNotes":657},{"title":"Ladymade Star","artist":"ESTi","difficulty":"FTR","constant":8.4,"totalNotes":636},{"title":"Lumia","artist":"sky_delta","difficulty":"FTR","constant":8.4,"totalNotes":961},{"title":"Moonheart","artist":"翡乃イスカ","difficulty":"FTR","constant":8.4,"totalNotes":947},{"title":"Purgatorium","artist":"お月さま交響曲","difficulty":"FTR","constant":8.4,"totalNotes":983},{"title":"Rabbit In The Black Room","artist":"Rabbit House","difficulty":"FTR","constant":8.4,"totalNotes":772},{"title":"REconstruction","artist":"Ryazan","difficulty":"FTR","constant":8.4,"totalNotes":825},{"title":"Snow White","artist":"Puru","difficulty":"FTR","constant":8.4,"totalNotes":978},{"title":"taboo tears you up 2017","artist":"REDALiCE","difficulty":"FTR","constant":8.4,"totalNotes":845},{"title":"Vainspire","artist":"satella","difficulty":"FTR","constant":8.4,"totalNotes":947},{"title":"Bookmaker (2D Version)","artist":"Kobaryo","difficulty":"FTR","constant":8.3,"totalNotes":1124},{"title":"disintegration","artist":"ひゅ〜ぶ","difficulty":"FTR","constant":8.3,"totalNotes":605},{"title":"Dot to Dot feat. shully","artist":"Mameyudoufu","difficulty":"FTR","constant":8.3,"totalNotes":739},{"title":"I want You","artist":"Lin-G","difficulty":"FTR","constant":8.3,"totalNotes":528},{"title":"Oblivia","artist":"Saiph","difficulty":"FTR","constant":8.3,"totalNotes":956},{"title":"san skia","artist":"ユアミトス","difficulty":"FTR","constant":8.3,"totalNotes":1046},{"title":"Shades of Light in a Transcendent Realm","artist":"ak+q","difficulty":"FTR","constant":8.3,"totalNotes":1067},{"title":"Tie me down gently","artist":"溝口ゆうま feat. 大瀬良あい","difficulty":"FTR","constant":8.3,"totalNotes":724},{"title":"Ävril -Flicka i krans-","artist":"Rigël Theatre","difficulty":"FTR","constant":8.3,"totalNotes":851},{"title":"Dematerialized","artist":"In Love With A Ghost","difficulty":"ETR","constant":8.3,"totalNotes":790},{"title":"1F√","artist":"WHITEFISTS","difficulty":"FTR","constant":8.2,"totalNotes":758},{"title":"blue comet","artist":"ああああ","difficulty":"FTR","constant":8.2,"totalNotes":776},{"title":"Genesis","artist":"Iris","difficulty":"FTR","constant":8.2,"totalNotes":713},{"title":"Hall of Mirrors","artist":"Sta","difficulty":"FTR","constant":8.2,"totalNotes":898},{"title":"これでホントにサヨナラ","artist":"Toby Fox","difficulty":"FTR","constant":8.2,"totalNotes":727},{"title":"LiftOff","artist":"MAYA AKAI","difficulty":"FTR","constant":8.2,"totalNotes":660},{"title":"Lucifer","artist":"chitose","difficulty":"FTR","constant":8.2,"totalNotes":861},{"title":"Miles","artist":"Electronic Boutique","difficulty":"FTR","constant":8.2,"totalNotes":687},{"title":"One Last Drive","artist":"REDSHiFT","difficulty":"FTR","constant":8.2,"totalNotes":885},{"title":"プレヤ","artist":"qfeileadh&レゾナンスもえこ","difficulty":"FTR","constant":8.2,"totalNotes":591},{"title":"Bullet Waiting for Me (James Landino remix)","artist":"Nikki Simmons","difficulty":"FTR","constant":8.1,"totalNotes":701},{"title":"Diode","artist":"Kolaa","difficulty":"FTR","constant":8.1,"totalNotes":709},{"title":"キャラメルポップコーンたべたいよ～","artist":"ヤミナベレコーズ feat. 繭糸","difficulty":"FTR","constant":8.1,"totalNotes":767},{"title":"光","artist":"THB","difficulty":"FTR","constant":8.1,"totalNotes":684},{"title":"I've heard it said","artist":"Combatplayer","difficulty":"FTR","constant":8.1,"totalNotes":864},{"title":"Prism","artist":"bermei.inazawa ft. Chata","difficulty":"FTR","constant":8.0,"totalNotes":785},{"title":"Relentless","artist":"Akira Complex","difficulty":"FTR","constant":8.0,"totalNotes":1015},{"title":"world.execute(me);","artist":"Mili","difficulty":"FTR","constant":8.0,"totalNotes":851},{"title":"Brand new world","artist":"U-ske","difficulty":"FTR","constant":7.8,"totalNotes":787},{"title":"クロートーと星の観測者","artist":"しーけー","difficulty":"FTR","constant":7.8,"totalNotes":1021},{"title":"華麗なる死闘","artist":"Toby Fox","difficulty":"FTR","constant":7.8,"totalNotes":610},{"title":"Dement ~after legend~","artist":"Cosmograph","difficulty":"FTR","constant":7.8,"totalNotes":970},{"title":"Dream goes on","artist":"Tiny Minim","difficulty":"FTR","constant":7.8,"totalNotes":719},{"title":"First Snow","artist":"黒魔","difficulty":"FTR","constant":7.8,"totalNotes":578},{"title":"Infinity Heaven","artist":"HyuN","difficulty":"FTR","constant":7.8,"totalNotes":853},{"title":"inkar-usi","artist":"DIA","difficulty":"FTR","constant":7.8,"totalNotes":463},{"title":"Jingle","artist":"DJ Noriken","difficulty":"FTR","constant":7.8,"totalNotes":848},{"title":"Moonlight of Sand Castle","artist":"旅人E","difficulty":"FTR","constant":7.8,"totalNotes":645},{"title":"Paradise","artist":"Sound Souler","difficulty":"FTR","constant":7.8,"totalNotes":729},{"title":"Rise","artist":"Combatplayer","difficulty":"FTR","constant":7.8,"totalNotes":788},{"title":"vsキミ戦争","artist":"U-ske (feat. lueur)","difficulty":"FTR","constant":7.8,"totalNotes":641},{"title":"Suomi","artist":"Aire","difficulty":"FTR","constant":7.8,"totalNotes":818},{"title":"心の痛み","artist":"Toby Fox","difficulty":"FTR","constant":7.5,"totalNotes":803},{"title":"HELLOHELL","artist":"暁Records","difficulty":"FTR","constant":7.5,"totalNotes":673},{"title":"エピクロスの虹はもう見えない","artist":"SYNC․ART'S feat.Misato","difficulty":"FTR","constant":7.5,"totalNotes":783},{"title":"Blossoms","artist":"T2Kazuya","difficulty":"FTR","constant":7.0,"totalNotes":655},{"title":"Fairytale","artist":"chitose","difficulty":"FTR","constant":7.0,"totalNotes":782},{"title":"Sayonara Hatsukoi","artist":"REDSHiFT","difficulty":"FTR","constant":7.0,"totalNotes":666},{"title":"Vexaria","artist":"ak+q","difficulty":"FTR","constant":7.0,"totalNotes":734}];
-
-// Assign stable IDs
-const SONGS = RAW_SONGS.map((s,i)=>({...s,id:'s'+i}));
-
 // ════ State ════
-let scores = JSON.parse(localStorage.getItem('aop_scores')||'{}');
-let sortDir = 1; // 1=desc, -1=asc
+let SONGS = [];
+let scores = JSON.parse(localStorage.getItem('aop_scores') || '{}');
+let sortDir = 1;       // 1=降順, -1=昇順
+let activeQuery = '';  // 決定ボタンで確定した検索語
 
-function persist(){localStorage.setItem('aop_scores',JSON.stringify(scores));}
+function persist() { localStorage.setItem('aop_scores', JSON.stringify(scores)); }
 
 // ════ OP Calculation ════
-function potential(score,c){
-  if(score>=10000000) return c+1;
-  if(score>=9800000)  return c+(score-9800000)/200000;
-  if(score>=9500000)  return c-0.5+(score-9500000)/300000;
-  if(score>=9200000)  return c-1.0+(score-9200000)/300000;
+function potential(score, c) {
+  if (score >= 10000000) return c + 1;
+  if (score >= 9800000)  return c + (score - 9800000) / 200000;
+  if (score >= 9500000)  return c - 0.5 + (score - 9500000) / 600000;
+  if (score >= 9200000)  return c - 1.0 + (score - 9200000) / 600000;
   return 0;
 }
 
-function calcOP(score,c,notes){
-  if(!score||score<9800000) return 0;
-  const pot=potential(score,c);
-  let rb=0,pb=0;
-  if(score>=10000000){
-    rb=0.5;
-    if(notes>0) pb=0.75*Math.min(score-10000000,notes)/notes;
-  } else {
-    rb=(score-9800000)/200000*0.5;
+function calcOP(score, c, notes) {
+  if (!score || score < 9200000) return 0;
+  const pot = potential(score, c);
+  let rb = 0, pb = 0;
+  if (score >= 10000000) {
+    rb = 0.5;
+    if (notes > 0) pb = 0.75 * Math.min(score - 10000000, notes) / notes;
+  } else if (score >= 9800000) {
+    rb = (score - 9800000) / 200000 * 0.5;
   }
-  return pot*5+rb+pb;
+  return pot * 5 + rb + pb;
 }
 
-// 100%基準 = (c+1)*5 + 0.5
-function base100(c){return(c+1)*5+0.5;}
-// 101%満点 = base100 + 0.75
-function maxOP(c){return base100(c)+0.75;}
+// base100: PMかつ無印Pure0個のOP (= 100%基準)
+function base100(c) { return (c + 1) * 5 + 0.5; }
+// maxOP: 全ノーツ無印Pure (= 101%基準)
+function maxOP(c)   { return base100(c) + 0.75; }
 
-function levelStr(c){
-  const f=Math.floor(c),d=c-f;
-  if(f<=6) return String(f);
-  if(f===12) return '12';
-  if(f===11) return d>=0.8?'11+':'11';
-  return d>=0.7?`${f}+`:String(f);
+// 達成率: PM帯は100〜101%でリニアに正規化
+function calcPct(op, c, score) {
+  if (op <= 0) return null;
+  const b = base100(c);
+  if (score >= 10000000) {
+    // PMボーナス部分を0.75で割って[0,1]→[0,1]%に変換
+    const pmBonus = op - b; // 0 to 0.75
+    return 100 + pmBonus / 0.75;
+  }
+  return op / b * 100;
 }
-const LV_ORDER=['1','2','3','4','5','6','7','7+','8','8+','9','9+','10','10+','11','11+','12'];
-function lvOrd(l){const i=LV_ORDER.indexOf(l);return i>=0?i:99;}
 
-function fmtPct(pct){return(Math.floor(pct*10000)/10000).toFixed(4)+'%';}
-function fmtOP(v){return(Math.floor(v*10000)/10000).toFixed(4);}
+function levelStr(c) {
+  const f = Math.floor(c), d = c - f;
+  if (f <= 6)  return String(f);
+  if (f === 12) return '12';
+  if (f === 11) return d >= 0.8 ? '11+' : '11';
+  return d >= 0.7 ? `${f}+` : String(f);
+}
+const LV_ORDER = ['1','2','3','4','5','6','7','7+','8','8+','9','9+','10','10+','11','11+','12'];
+function lvOrd(l) { const i = LV_ORDER.indexOf(l); return i >= 0 ? i : 99; }
 
-function colorClass(pct){
-  if(pct>=95) return 'c-rainbow';
-  if(pct>=90) return 'c-plat';
-  if(pct>=80) return 'c-gold';
-  if(pct>=70) return 'c-silver';
+// 小数点4桁（切り捨て）
+function fmt4(v) { return (Math.floor(v * 10000) / 10000).toFixed(4); }
+function fmtPct(pct) { return fmt4(Math.min(101, pct)) + '%'; }
+
+function colorClass(pct) {
+  if (pct >= 95) return 'c-rainbow';
+  if (pct >= 90) return 'c-plat';
+  if (pct >= 80) return 'c-gold';
+  if (pct >= 70) return 'c-silver';
   return 'c-white';
 }
-function barColor(pct){
-  if(pct>=95) return '#34d399';
-  if(pct>=90) return '#e2d067';
-  if(pct>=80) return '#f59e0b';
-  if(pct>=70) return '#94a3b8';
+function barColor(pct) {
+  if (pct >= 95) return '#34d399';
+  if (pct >= 90) return '#e2d067';
+  if (pct >= 80) return '#f59e0b';
+  if (pct >= 70) return '#94a3b8';
   return '#00d4ff';
 }
-function isPM(score){return score>=10000000;}
+function isPM(score) { return score >= 10000000; }
 
 // ════ Dashboard ════
-function updateDashboard(){
-  let tot=0,totMax=0,pm=0,fr=0,scored=0;
-  SONGS.forEach(s=>{
-    const sc=scores[s.id],v=sc?.score||0;
-    totMax+=maxOP(s.constant);
-    if(v>=9800000){
+function updateDashboard() {
+  let tot = 0, totMax = 0, totBase = 0, pm = 0, fr = 0, scored = 0;
+  SONGS.forEach(s => {
+    const sc = scores[s.id], v = sc?.score || 0;
+    totMax  += maxOP(s.constant);
+    totBase += base100(s.constant);
+    if (v >= 9200000) {
       scored++;
-      tot+=calcOP(v,s.constant,s.totalNotes);
-      if(isPM(v)){pm++;fr++;}
-      else if(sc?.fr) fr++;
+      tot += calcOP(v, s.constant, s.totalNotes);
+      if (isPM(v)) { pm++; fr++; }
+      else if (sc?.fr) fr++;
     }
   });
-  const b100=SONGS.reduce((a,s)=>a+base100(s.constant),0);
-  const pct=b100>0?tot/b100*100:-1;
-  const cc=pct>=0?colorClass(pct):'c-white';
 
-  const pctEl=document.getElementById('d-pct');
-  pctEl.textContent=pct>=0?fmtPct(pct):'—';
-  pctEl.className='op-pct '+cc;
-  document.getElementById('d-raw').textContent=pct>=0?`${fmtOP(tot)} / ${fmtOP(totMax)}`:'スコアを入力すると表示されます';
-  const bar=document.getElementById('d-bar');
-  bar.style.width=(pct>=0?Math.min(101,pct)/101*100:0)+'%';
-  bar.style.background=pct>=0?barColor(pct):'#00d4ff';
-  document.getElementById('d-pm').textContent=pm;
-  document.getElementById('d-fr').textContent=fr;
-  document.getElementById('d-scored').textContent=scored;
-  document.getElementById('d-total').textContent=SONGS.length;
+  // Dashboard %はbase100基準で0〜101%
+  const pct = totBase > 0 ? tot / totBase * 100 : -1;
+  const cc  = pct >= 0 ? colorClass(pct) : 'c-white';
+  const pctEl = document.getElementById('d-pct');
+  pctEl.textContent  = pct >= 0 ? fmtPct(pct) : '—';
+  pctEl.className    = 'op-pct ' + cc;
+  document.getElementById('d-raw').textContent = pct >= 0
+    ? `${fmt4(tot)} / ${fmt4(totMax)}`
+    : 'スコアを入力すると表示されます';
+  const bar = document.getElementById('d-bar');
+  bar.style.width      = (pct >= 0 ? Math.min(101, pct) / 101 * 100 : 0) + '%';
+  bar.style.background = pct >= 0 ? barColor(pct) : '#00d4ff';
+  document.getElementById('d-pm').textContent     = pm;
+  document.getElementById('d-fr').textContent     = fr;
+  document.getElementById('d-scored').textContent = scored;
+  document.getElementById('d-total').textContent  = SONGS.length;
 
-  const map={};
-  SONGS.forEach(s=>{
-    const lv=levelStr(s.constant);
-    if(!map[lv])map[lv]={op:0,b100:0,max:0,n:0,sc:0};
-    map[lv].max+=maxOP(s.constant);
-    map[lv].b100+=base100(s.constant);
+  // Level breakdown
+  const map = {};
+  SONGS.forEach(s => {
+    const lv = levelStr(s.constant);
+    if (!map[lv]) map[lv] = { op: 0, base: 0, max: 0, n: 0, sc: 0 };
+    map[lv].max  += maxOP(s.constant);
+    map[lv].base += base100(s.constant);
     map[lv].n++;
-    const v=scores[s.id]?.score||0;
-    if(v>=9800000){map[lv].op+=calcOP(v,s.constant,s.totalNotes);map[lv].sc++;}
+    const v = scores[s.id]?.score || 0;
+    if (v >= 9200000) { map[lv].op += calcOP(v, s.constant, s.totalNotes); map[lv].sc++; }
   });
-  const levels=Object.keys(map).sort((a,b)=>lvOrd(b)-lvOrd(a));
-  const grid=document.getElementById('lv-grid');
-  if(!levels.length){grid.innerHTML='<div class="empty-state">スコアを入力するとレベル別の集計が表示されます</div>';return;}
-  grid.innerHTML=levels.map(lv=>{
-    const d=map[lv];
-    const p=d.b100>0?d.op/d.b100*100:0;
-    const barW=Math.min(101,p)/101*100;
+  const levels = Object.keys(map).sort((a, b) => lvOrd(b) - lvOrd(a));
+  const grid   = document.getElementById('lv-grid');
+  if (!levels.length) {
+    grid.innerHTML = '<div class="empty-state">スコアを入力するとレベル別の集計が表示されます</div>';
+    return;
+  }
+  grid.innerHTML = levels.map(lv => {
+    const d = map[lv];
+    const p = d.base > 0 ? d.op / d.base * 100 : 0;
+    const barW = Math.min(101, p) / 101 * 100;
     return `<div class="lv-row">
       <div class="lv-name">Lv ${lv}</div>
       <div class="lv-bar-wrap">
         <div class="lv-bar-bg"><div class="lv-bar-fill" style="width:${barW.toFixed(1)}%;background:${barColor(p)}"></div></div>
-        <div class="lv-detail">${fmtOP(d.op)} / ${fmtOP(d.max)} &nbsp;·&nbsp; ${d.sc} / ${d.n} 曲入力済</div>
+        <div class="lv-detail">${fmt4(d.op)} / ${fmt4(d.max)} &nbsp;·&nbsp; ${d.sc} / ${d.n} 曲入力済</div>
       </div>
-      <div class="lv-pct ${colorClass(p)}">${d.sc>0?fmtPct(p):'—'}</div>
+      <div class="lv-pct ${colorClass(p)}">${d.sc > 0 ? fmtPct(p) : '—'}</div>
     </div>`;
   }).join('');
 }
 
 // ════ Song Table ════
-function renderTable(){
-  const fq=(document.getElementById('f-search').value||'').trim().toLowerCase();
-  const fd=document.getElementById('f-diff').value;
-  const fl=document.getElementById('f-lv').value;
-  const fs=document.getElementById('f-sort').value;
+function applySearch() {
+  activeQuery = (document.getElementById('f-search').value || '').trim().toLowerCase();
+  renderTable();
+}
 
-  const allLvs=[...new Set(SONGS.map(s=>levelStr(s.constant)))].sort((a,b)=>lvOrd(b)-lvOrd(a));
-  const flEl=document.getElementById('f-lv');
-  const prev=flEl.value;
-  flEl.innerHTML='<option value="">全レベル</option>'+allLvs.map(l=>`<option value="${l}"${l===prev?' selected':''}>${l}</option>`).join('');
+function renderTable() {
+  if (!SONGS.length) return;
+  const fd = document.getElementById('f-diff').value;
+  const fl = document.getElementById('f-lv').value;
+  const fs = document.getElementById('f-sort').value;
 
-  let list=SONGS.filter(s=>{
-    if(fd&&s.difficulty!==fd)return false;
-    if(fl&&levelStr(s.constant)!==fl)return false;
-    if(fq){
-      const t=s.title.toLowerCase(),a=(s.artist||'').toLowerCase();
-      if(!t.includes(fq)&&!a.includes(fq))return false;
+  // Rebuild level filter
+  const allLvs = [...new Set(SONGS.map(s => levelStr(s.constant)))].sort((a, b) => lvOrd(b) - lvOrd(a));
+  const flEl = document.getElementById('f-lv');
+  const prevLv = flEl.value;
+  flEl.innerHTML = '<option value="">レベル</option>' +
+    allLvs.map(l => `<option value="${l}"${l === prevLv ? ' selected' : ''}>${l}</option>`).join('');
+
+  let list = SONGS.filter(s => {
+    if (fd && s.difficulty !== fd) return false;
+    if (fl && levelStr(s.constant) !== fl) return false;
+    if (activeQuery) {
+      const t = s.title.toLowerCase(), a = (s.artist || '').toLowerCase();
+      if (!t.includes(activeQuery) && !a.includes(activeQuery)) return false;
     }
     return true;
   });
 
-  list.sort((a,b)=>{
-    let va=0,vb=0;
-    if(fs==='const'){va=a.constant;vb=b.constant;}
-    else if(fs==='level'){va=lvOrd(levelStr(a.constant));vb=lvOrd(levelStr(b.constant));}
-    else if(fs==='score'){va=scores[a.id]?.score||0;vb=scores[b.id]?.score||0;}
-    else if(fs==='pct'){
-      const sa=scores[a.id]?.score||0,sb=scores[b.id]?.score||0;
-      va=sa>=9800000?calcOP(sa,a.constant,a.totalNotes)/base100(a.constant):0;
-      vb=sb>=9800000?calcOP(sb,b.constant,b.totalNotes)/base100(b.constant):0;
+  list.sort((a, b) => {
+    let va = 0, vb = 0;
+    if (fs === 'const') { va = a.constant; vb = b.constant; }
+    else if (fs === 'level') { va = lvOrd(levelStr(a.constant)); vb = lvOrd(levelStr(b.constant)); }
+    else if (fs === 'score') { va = scores[a.id]?.score || 0; vb = scores[b.id]?.score || 0; }
+    else if (fs === 'pct') {
+      const sa = scores[a.id]?.score || 0, sb = scores[b.id]?.score || 0;
+      const oa = sa >= 9200000 ? calcOP(sa, a.constant, a.totalNotes) : 0;
+      const ob = sb >= 9200000 ? calcOP(sb, b.constant, b.totalNotes) : 0;
+      va = oa > 0 ? calcPct(oa, a.constant, sa) : 0;
+      vb = ob > 0 ? calcPct(ob, b.constant, sb) : 0;
     }
-    return (vb-va)*sortDir;
+    return (vb - va) * sortDir;
   });
 
-  const cont=document.getElementById('tbl-container');
-  if(!list.length){cont.innerHTML='<div class="empty-state">条件に一致する楽曲がありません</div>';return;}
+  const cont = document.getElementById('tbl-container');
+  if (!list.length) {
+    cont.innerHTML = '<div class="empty-state">条件に一致する楽曲がありません</div>';
+    return;
+  }
 
-  const rows=list.map(s=>{
-    const sc=scores[s.id]||{score:0,fr:false};
-    const v=sc.score||0;
-    const op=v>=9800000?calcOP(v,s.constant,s.totalNotes):null;
-    const b1=base100(s.constant);
-    const mx=maxOP(s.constant);
-    const pct=op!=null?op/b1*100:null;
-    const cc=pct!=null?colorClass(pct):'dim';
-    const pm=isPM(v);const fr=sc.fr||pm;
+  const rows = list.map(s => {
+    const sc  = scores[s.id] || { score: 0, fr: false };
+    const v   = sc.score || 0;
+    const op  = v >= 9200000 ? calcOP(v, s.constant, s.totalNotes) : null;
+    const pct = op != null ? calcPct(op, s.constant, v) : null;
+    const cc  = pct != null ? colorClass(pct) : 'dim';
+    const pm  = isPM(v), fr = sc.fr || pm;
+    const maxScore = 10000000 + s.totalNotes;
     return `<tr>
       <td><span class="diff-badge d-${s.difficulty}">${s.difficulty}</span></td>
       <td>
-        <div class="song-title">${esc(s.title)}${pm?'<span class="badge-pm">PM</span>':fr?'<span class="badge-fr">FR</span>':''}</div>
-        ${s.artist?`<div class="song-artist">${esc(s.artist)}</div>`:''}
+        <div class="song-title">${esc(s.title)}${pm ? '<span class="badge-pm">PM</span>' : fr ? '<span class="badge-fr">FR</span>' : ''}</div>
+        ${s.artist ? `<div class="song-artist">${esc(s.artist)}</div>` : ''}
       </td>
       <td class="dim mono" style="font-size:12px">Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}</td>
-      <td><input type="number" class="score-inp" value="${v||''}" min="0" max="${10000000+s.totalNotes}" placeholder="—" onchange="onScoreChange('${s.id}',this.value,${s.totalNotes})"></td>
-      <td><input type="checkbox" class="fr-check" ${fr?'checked':''} ${pm?'disabled':''} onchange="onFRChange('${s.id}',this.checked)" title="Full Recall（LOSTなし）"></td>
-      <td class="mono ${cc}">${op!=null?fmtOP(op):'—'}</td>
-      <td class="mono dim" style="font-size:12px">${fmtOP(mx)}</td>
-      <td class="mono ${cc}">${pct!=null?fmtPct(pct):'—'}</td>
+      <td><input type="number" class="score-inp" value="${v || ''}" min="0" max="${maxScore}" placeholder="—"
+        onchange="onScoreChange('${s.id}', this.value, ${s.totalNotes}, ${maxScore})"></td>
+      <td><input type="checkbox" class="fr-check" ${fr ? 'checked' : ''} ${pm ? 'disabled' : ''}
+        onchange="onFRChange('${s.id}', this.checked)" title="Full Recall（LOSTなし）"></td>
+      <td class="mono ${cc}">${op != null ? fmt4(op) : '—'}</td>
+      <td class="mono dim" style="font-size:12px">${fmt4(maxOP(s.constant))}</td>
+      <td class="mono ${cc}">${pct != null ? fmtPct(pct) : '—'}</td>
     </tr>`;
   }).join('');
 
-  cont.innerHTML=`<table><thead><tr>
+  cont.innerHTML = `<table><thead><tr>
     <th>難易度</th><th>楽曲名</th><th>Lv / 定数</th>
     <th>スコア</th><th>FR</th><th>OP値</th><th>理論値</th><th>達成率</th>
   </tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-
-function onScoreChange(id,val,notes){
-  const v=parseInt(val)||0;
-  if(!scores[id])scores[id]={score:0,fr:false};
-  scores[id].score=v;
-  if(isPM(v))scores[id].fr=true;
-  persist();updateDashboard();renderTable();
-}
-function onFRChange(id,checked){
-  if(!scores[id])scores[id]={score:0,fr:false};
-  scores[id].fr=checked;
-  persist();updateDashboard();
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ════ Sort direction ════
-function toggleSortDir(){
-  sortDir*=-1;
-  document.getElementById('sort-dir-btn').textContent=sortDir===1?'↓':'↑';
+function onScoreChange(id, val, notes, maxScore) {
+  let v = parseInt(val) || 0;
+  if (v > maxScore) v = maxScore; // cap at theoretical max
+  if (!scores[id]) scores[id] = { score: 0, fr: false };
+  scores[id].score = v;
+  if (isPM(v)) scores[id].fr = true;
+  persist(); updateDashboard(); renderTable();
+}
+function onFRChange(id, checked) {
+  if (!scores[id]) scores[id] = { score: 0, fr: false };
+  scores[id].fr = checked;
+  persist(); updateDashboard();
+}
+
+// ════ Sort ════
+function toggleSortDir() {
+  sortDir *= -1;
+  const btn = document.getElementById('sort-dir-btn');
+  btn.textContent = sortDir === 1 ? '↓ 降順' : '↑ 昇順';
+  btn.classList.toggle('active-dir', sortDir === -1);
   renderTable();
 }
 
 // ════ Score Export/Import ════
-function exportData(){
-  const blob=new Blob([JSON.stringify(scores,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='arcaea-op-scores.json';a.click();
+function exportData() {
+  const blob = new Blob([JSON.stringify(scores, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'arcaea-op-scores.json';
+  a.click();
 }
-function triggerScoreImport(){document.getElementById('score-import-file').click();}
-function importScoreData(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    try{scores=JSON.parse(e.target.result);persist();updateDashboard();renderTable();alert('復元しました');}
-    catch(err){alert('復元に失敗しました: '+err.message);}
-    input.value='';
+function importScoreData(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      scores = JSON.parse(e.target.result);
+      persist(); updateDashboard(); renderTable();
+      alert('復元しました');
+    } catch(err) { alert('復元に失敗しました: ' + err.message); }
+    input.value = '';
   };
   reader.readAsText(file);
 }
 
-// ════ Nav ════
-function switchTab(btn,name){
-  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(el=>el.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  // sync both desktop and drawer buttons
-  document.querySelectorAll('.nav-btn').forEach(b=>{
-    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+name+"'"))b.classList.add('active');
-  });
-  if(name==='songs')renderTable();
+// ════ Navigation (URL hash) ════
+const TABS = ['dashboard', 'songs', 'settings'];
+
+function navTo(name) {
+  if (!TABS.includes(name)) name = 'dashboard';
+  // Update hash without triggering hashchange twice
+  if (location.hash !== '#' + name) {
+    history.pushState(null, '', '#' + name);
+  }
+  activateTab(name);
 }
 
-function toggleMenu(){
+function activateTab(name) {
+  if (!TABS.includes(name)) name = 'dashboard';
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === name);
+  });
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'songs') renderTable();
+}
+
+window.addEventListener('popstate', () => {
+  const name = location.hash.replace('#', '') || 'dashboard';
+  activateTab(name);
+});
+
+// ════ Hamburger ════
+function toggleMenu() {
   document.getElementById('ham').classList.toggle('open');
   document.getElementById('drawer').classList.toggle('open');
 }
-function closeMenu(){
+function closeMenu() {
   document.getElementById('ham').classList.remove('open');
   document.getElementById('drawer').classList.remove('open');
 }
-document.addEventListener('click',e=>{
-  const drawer=document.getElementById('drawer');
-  const ham=document.getElementById('ham');
-  if(drawer.classList.contains('open')&&!drawer.contains(e.target)&&!ham.contains(e.target))closeMenu();
+document.addEventListener('click', e => {
+  const drawer = document.getElementById('drawer'), ham = document.getElementById('ham');
+  if (drawer.classList.contains('open') && !drawer.contains(e.target) && !ham.contains(e.target)) closeMenu();
 });
 
-// ════ Init ════
-updateDashboard();
-renderTable();
+// ════ Load song data & Init ════
+fetch('songdata.json')
+  .then(r => {
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.json();
+  })
+  .then(data => {
+    SONGS = data.map((s, i) => ({ ...s, id: 's' + i }));
+    updateDashboard();
+    renderTable();
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById('tbl-container').innerHTML =
+      `<div class="err-state">楽曲データの読み込みに失敗しました。<br><code>songdata.json</code> がHTMLと同じディレクトリに存在するか確認してください。<br><small>${err.message}</small></div>`;
+  });
+
+// Init tab from hash
+const initTab = location.hash.replace('#', '') || 'dashboard';
+activateTab(initTab);
 </script>
 </body>
 </html>
