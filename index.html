@@ -223,17 +223,10 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
         <button class="btn ghost" onclick="document.getElementById('score-import-file').click()">スコアデータを復元</button>
         <input type="file" id="score-import-file" accept=".json" style="display:none" onchange="importScoreData(this)">
       </div>
-      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データは <code>songdata.json</code> を編集して管理してください。</div>
+      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。</div>
     </div>
     <div class="settings-section">
-      <div class="settings-title">楽曲データの更新</div>
-      <div class="hint">
-        リポジトリ内の <code>songdata.json</code> を編集すると楽曲リストに反映されます。<br>
-        フォーマット: <code>[{"title":"…","artist":"…","difficulty":"FTR/ETR/BYD","constant":0.0,"totalNotes":0}, …]</code>
-      </div>
-    </div>
-    <div class="settings-section">
-      <div class="settings-title">OP計算式</div>
+      <div class="settings-title">OVER POWER計算式</div>
       <div class="hint">
         <b>対象グレード:</b> A (9,200,000) 以上<br>
         <b>Potential:</b><br>
