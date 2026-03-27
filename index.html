@@ -14,9 +14,18 @@
   --ftr:#A54086;--etr:#8D76AA;--byd:#D91A3A;
   --text:#dde6f5;--text-dim:#4e6080;--text-mid:#7a94b8;
   --c-white:#dde6f5;--c-silver:#94a3b8;--c-gold:#f59e0b;--c-plat:#e8d87a;--c-rainbow:#34d399;
+  --row-hover:rgba(255,255,255,0.015);
+}
+body.light{
+  --bg:#f0f4fc;--surface:#ffffff;--surface2:#e8edf8;
+  --border:#c8d4e8;--border2:#b0bfd8;
+  --accent:#0099cc;--accent-dim:rgba(0,153,204,0.12);
+  --text:#1a2540;--text-dim:#7a90b8;--text-mid:#4a5c80;
+  --c-white:#1a2540;--c-silver:#5a6880;--c-gold:#a07000;--c-plat:#8a7800;--c-rainbow:#107850;
+  --row-hover:rgba(0,0,0,0.025);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;transition:background .2s,color .2s;}
 
 /* ── Header ── */
 header{position:sticky;top:0;z-index:100;height:52px;background:rgba(7,9,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;}
@@ -109,15 +118,32 @@ table{width:100%;border-collapse:collapse;}
 th{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;padding:8px 8px;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
 td{padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
-tbody tr:hover td{background:rgba(255,255,255,.015);}
+tbody tr:hover td{background:var(--row-hover);}
 
 .diff-badge{display:inline-flex;align-items:center;justify-content:center;padding:2px 6px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;border:1px solid;}
 .d-FTR{color:var(--ftr);border-color:var(--ftr);background:rgba(165,64,134,0.15);}
 .d-ETR{color:var(--etr);border-color:var(--etr);background:rgba(141,118,170,0.15);}
 .d-BYD{color:var(--byd);border-color:var(--byd);background:rgba(217,26,58,0.15);}
 
-.song-title{font-size:13px;}
-.song-artist{font-size:11px;color:var(--text-dim);margin-top:1px;}
+/* ── Light mode ── */
+body.light{
+  --bg:#f0f2f8;--surface:#ffffff;--surface2:#e8ecf5;
+  --border:#c8d0e0;--border2:#aab4cc;
+  --accent:#0077aa;--accent-dim:rgba(0,119,170,0.1);
+  --ftr:#8a3070;--etr:#6b559a;--byd:#b01030;
+  --text:#1a1f2e;--text-dim:#7080a0;--text-mid:#50688a;
+  --c-white:#1a1f2e;--c-silver:#506080;--c-gold:#b07000;--c-plat:#7a6800;--c-rainbow:#187a50;
+}
+body.light header{background:rgba(240,242,248,0.96);}
+body.light .nav-drawer{background:var(--surface);}
+body.light .op-hero{background:linear-gradient(135deg,var(--surface) 0%,#dce4f0 100%);}
+
+.song-title{font-size:13px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;max-width:240px;}
+.song-artist{font-size:11px;color:var(--text-dim);margin-top:1px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:240px;}
+@media(max-width:600px){
+  .song-title{max-width:140px;-webkit-line-clamp:4;}
+  .song-artist{max-width:140px;}
+}
 .score-inp{width:112px;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;text-align:right;}
 .score-inp::placeholder{color:var(--text-dim);font-size:12px;font-weight:400;}
 .mono{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;}
@@ -201,10 +227,11 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
         </select>
         <select id="f-lv" onchange="renderTable()"><option value="">レベル</option></select>
         <select id="f-sort" onchange="renderTable()">
-          <option value="const">ソート: 定数</option>
-          <option value="level">ソート: レベル</option>
-          <option value="score">ソート: スコア</option>
-          <option value="pct">ソート: 達成率</option>
+          <option value="const">定数順</option>
+          <option value="level">レベル順</option>
+          <option value="score">スコア順</option>
+          <option value="pct">達成率順</option>
+          <option value="title">楽曲名順</option>
         </select>
         <button class="ctrl-btn" id="sort-dir-btn" onclick="toggleSortDir()" title="昇順/降順切替">↓ 降順</button>
       </div>
@@ -217,16 +244,30 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
   <!-- ═══ SETTINGS ═══ -->
   <div id="tab-settings" class="tab-content">
     <div class="settings-section">
+      <div class="settings-title">表示設定</div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="hint" style="margin:0">カラーモード</span>
+        <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()" style="min-width:120px">☽ ダークモード</button>
+      </div>
+    </div>
+    <div class="settings-section">
       <div class="settings-title">データ管理</div>
       <div class="btn-row">
         <button class="btn ghost" onclick="exportData()">スコアデータをエクスポート</button>
         <button class="btn ghost" onclick="document.getElementById('score-import-file').click()">スコアデータを復元</button>
         <input type="file" id="score-import-file" accept=".json" style="display:none" onchange="importScoreData(this)">
       </div>
-      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。</div>
+      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データは <code>songdata.json</code> を編集して管理してください。</div>
     </div>
     <div class="settings-section">
-      <div class="settings-title">OVER POWER計算式</div>
+      <div class="settings-title">楽曲データの更新</div>
+      <div class="hint">
+        リポジトリ内の <code>songdata.json</code> を編集すると楽曲リストに反映されます。<br>
+        フォーマット: <code>[{"title":"…","artist":"…","difficulty":"FTR/ETR/BYD","constant":0.0,"totalNotes":0}, …]</code>
+      </div>
+    </div>
+    <div class="settings-section">
+      <div class="settings-title">OP計算式</div>
       <div class="hint">
         <b>対象グレード:</b> A (9,200,000) 以上<br>
         <b>Potential:</b><br>
@@ -246,11 +287,39 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
 <script>
 // ════ State ════
 let SONGS = [];
-let scores = JSON.parse(localStorage.getItem('aop_scores') || '{}');
+let scores = {};
 let sortDir = 1;       // 1=降順, -1=昇順
 let activeQuery = '';  // 決定ボタンで確定した検索語
 
+// 安定キー: title と difficulty の組み合わせ（楽曲追加でズレない）
+function makeId(title, diff) { return title + '|||' + diff; }
+
 function persist() { localStorage.setItem('aop_scores', JSON.stringify(scores)); }
+
+// 旧形式(s0, s1, …)から新形式へのマイグレーション
+function migrateScores(songsArr) {
+  const raw = JSON.parse(localStorage.getItem('aop_scores') || '{}');
+  const keys = Object.keys(raw);
+  if (keys.length === 0) return raw;
+  // 旧キー判定: s + 数字のみ
+  const hasOld = keys.some(k => /^s\d+$/.test(k));
+  if (!hasOld) return raw;
+  const migrated = {};
+  keys.forEach(k => {
+    const m = k.match(/^s(\d+)$/);
+    if (m) {
+      const idx = parseInt(m[1]);
+      if (songsArr[idx]) {
+        const newKey = makeId(songsArr[idx].title, songsArr[idx].difficulty);
+        migrated[newKey] = raw[k];
+      }
+    } else {
+      migrated[k] = raw[k]; // すでに新形式
+    }
+  });
+  console.log(`[OP Tracker] スコアキーをマイグレーション: ${keys.length} → ${Object.keys(migrated).length}`);
+  return migrated;
+}
 
 // ════ OP Calculation ════
 function potential(score, c) {
@@ -415,6 +484,9 @@ function renderTable() {
   });
 
   list.sort((a, b) => {
+    if (fs === 'title') {
+      return a.title.localeCompare(b.title, 'ja') * sortDir;
+    }
     let va = 0, vb = 0;
     if (fs === 'const') { va = a.constant; vb = b.constant; }
     else if (fs === 'level') { va = lvOrd(levelStr(a.constant)); vb = lvOrd(levelStr(b.constant)); }
@@ -515,6 +587,17 @@ function importScoreData(input) {
   reader.readAsText(file);
 }
 
+// ════ Theme ════
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light');
+  localStorage.setItem('aop_theme', isLight ? 'light' : 'dark');
+  updateThemeBtn(isLight);
+}
+function updateThemeBtn(isLight) {
+  const btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = isLight ? '☀ ライトモード' : '☽ ダークモード';
+}
+
 // ════ Navigation (URL hash) ════
 const TABS = ['dashboard', 'songs', 'settings'];
 
@@ -563,7 +646,9 @@ fetch('songdata.json')
     return r.json();
   })
   .then(data => {
-    SONGS = data.map((s, i) => ({ ...s, id: 's' + i }));
+    SONGS = data.map(s => ({ ...s, id: makeId(s.title, s.difficulty) }));
+    scores = migrateScores(data); // 旧形式があれば自動変換
+    persist();
     updateDashboard();
     renderTable();
   })
@@ -576,6 +661,11 @@ fetch('songdata.json')
 // Init tab from hash
 const initTab = location.hash.replace('#', '') || 'dashboard';
 activateTab(initTab);
+
+// Init theme
+const savedTheme = localStorage.getItem('aop_theme');
+if (savedTheme === 'light') { document.body.classList.add('light'); }
+updateThemeBtn(document.body.classList.contains('light'));
 </script>
 </body>
 </html>
