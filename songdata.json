@@ -1792,7 +1792,7 @@
     "totalNotes": 1182
   },
   {
-    "title": "~_+",
+    "title": "~\\_+",
     "artist": "AQUASINE ~ MEMODEMO + METAROOM",
     "difficulty": "FTR",
     "constant": 9.9,
@@ -4690,6 +4690,13 @@
     "totalNotes": 803
   },
   {
+    "title": "Dematerialized",
+    "artist": "In Love With A Ghost",
+    "difficulty": "FTR",
+    "constant": 7.5,
+    "totalNotes": 722
+  },
+  {
     "title": "HELLOHELL",
     "artist": "暁Records",
     "difficulty": "FTR",
@@ -4702,6 +4709,13 @@
     "difficulty": "FTR",
     "constant": 7.5,
     "totalNotes": 783
+  },
+  {
+    "title": "始マリノ詩",
+    "artist": "有村京悟 feat. July",
+    "difficulty": "FTR",
+    "constant": 7.5,
+    "totalNotes": 608
   },
   {
     "title": "Blossoms",
