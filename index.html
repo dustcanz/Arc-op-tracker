@@ -354,11 +354,12 @@ function calcPct(op, c, score) {
 }
 
 function levelStr(c) {
-  const f = Math.floor(c), d = c - f;
-  if (f <= 6)  return String(f);
+  const f = Math.floor(c);
+  const d = Math.round((c - f) * 10); // 浮動小数点誤差を避けるため整数で比較
+  if (f <= 6)   return String(f);
   if (f === 12) return '12';
-  if (f === 11) return d >= 0.8 ? '11+' : '11';
-  return d >= 0.7 ? `${f}+` : String(f);
+  if (f === 11) return d >= 8 ? '11+' : '11';
+  return d >= 7 ? `${f}+` : String(f);
 }
 const LV_ORDER = ['1','2','3','4','5','6','7','7+','8','8+','9','9+','10','10+','11','11+','12'];
 function lvOrd(l) { const i = LV_ORDER.indexOf(l); return i >= 0 ? i : 99; }
@@ -516,9 +517,11 @@ function renderTable() {
       </td>
       <td class="dim mono" style="font-size:12px">Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}</td>
       <td><input type="number" class="score-inp" value="${v || ''}" min="0" max="${maxScore}" placeholder="—"
-        onchange="onScoreChange('${s.id}', this.value, ${s.totalNotes}, ${maxScore})"></td>
+        data-id="${esc(s.id)}" data-notes="${s.totalNotes}" data-max="${maxScore}"
+        onchange="onScoreChange(this)"></td>
       <td><input type="checkbox" class="fr-check" ${fr ? 'checked' : ''} ${pm ? 'disabled' : ''}
-        onchange="onFRChange('${s.id}', this.checked)" title="Full Recall（LOSTなし）"></td>
+        data-id="${esc(s.id)}"
+        onchange="onFRChange(this)" title="Full Recall（LOSTなし）"></td>
       <td class="mono ${cc}">${op != null ? fmt4(op) : '—'}</td>
       <td class="mono dim" style="font-size:12px">${fmt4(maxOP(s.constant))}</td>
       <td class="mono ${cc}">${pct != null ? fmtPct(pct) : '—'}</td>
@@ -535,17 +538,21 @@ function esc(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function onScoreChange(id, val, notes, maxScore) {
-  let v = parseInt(val) || 0;
-  if (v > maxScore) v = maxScore; // cap at theoretical max
+function onScoreChange(el) {
+  const id = el.dataset.id;
+  const notes = parseInt(el.dataset.notes);
+  const maxScore = parseInt(el.dataset.max);
+  let v = parseInt(el.value) || 0;
+  if (v > maxScore) v = maxScore;
   if (!scores[id]) scores[id] = { score: 0, fr: false };
   scores[id].score = v;
   if (isPM(v)) scores[id].fr = true;
   persist(); updateDashboard(); renderTable();
 }
-function onFRChange(id, checked) {
+function onFRChange(el) {
+  const id = el.dataset.id;
   if (!scores[id]) scores[id] = { score: 0, fr: false };
-  scores[id].fr = checked;
+  scores[id].fr = el.checked;
   persist(); updateDashboard();
 }
 
