@@ -164,18 +164,17 @@ body.light .op-hero{background:linear-gradient(135deg,var(--surface) 0%,#dce4f0 
 .btn.ghost{background:transparent;border:1px solid var(--border2);color:var(--text-mid);}.btn.ghost:hover{border-color:var(--text-mid);color:var(--text);}
 
 /* ── Score color tiers ── */
-.sc-white {color:var(--c-white);}
-.sc-yellow{color:#c8a010;}
-.sc-ygreen{color:#68b810;}
-.sc-pur1  {color:#b050c0;}
-.sc-pur2  {color:#7050d8;}
-.sc-blue1 {color:#366FFF;}
-.sc-blue2 {color:#3a90f0;}
+.sc-white {color:#788aa8;}
+.sc-aa1   {color:#e8a832;}
+.sc-aa2   {color:#30c880;}
+.sc-aa3   {color:#9060e0;}
+.sc-aa4   {color:#c040c8;}
+.sc-ex1   {color:#366FFF;}
+.sc-ex2   {color:#40a0f8;}
 .sc-cyan1 {color:#1BD5FF;text-shadow:0 0 8px rgba(255,255,255,0.40);}
 .sc-cyan2 {color:#48e8ff;text-shadow:0 0 10px rgba(255,255,255,0.50);}
 .sc-pm    {color:#48e8ff;text-shadow:0 0 10px rgba(255,255,255,0.50);}
 .sc-perf  {color:#48e8ff;text-shadow:0 0 14px rgba(70,150,255,0.75),0 0 5px rgba(255,255,255,0.55);}
-/* faint bg wrapper for PM / perfect */
 .sc-bg{display:inline-block;background:rgba(255,255,255,0.08);padding:0 3px;border-radius:2px;}
 
 /* ── Stars ── */
@@ -184,24 +183,47 @@ body.light .op-hero{background:linear-gradient(135deg,var(--surface) 0%,#dce4f0 
 .hero-stars{font-size:13px;color:#48e8ff;letter-spacing:2px;margin-top:3px;opacity:.9;}
 
 /* ── Hero background stages ── */
-.op-hero.bg-s1{border-color:#6a7a9a;}
-.op-hero.bg-s2{border-color:#366FFF;box-shadow:0 0 22px rgba(54,111,255,0.18);}
-.op-hero.bg-s3{border-color:#1BD5FF;box-shadow:0 0 26px rgba(27,213,255,0.22);}
-@keyframes prismatic{0%,100%{border-color:#48e8ff;box-shadow:0 0 28px rgba(72,232,255,0.22);}33%{border-color:#a060f0;box-shadow:0 0 28px rgba(160,96,240,0.22);}66%{border-color:#48e8ff;box-shadow:0 0 28px rgba(72,232,255,0.22);}}
+/* bg-s1: 全曲Aグレード — 落ち着いたシルバー調 */
+.op-hero.bg-s1{
+  background:linear-gradient(135deg,#0e1428 0%,#141e38 100%);
+  border-color:#5a7090;
+  box-shadow:inset 0 0 40px rgba(90,112,144,0.12);
+}
+/* bg-s2: 全曲EX — ブルー調 */
+.op-hero.bg-s2{
+  background:linear-gradient(135deg,#080f28 0%,#0d1e48 100%);
+  border-color:#366FFF;
+  box-shadow:0 0 28px rgba(54,111,255,0.28),inset 0 0 50px rgba(54,111,255,0.08);
+}
+/* bg-s3: 全曲EX+ — シアン調 */
+.op-hero.bg-s3{
+  background:linear-gradient(135deg,#061828 0%,#0a2238 100%);
+  border-color:#1BD5FF;
+  box-shadow:0 0 32px rgba(27,213,255,0.32),inset 0 0 60px rgba(27,213,255,0.07);
+}
+/* bg-s4: 全曲PM — アニメーション */
+@keyframes prismatic{
+  0%  {border-color:#48e8ff;box-shadow:0 0 36px rgba(72,232,255,0.35),inset 0 0 60px rgba(72,232,255,0.07);background:linear-gradient(135deg,#061828 0%,#0a2035 100%);}
+  33% {border-color:#a060f0;box-shadow:0 0 36px rgba(160,96,240,0.35),inset 0 0 60px rgba(160,96,240,0.07);background:linear-gradient(135deg,#0e0820 0%,#180d38 100%);}
+  66% {border-color:#48e8ff;box-shadow:0 0 36px rgba(72,232,255,0.35),inset 0 0 60px rgba(72,232,255,0.07);background:linear-gradient(135deg,#061828 0%,#0a2035 100%);}
+  100%{border-color:#48e8ff;box-shadow:0 0 36px rgba(72,232,255,0.35),inset 0 0 60px rgba(72,232,255,0.07);background:linear-gradient(135deg,#061828 0%,#0a2035 100%);}
+}
 .op-hero.bg-s4{animation:prismatic 5s ease-in-out infinite;}
 
-/* light mode overrides for score tiers */
-body.light .sc-yellow{color:#a07800;}
-body.light .sc-ygreen{color:#508800;}
-body.light .sc-pur1  {color:#8030a0;}
-body.light .sc-pur2  {color:#5030b8;}
-body.light .sc-blue1 {color:#1a4fd0;}
-body.light .sc-blue2 {color:#1a70c8;}
-body.light .sc-cyan1,body.light .sc-cyan2,body.light .sc-pm,body.light .sc-perf{color:#007899;}
-body.light .sc-cyan1{text-shadow:none;}body.light .sc-cyan2{text-shadow:none;}
-body.light .sc-pm{text-shadow:none;}body.light .sc-perf{text-shadow:none;}
+/* light mode overrides */
+body.light .sc-white{color:#8899b8;}
+body.light .sc-aa1  {color:#c07010;}
+body.light .sc-aa2  {color:#108850;}
+body.light .sc-aa3  {color:#6040b8;}
+body.light .sc-aa4  {color:#901080;}
+body.light .sc-ex1  {color:#1a4fd0;}
+body.light .sc-ex2  {color:#1870c0;}
+body.light .sc-cyan1,body.light .sc-cyan2,body.light .sc-pm,body.light .sc-perf{color:#007899;text-shadow:none;}
 body.light .sc-bg{background:rgba(0,0,0,0.06);}
 body.light .score-stars,body.light .lv-stars,body.light .hero-stars{color:#007899;}
+body.light .op-hero.bg-s1{background:linear-gradient(135deg,#e8eef8 0%,#dce8f4 100%);border-color:#8090b0;box-shadow:inset 0 0 40px rgba(128,144,176,0.10);}
+body.light .op-hero.bg-s2{background:linear-gradient(135deg,#dce8ff 0%,#c8daff 100%);border-color:#2a5fd0;box-shadow:0 0 24px rgba(42,95,208,0.20),inset 0 0 40px rgba(42,95,208,0.06);}
+body.light .op-hero.bg-s3{background:linear-gradient(135deg,#d0f0ff 0%,#b8e8fa 100%);border-color:#0099cc;box-shadow:0 0 28px rgba(0,153,204,0.22),inset 0 0 40px rgba(0,153,204,0.06);}
 </style>
 </head>
 <body>
@@ -428,15 +450,15 @@ function isPM(score) { return score >= 10000000; }
 // ════ Score tier system ════
 function scoreClass(score) {
   if (!score || score < 9500000) return 'sc-white';
-  if (score < 9600000) return 'sc-yellow';
-  if (score < 9700000) return 'sc-ygreen';
-  if (score < 9750000) return 'sc-pur1';
-  if (score < 9800000) return 'sc-pur2';
-  if (score < 9850000) return 'sc-blue1';
-  if (score < 9900000) return 'sc-blue2';
+  if (score < 9600000) return 'sc-aa1';
+  if (score < 9700000) return 'sc-aa2';
+  if (score < 9750000) return 'sc-aa3';
+  if (score < 9800000) return 'sc-aa4';
+  if (score < 9850000) return 'sc-ex1';
+  if (score < 9900000) return 'sc-ex2';
   if (score < 9950000) return 'sc-cyan1';
   if (score < 10000000) return 'sc-cyan2';
-  return 'sc-pm'; // PM帯（理論値含む）
+  return 'sc-pm';
 }
 
 function scoreStars(score) {
