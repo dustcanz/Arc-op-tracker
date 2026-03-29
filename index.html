@@ -162,6 +162,46 @@ body.light .op-hero{background:linear-gradient(135deg,var(--surface) 0%,#dce4f0 
 .btn{padding:7px 14px;height:34px;background:var(--accent);border:none;color:var(--bg);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:background .15s;white-space:nowrap;}
 .btn:hover{background:#33e0ff;}
 .btn.ghost{background:transparent;border:1px solid var(--border2);color:var(--text-mid);}.btn.ghost:hover{border-color:var(--text-mid);color:var(--text);}
+
+/* ── Score color tiers ── */
+.sc-white {color:var(--c-white);}
+.sc-yellow{color:#c8a010;}
+.sc-ygreen{color:#68b810;}
+.sc-pur1  {color:#b050c0;}
+.sc-pur2  {color:#7050d8;}
+.sc-blue1 {color:#366FFF;}
+.sc-blue2 {color:#3a90f0;}
+.sc-cyan1 {color:#1BD5FF;text-shadow:0 0 8px rgba(255,255,255,0.40);}
+.sc-cyan2 {color:#48e8ff;text-shadow:0 0 10px rgba(255,255,255,0.50);}
+.sc-pm    {color:#48e8ff;text-shadow:0 0 10px rgba(255,255,255,0.50);}
+.sc-perf  {color:#48e8ff;text-shadow:0 0 14px rgba(70,150,255,0.75),0 0 5px rgba(255,255,255,0.55);}
+/* faint bg wrapper for PM / perfect */
+.sc-bg{display:inline-block;background:rgba(255,255,255,0.08);padding:0 3px;border-radius:2px;}
+
+/* ── Stars ── */
+.score-stars{font-size:9px;color:#48e8ff;letter-spacing:1px;min-height:12px;text-align:right;margin-top:1px;opacity:.85;}
+.lv-stars{font-size:9px;color:#48e8ff;letter-spacing:1px;text-align:right;margin-top:0;opacity:.85;}
+.hero-stars{font-size:13px;color:#48e8ff;letter-spacing:2px;margin-top:3px;opacity:.9;}
+
+/* ── Hero background stages ── */
+.op-hero.bg-s1{border-color:#6a7a9a;}
+.op-hero.bg-s2{border-color:#366FFF;box-shadow:0 0 22px rgba(54,111,255,0.18);}
+.op-hero.bg-s3{border-color:#1BD5FF;box-shadow:0 0 26px rgba(27,213,255,0.22);}
+@keyframes prismatic{0%,100%{border-color:#48e8ff;box-shadow:0 0 28px rgba(72,232,255,0.22);}33%{border-color:#a060f0;box-shadow:0 0 28px rgba(160,96,240,0.22);}66%{border-color:#48e8ff;box-shadow:0 0 28px rgba(72,232,255,0.22);}}
+.op-hero.bg-s4{animation:prismatic 5s ease-in-out infinite;}
+
+/* light mode overrides for score tiers */
+body.light .sc-yellow{color:#a07800;}
+body.light .sc-ygreen{color:#508800;}
+body.light .sc-pur1  {color:#8030a0;}
+body.light .sc-pur2  {color:#5030b8;}
+body.light .sc-blue1 {color:#1a4fd0;}
+body.light .sc-blue2 {color:#1a70c8;}
+body.light .sc-cyan1,body.light .sc-cyan2,body.light .sc-pm,body.light .sc-perf{color:#007899;}
+body.light .sc-cyan1{text-shadow:none;}body.light .sc-cyan2{text-shadow:none;}
+body.light .sc-pm{text-shadow:none;}body.light .sc-perf{text-shadow:none;}
+body.light .sc-bg{background:rgba(0,0,0,0.06);}
+body.light .score-stars,body.light .lv-stars,body.light .hero-stars{color:#007899;}
 </style>
 </head>
 <body>
@@ -193,6 +233,7 @@ body.light .op-hero{background:linear-gradient(135deg,var(--surface) 0%,#dce4f0 
         <div class="op-eyebrow">Total Over Power</div>
         <div class="op-pct c-white" id="d-pct">—</div>
         <div class="op-raw" id="d-raw">スコアを入力すると表示されます</div>
+        <div class="hero-stars" id="d-stars"></div>
         <div class="op-bar"><div class="op-bar-fill" id="d-bar" style="width:0%"></div></div>
       </div>
       <div class="op-stats">
@@ -384,6 +425,63 @@ function barColor(pct) {
 }
 function isPM(score) { return score >= 10000000; }
 
+// ════ Score tier system ════
+function scoreClass(score) {
+  if (!score || score < 9500000) return 'sc-white';
+  if (score < 9600000) return 'sc-yellow';
+  if (score < 9700000) return 'sc-ygreen';
+  if (score < 9750000) return 'sc-pur1';
+  if (score < 9800000) return 'sc-pur2';
+  if (score < 9850000) return 'sc-blue1';
+  if (score < 9900000) return 'sc-blue2';
+  if (score < 9950000) return 'sc-cyan1';
+  if (score < 10000000) return 'sc-cyan2';
+  return 'sc-pm'; // PM帯（理論値含む）
+}
+
+function scoreStars(score) {
+  if (score >= 10000000) return '★★★';
+  if (score >= 9900000)  return '★★';
+  if (score >= 9800000)  return '★';
+  return '';
+}
+
+// 理論値判定
+function isPerfect(score, totalNotes) { return score >= 10000000 + totalNotes; }
+
+// スコア値をOP値セル用のHTML（背景・クラス付き）に変換
+function opValHtml(valStr, score, totalNotes) {
+  const cls = score > 0 ? scoreClass(score) : 'sc-white';
+  const perf = isPerfect(score, totalNotes);
+  const useBg = score >= 10000000;
+  const finalCls = perf ? 'sc-perf' : cls;
+  if (useBg) return `<span class="${finalCls} sc-bg">${valStr}</span>`;
+  return `<span class="${finalCls}">${valStr}</span>`;
+}
+
+// ヒーロー背景ステージ（Lv11+とLv12を除外した全曲チェック）
+function heroStageClass() {
+  const target = SONGS.filter(s => { const lv = levelStr(s.constant); return lv !== '11+' && lv !== '12'; });
+  if (!target.length) return '';
+  const check = (th) => target.every(s => (scores[s.id]?.score || 0) >= th);
+  if (check(10000000)) return 'bg-s4';
+  if (check(9900000))  return 'bg-s3';
+  if (check(9800000))  return 'bg-s2';
+  if (check(9200000))  return 'bg-s1';
+  return '';
+}
+
+// レベル内の最小スコアから★数を決定
+function levelStarsStr(songsInLevel) {
+  const allScored = songsInLevel.every(s => (scores[s.id]?.score || 0) >= 9200000);
+  if (!allScored) return '';
+  const check = (th) => songsInLevel.every(s => (scores[s.id]?.score || 0) >= th);
+  if (check(10000000)) return '★★★';
+  if (check(9900000))  return '★★';
+  if (check(9800000))  return '★';
+  return '';
+}
+
 // ════ Dashboard ════
 function updateDashboard() {
   let tot = 0, totMax = 0, totBase = 0, pm = 0, fr = 0, scored = 0;
@@ -416,14 +514,26 @@ function updateDashboard() {
   document.getElementById('d-scored').textContent = scored;
   document.getElementById('d-total').textContent  = SONGS.length;
 
+  // ヒーロー背景ステージ
+  const hero = document.querySelector('.op-hero');
+  hero.classList.remove('bg-s1','bg-s2','bg-s3','bg-s4');
+  const stage = heroStageClass();
+  if (stage) hero.classList.add(stage);
+
+  // ヒーロー★（除外対象を考慮したスター）
+  const targetForStars = SONGS.filter(s => { const lv = levelStr(s.constant); return lv !== '11+' && lv !== '12'; });
+  document.getElementById('d-stars').textContent = levelStarsStr(targetForStars);
+
   // Level breakdown
   const map = {};
+  const songsByLv = {};
   SONGS.forEach(s => {
     const lv = levelStr(s.constant);
-    if (!map[lv]) map[lv] = { op: 0, base: 0, max: 0, n: 0, sc: 0 };
+    if (!map[lv]) { map[lv] = { op: 0, base: 0, max: 0, n: 0, sc: 0 }; songsByLv[lv] = []; }
     map[lv].max  += maxOP(s.constant);
     map[lv].base += base100(s.constant);
     map[lv].n++;
+    songsByLv[lv].push(s);
     const v = scores[s.id]?.score || 0;
     if (v >= 9200000) { map[lv].op += calcOP(v, s.constant, s.totalNotes); map[lv].sc++; }
   });
@@ -437,13 +547,14 @@ function updateDashboard() {
     const d = map[lv];
     const p = d.base > 0 ? d.op / d.base * 100 : 0;
     const barW = Math.min(101, p) / 101 * 100;
+    const stars = levelStarsStr(songsByLv[lv]);
     return `<div class="lv-row">
       <div class="lv-name">Lv ${lv}</div>
       <div class="lv-bar-wrap">
         <div class="lv-bar-bg"><div class="lv-bar-fill" style="width:${barW.toFixed(1)}%;background:${barColor(p)}"></div></div>
         <div class="lv-detail">${fmt4(d.op)} / ${fmt4(d.max)} &nbsp;·&nbsp; ${d.sc} / ${d.n} 曲入力済</div>
       </div>
-      <div class="lv-pct ${colorClass(p)}">${d.sc > 0 ? fmtPct(p) : '—'}</div>
+      <div class="lv-pct ${colorClass(p)}">${d.sc > 0 ? fmtPct(p) : '—'}<div class="lv-stars">${stars}</div></div>
     </div>`;
   }).join('');
 }
@@ -506,9 +617,11 @@ function renderTable() {
     const v   = sc.score || 0;
     const op  = v >= 9200000 ? calcOP(v, s.constant, s.totalNotes) : null;
     const pct = op != null ? calcPct(op, s.constant, v) : null;
-    const cc  = pct != null ? colorClass(pct) : 'dim';
     const pm  = isPM(v), fr = sc.fr || pm;
     const maxScore = 10000000 + s.totalNotes;
+    const stars = v > 0 ? scoreStars(v) : '';
+    const opHtml = op != null ? opValHtml(fmt4(op), v, s.totalNotes) : '—';
+    const pctHtml = pct != null ? opValHtml(fmtPct(pct), v, s.totalNotes) : '—';
     return `<tr>
       <td><span class="diff-badge d-${s.difficulty}">${s.difficulty}</span></td>
       <td>
@@ -516,15 +629,18 @@ function renderTable() {
         ${s.artist ? `<div class="song-artist">${esc(s.artist)}</div>` : ''}
       </td>
       <td class="dim mono" style="font-size:12px">Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}</td>
-      <td><input type="number" class="score-inp" value="${v || ''}" min="0" max="${maxScore}" placeholder="—"
-        data-id="${esc(s.id)}" data-notes="${s.totalNotes}" data-max="${maxScore}"
-        onchange="onScoreChange(this)"></td>
+      <td>
+        <input type="number" class="score-inp" value="${v || ''}" min="0" max="${maxScore}" placeholder="—"
+          data-id="${esc(s.id)}" data-notes="${s.totalNotes}" data-max="${maxScore}"
+          onchange="onScoreChange(this)">
+        <div class="score-stars">${stars}</div>
+      </td>
       <td><input type="checkbox" class="fr-check" ${fr ? 'checked' : ''} ${pm ? 'disabled' : ''}
         data-id="${esc(s.id)}"
         onchange="onFRChange(this)" title="Full Recall（LOSTなし）"></td>
-      <td class="mono ${cc}">${op != null ? fmt4(op) : '—'}</td>
+      <td class="mono">${opHtml}</td>
       <td class="mono dim" style="font-size:12px">${fmt4(maxOP(s.constant))}</td>
-      <td class="mono ${cc}">${pct != null ? fmtPct(pct) : '—'}</td>
+      <td class="mono">${pctHtml}</td>
     </tr>`;
   }).join('');
 
