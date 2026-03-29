@@ -210,6 +210,22 @@ body.light .op-hero{background:linear-gradient(135deg,var(--surface) 0%,#dce4f0 
 }
 .op-hero.bg-s4{animation:prismatic 5s ease-in-out infinite;}
 
+/* ── Level row background stages ── */
+.lv-row.bg-s1{background:linear-gradient(90deg,#0e1428 0%,#141e38 100%);border-color:#5a7090;}
+.lv-row.bg-s2{background:linear-gradient(90deg,#080f28 0%,#0d1e48 100%);border-color:#366FFF;box-shadow:0 0 14px rgba(54,111,255,0.18);}
+.lv-row.bg-s3{background:linear-gradient(90deg,#061828 0%,#0a2238 100%);border-color:#1BD5FF;box-shadow:0 0 16px rgba(27,213,255,0.22);}
+@keyframes prismatic-row{
+  0%  {border-color:#48e8ff;box-shadow:0 0 18px rgba(72,232,255,0.30);background:linear-gradient(90deg,#061828 0%,#0a2035 100%);}
+  33% {border-color:#a060f0;box-shadow:0 0 18px rgba(160,96,240,0.30);background:linear-gradient(90deg,#0e0820 0%,#180d38 100%);}
+  66% {border-color:#48e8ff;box-shadow:0 0 18px rgba(72,232,255,0.30);background:linear-gradient(90deg,#061828 0%,#0a2035 100%);}
+  100%{border-color:#48e8ff;box-shadow:0 0 18px rgba(72,232,255,0.30);background:linear-gradient(90deg,#061828 0%,#0a2035 100%);}
+}
+.lv-row.bg-s4{animation:prismatic-row 5s ease-in-out infinite;}
+body.light .lv-row.bg-s1{background:linear-gradient(90deg,#e8eef8 0%,#dce8f4 100%);border-color:#8090b0;box-shadow:none;}
+body.light .lv-row.bg-s2{background:linear-gradient(90deg,#dce8ff 0%,#c8daff 100%);border-color:#2a5fd0;box-shadow:0 0 12px rgba(42,95,208,0.15);}
+body.light .lv-row.bg-s3{background:linear-gradient(90deg,#d0f0ff 0%,#b8e8fa 100%);border-color:#0099cc;box-shadow:0 0 14px rgba(0,153,204,0.18);}
+
+
 /* light mode overrides */
 body.light .sc-white{color:#8899b8;}
 body.light .sc-aa1  {color:#c07010;}
@@ -570,7 +586,17 @@ function updateDashboard() {
     const p = d.base > 0 ? d.op / d.base * 100 : 0;
     const barW = Math.min(101, p) / 101 * 100;
     const stars = levelStarsStr(songsByLv[lv]);
-    return `<div class="lv-row">
+    // レベル行の背景ステージを判定
+    const allScored = songsByLv[lv].every(s => (scores[s.id]?.score || 0) >= 9200000);
+    let lvStage = '';
+    if (allScored) {
+      const chk = th => songsByLv[lv].every(s => (scores[s.id]?.score || 0) >= th);
+      if (chk(10000000))     lvStage = 'bg-s4';
+      else if (chk(9900000)) lvStage = 'bg-s3';
+      else if (chk(9800000)) lvStage = 'bg-s2';
+      else                   lvStage = 'bg-s1';
+    }
+    return `<div class="lv-row ${lvStage}">
       <div class="lv-name">Lv ${lv}</div>
       <div class="lv-bar-wrap">
         <div class="lv-bar-bg"><div class="lv-bar-fill" style="width:${barW.toFixed(1)}%;background:${barColor(p)}"></div></div>
