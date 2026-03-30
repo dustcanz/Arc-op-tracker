@@ -4843,56 +4843,56 @@
     "title": "Ignotus Afterburn",
     "artist": "Arcaea Sound Team",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 1028
   }, 
   {
     "title": "Red and Blue and Green",
     "artist": "fn(ArcaeaSoundTeam)",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 1508
   }, 
   {
     "title": "Singularity VVVIP",
     "artist": "Arcaea Sound Team against. ETIA.",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 770
   }, 
   {
     "title": "overdead.",
     "artist": "fn",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 1228
   }, 
   {
     "title": "Mistempered Malignance",
     "artist": "f→n",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 944
   }, 
   {
     "title": "0xe0e1ccull",
     "artist": "s-don vs. nitro (lowiro)",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 1530
   },
   {
     "title": "HIVEMIND INTERLINKED",
     "artist": "かたぎり",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 1445
   }, 
   {
     "title": "Live Faster Die Younger",
     "artist": "Dustvoxx",
     "difficulty": "FTR",
-    "constant": "?",
+    "constant": 0,
     "totalNotes": 1263
   }
 ]
