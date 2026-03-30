@@ -1,3 +1,7 @@
+{
+    "$ver": "v6.13.2"
+    "dataver": "v1.0.0"
+}
 [
   {
     "title": "Testify",
@@ -70,7 +74,8 @@
     "totalNotes": 1644
   },
   {
-    "title": "多次元宇宙融合論",
+    "title": "Extradimensional Cosmic Phenomenon",
+    "titleb": "多次元宇宙融合論",
     "artist": "TAKIO feat. つぐ",
     "difficulty": "ETR",
     "constant": 11.3,
@@ -126,7 +131,8 @@
     "totalNotes": 1450
   },
   {
-    "title": "魔王",
+    "title": "World Ender",
+    "titleb": "魔王",
     "artist": "sasakure.UK × TJ.hangneil",
     "difficulty": "BYD",
     "constant": 11.1,
@@ -140,7 +146,8 @@
     "totalNotes": 1385
   },
   {
-    "title": "最強STRONGER",
+    "title": "SAIKYO STRONGER",
+    "titleb": "最強STRONGER",
     "artist": "REDALiCE vs USAO",
     "difficulty": "FTR",
     "constant": 11.0,
@@ -182,7 +189,8 @@
     "totalNotes": 1768
   },
   {
-    "title": "業 -善なる神とこの世の悪について-",
+    "title": "Misdeed -la bonté de Dieu et l'origine du mal-",
+    "titleb": "業 -善なる神とこの世の悪について-",
     "artist": "光吉猛修 VS 穴山大輔",
     "difficulty": "FTR",
     "constant": 10.9,
@@ -301,7 +309,8 @@
     "totalNotes": 1412
   },
   {
-    "title": "光速神授説 - Divine Light of Myriad -",
+    "title": "Divine Light of Myriad",
+    "titleb": "光速神授説 - Divine Light of Myriad -",
     "artist": "yoho",
     "difficulty": "FTR",
     "constant": 10.8,
@@ -343,7 +352,8 @@
     "totalNotes": 1146
   },
   {
-    "title": "蜘蛛の糸",
+    "title": "Spider's Thread",
+    "titleb": "蜘蛛の糸",
     "artist": "きくお×cosMo＠暴走P feat.影縫英",
     "difficulty": "FTR",
     "constant": 10.8,
@@ -441,7 +451,8 @@
     "totalNotes": 1368
   },
   {
-    "title": "狂恋ROMANCE",
+    "title": "KYOREN ROMANCE",
+    "titleb": "狂恋ROMANCE",
     "artist": "REDALiCE vs DJ Myosuke feat. DELUTAYA",
     "difficulty": "FTR",
     "constant": 10.7,
@@ -462,7 +473,8 @@
     "totalNotes": 1369
   },
   {
-    "title": "烈華RESONANCE",
+    "title": "REKKA RESONANCE",
+    "titleb": "烈華RESONANCE",
     "artist": "REDALiCE vs Kobaryo",
     "difficulty": "FTR",
     "constant": 10.7,
@@ -581,7 +593,8 @@
     "totalNotes": 1460
   },
   {
-    "title": "多次元宇宙融合論",
+    "title": "Extradimensional Cosmic Phenomenon",
+    "titleb": "多次元宇宙融合論",
     "artist": "TAKIO feat. つぐ",
     "difficulty": "FTR",
     "constant": 10.6,
@@ -651,7 +664,8 @@
     "totalNotes": 1263
   },
   {
-    "title": "羽化する亜球体",
+    "title": "Subsphere in Eclosion",
+    "titleb": "羽化する亜球体",
     "artist": "窓辺リカ",
     "difficulty": "ETR",
     "constant": 10.6,
@@ -665,7 +679,8 @@
     "totalNotes": 1202
   },
   {
-    "title": "妖艶魔女 -trappola bewitching-",
+    "title": "trappola bewitching",
+    "titleb": "妖艶魔女 -trappola bewitching-",
     "artist": "gmtn.",
     "difficulty": "BYD",
     "constant": 10.6,
@@ -861,7 +876,8 @@
     "totalNotes": 1280
   },
   {
-    "title": "黄昏の協奏曲",
+    "title": "Twilight Concerto",
+    "titleb": "黄昏の協奏曲",
     "artist": "Scarlette",
     "difficulty": "ETR",
     "constant": 10.5,
@@ -952,7 +968,8 @@
     "totalNotes": 1345
   },
   {
-    "title": "プラシイボ♥バトラー",
+    "title": "Placebo♥Battler",
+    "titleb": "プラシイボ♥バトラー",
     "artist": "OSTER project",
     "difficulty": "FTR",
     "constant": 10.4,
@@ -1008,7 +1025,8 @@
     "totalNotes": 1355
   },
   {
-    "title": "メルティーラプソディー",
+    "title": "Melty Rhapsody",
+    "titleb": "メルティーラプソディー",
     "artist": "lapix feat. PANXI",
     "difficulty": "ETR",
     "constant": 10.4,
@@ -1022,6 +1040,7 @@
     "totalNotes": 1008
   },
   {
+    "titleb": "The 'Raft' taught me: your heart will always find a way.",
     "title": "［筏］は云う。幾ら漂流すれど不撓の心さえ有れば軈て行到ると。",
     "artist": "庭師",
     "difficulty": "ETR",
@@ -1078,14 +1097,16 @@
     "totalNotes": 1170
   },
   {
-    "title": "緋色月下、狂咲ノ絶 (nayuta 2017 ver.)",
+    "title":"Hiiro Gekka, Kyoushou no Zetsu (nayuta 2017 ver.)",
+    "titleb":"緋色月下、狂咲ノ絶 (nayuta 2017 ver.)"
     "artist": "nayuta x 黒鳥(EastNewSound)",
     "difficulty": "FTR",
     "constant": 10.3,
     "totalNotes": 1126
   },
   {
-    "title": "怒槌",
+    "title": "Ikazuchi",
+    "titleb": "怒槌",
     "artist": "光吉猛修",
     "difficulty": "FTR",
     "constant": 10.3,
@@ -1127,7 +1148,8 @@
     "totalNotes": 1086
   },
   {
-    "title": "アリス・リデルに捧ぐ",
+    "title": "To: Alice Liddell",
+    "titleb": "アリス・リデルに捧ぐ",
     "artist": "モリモリあつし",
     "difficulty": "FTR",
     "constant": 10.3,
@@ -1309,7 +1331,8 @@
     "totalNotes": 1339
   },
   {
-    "title": "Quon",
+    "title": "Quon[DJNoriken]",
+    "titleb": "Quon",
     "artist": "DJ Noriken",
     "difficulty": "BYD",
     "constant": 10.2,
@@ -1330,7 +1353,8 @@
     "totalNotes": 1165
   },
   {
-    "title": "最高の悪夢",
+    "title": "Your Best Nightmare",
+    "titleb": "最高の悪夢",
     "artist": "Toby Fox",
     "difficulty": "BYD",
     "constant": 10.2,
@@ -1344,7 +1368,8 @@
     "totalNotes": 1353
   },
   {
-    "title": "患部で止まってすぐ溶ける　～ 狂気の優曇華院",
+    "title": "Kanbu de Tomatte Sugu Tokeru",
+    "titleb": "患部で止まってすぐ溶ける　～ 狂気の優曇華院",
     "artist": "ARM + 夕野ヨシミ (IOSYS) feat. miko",
     "difficulty": "FTR",
     "constant": 10.1,
@@ -1414,7 +1439,8 @@
     "totalNotes": 1004
   },
   {
-    "title": "幻想のサテライト",
+    "title": "Gensou no Satellite",
+    "titleb": "幻想のサテライト",
     "artist": "豚乙女",
     "difficulty": "ETR",
     "constant": 10.1,
@@ -1449,7 +1475,8 @@
     "totalNotes": 1040
   },
   {
-    "title": "竹",
+    "title": "Bamboo",
+    "titleb": "竹",
     "artist": "立秋 feat. ちょこ",
     "difficulty": "FTR",
     "constant": 10.0,
@@ -1526,7 +1553,8 @@
     "totalNotes": 1150
   },
   {
-    "title": "魔王",
+    "title": "World Ender",
+    "titleb": "魔王",
     "artist": "sasakure.UK × TJ.hangneil",
     "difficulty": "FTR",
     "constant": 10.0,
@@ -1589,7 +1617,8 @@
     "totalNotes": 925
   },
   {
-    "title": "雨神楽",
+    "title": "Amekagura",
+    "titleb": "雨神楽",
     "artist": "荒谷サトル",
     "difficulty": "FTR",
     "constant": 9.9,
@@ -1652,7 +1681,8 @@
     "totalNotes": 1129
   },
   {
-    "title": "ディストーション・ニンゲン",
+    "title": "Distortion Human",
+    "titleb": "ディストーション・ニンゲン",
     "artist": "DJ Myosuke & KAJI",
     "difficulty": "FTR",
     "constant": 9.9,
@@ -1729,7 +1759,8 @@
     "totalNotes": 1108
   },
   {
-    "title": "彩る夏の恋花火",
+    "title": "Summer Fireworks of Love",
+    "titleb": "彩る夏の恋花火",
     "artist": "karatoPαnchii feat. はるの",
     "difficulty": "FTR",
     "constant": 9.9,
@@ -1764,7 +1795,8 @@
     "totalNotes": 1074
   },
   {
-    "title": "妖艶魔女 -trappola bewitching-",
+    "title": "trappola bewitching",
+    "titleb": "妖艶魔女 -trappola bewitching-",
     "artist": "gmtn.",
     "difficulty": "FTR",
     "constant": 9.9,
@@ -1792,7 +1824,7 @@
     "totalNotes": 1182
   },
   {
-    "title": "~\\_+",
+    "title": "~_+",
     "artist": "AQUASINE ~ MEMODEMO + METAROOM",
     "difficulty": "FTR",
     "constant": 9.9,
@@ -1827,7 +1859,8 @@
     "totalNotes": 1043
   },
   {
-    "title": "進捗どうですか?",
+    "title": "Shinchoku Doudesuka?",
+    "titleb": "進捗どうですか?",
     "artist": "sumijun feat. ななひら",
     "difficulty": "ETR",
     "constant": 9.9,
@@ -1876,7 +1909,8 @@
     "totalNotes": 995
   },
   {
-    "title": "狂言綺語",
+    "title": "False Embellishment",
+    "titleb": "狂言綺語",
     "artist": "影虎。& ikaruga_nex",
     "difficulty": "BYD",
     "constant": 9.9,
@@ -1967,7 +2001,8 @@
     "totalNotes": 1329
   },
   {
-    "title": "Genesis",
+    "title": "Genesis[Morrigan]",
+    "titleb": "Genesis",
     "artist": "Morrigan feat.Lily",
     "difficulty": "FTR",
     "constant": 9.8,
@@ -1981,7 +2016,8 @@
     "totalNotes": 794
   },
   {
-    "title": "秋の陽炎",
+    "title": "Haze of Autumn",
+    "titleb": "秋の陽炎",
     "artist": "karatoPαnchii feat. はるの",
     "difficulty": "FTR",
     "constant": 9.8,
@@ -1995,7 +2031,8 @@
     "totalNotes": 1560
   },
   {
-    "title": "ヒュブリスの頂に聳えるのは",
+    "title": "Hybris (The one who shattered)",
+    "titleb": "ヒュブリスの頂に聳えるのは",
     "artist": "qfeileadh feat.のあ",
     "difficulty": "FTR",
     "constant": 9.8,
@@ -2023,7 +2060,8 @@
     "totalNotes": 1204
   },
   {
-    "title": "感情の摩天楼 ～Arr.Demetori",
+    "title": "Kanjou no matenrou ～Arr.Demetori",
+    "titleb": "感情の摩天楼 ～Arr.Demetori",
     "artist": "Demetori",
     "difficulty": "FTR",
     "constant": 9.8,
@@ -2128,7 +2166,8 @@
     "totalNotes": 1195
   },
   {
-    "title": "朱月ノ姫",
+    "title": "Scarlet Lunar Empress",
+    "titleb": "朱月ノ姫",
     "artist": "technoplanet feat. 夕月ティア",
     "difficulty": "FTR",
     "constant": 9.8,
@@ -2170,7 +2209,8 @@
     "totalNotes": 1304
   },
   {
-    "title": "彼方の夢へと",
+    "title": "To the Furthest Dream",
+    "titleb": "彼方の夢へと",
     "artist": "ii/night feat. 綺良雪",
     "difficulty": "FTR",
     "constant": 9.8,
@@ -2205,7 +2245,8 @@
     "totalNotes": 1138
   },
   {
-    "title": "ヨミビトシラズ",
+    "title": "yomibito_shirazu",
+    "titleb": "ヨミビトシラズ",
     "artist": "Limonène (サノカモメ+月島春果)",
     "difficulty": "FTR",
     "constant": 9.8,
@@ -2289,7 +2330,8 @@
     "totalNotes": 1103
   },
   {
-    "title": "神奈川電脳暗渠",
+    "title": "Kanagawa Cyber Culvert",
+    "titleb": "神奈川電脳暗渠",
     "artist": "南ゆに",
     "difficulty": "BYD",
     "constant": 9.8,
@@ -2394,7 +2436,8 @@
     "totalNotes": 1099
   },
   {
-    "title": "DX超性能フルメタル少女",
+    "title": "DX Choseinou Full Metal Shojo",
+    "titleb": "DX超性能フルメタル少女",
     "artist": "IOSYS TRAX (uno with.ちよこ)",
     "difficulty": "FTR",
     "constant": 9.7,
@@ -2436,7 +2479,8 @@
     "totalNotes": 1112
   },
   {
-    "title": "蛍火の雪",
+    "title": "Hotarubi no Yuki",
+    "titleb": "蛍火の雪",
     "artist": "Endorfin.",
     "difficulty": "FTR",
     "constant": 9.7,
@@ -2520,7 +2564,8 @@
     "totalNotes": 1123
   },
   {
-    "title": "森奥虚跡",
+    "title": "The Forgotten Forest Haven",
+    "titleb": "森奥虚跡",
     "artist": "ShiBa",
     "difficulty": "FTR",
     "constant": 9.7,
@@ -2583,7 +2628,8 @@
     "totalNotes": 871
   },
   {
-    "title": "これでホントにサヨナラ",
+    "title": "Last Goodbye",
+    "titleb": "これでホントにサヨナラ",
     "artist": "Toby Fox",
     "difficulty": "ETR",
     "constant": 9.7,
@@ -2597,7 +2643,7 @@
     "totalNotes": 881
   },
   {
-    "title": "Last｜Eternity",
+    "title": "Last | Eternity",
     "artist": "onoken",
     "difficulty": "BYD",
     "constant": 9.7,
@@ -2632,14 +2678,16 @@
     "totalNotes": 954
   },
   {
-    "title": "迷える音色は恋の唄",
+    "title": "A Wandering Melody of Love",
+    "titleb": "迷える音色は恋の唄",
     "artist": "からとPαnchii少年 feat. はるの",
     "difficulty": "FTR",
     "constant": 9.6,
     "totalNotes": 931
   },
   {
-    "title": "アローンアンドローン",
+    "title": "Alone & Lorn",
+    "titleb": "アローンアンドローン",
     "artist": "Ponchi♪ feat. はぁち",
     "difficulty": "FTR",
     "constant": 9.6,
@@ -2695,7 +2743,8 @@
     "totalNotes": 1056
   },
   {
-    "title": "心",
+    "title": "Heart",
+    "titleb": "心",
     "artist": "削除 (Violin: Katali)",
     "difficulty": "FTR",
     "constant": 9.6,
@@ -2716,14 +2765,16 @@
     "totalNotes": 1031
   },
   {
-    "title": "白道、多希望羊と信じありく。",
+    "title": "LunarOrbit -believe in the Espebranch road-",
+    "titleb": "白道、多希望羊と信じありく。",
     "artist": "Apo11o program ft. 大瀬良あい",
     "difficulty": "FTR",
     "constant": 9.6,
     "totalNotes": 1058
   },
   {
-    "title": "メルティーラプソディー",
+    "title": "Melty Rhapsody",
+    "titleb": "メルティーラプソディー",
     "artist": "lapix feat. PANXI",
     "difficulty": "FTR",
     "constant": 9.6,
@@ -2772,7 +2823,8 @@
     "totalNotes": 877
   },
   {
-    "title": "羽化する亜球体",
+    "title": "Subsphere in Eclosion",
+    "titleb": "羽化する亜球体",
     "artist": "窓辺リカ",
     "difficulty": "FTR",
     "constant": 9.6,
@@ -2821,7 +2873,7 @@
     "totalNotes": 986
   },
   {
-    "title": "Last｜Moment",
+    "title": "Last | Moment",
     "artist": "onoken",
     "difficulty": "BYD",
     "constant": 9.6,
@@ -2898,7 +2950,8 @@
     "totalNotes": 738
   },
   {
-    "title": "緋纏いの宵",
+    "title": "Evening in Scarlet",
+    "titleb": "緋纏いの宵",
     "artist": "Freezer feat. 妃苺",
     "difficulty": "FTR",
     "constant": 9.5,
@@ -2919,7 +2972,8 @@
     "totalNotes": 733
   },
   {
-    "title": "堕落の園",
+    "title": "Illegal Paradise",
+    "titleb": "堕楽の園",
     "artist": "gmtn. (witch's slave)",
     "difficulty": "FTR",
     "constant": 9.5,
@@ -3031,7 +3085,8 @@
     "totalNotes": 1226
   },
   {
-    "title": "［筏］は云う。幾ら漂流すれど不撓の心さえ有れば軈て行到ると。",
+    "title": "The 'Raft' taught me: your heart will always find a way.",
+    "titleb": "［筏］は云う。幾ら漂流すれど不撓の心さえ有れば軈て行到ると。",
     "artist": "庭師",
     "difficulty": "FTR",
     "constant": 9.5,
@@ -3045,7 +3100,8 @@
     "totalNotes": 805
   },
   {
-    "title": "黄昏の協奏曲",
+    "title": "Twilight Concerto",
+    "titleb": "黄昏の協奏曲",
     "artist": "Scarlette",
     "difficulty": "FTR",
     "constant": 9.5,
@@ -3199,7 +3255,8 @@
     "totalNotes": 1061
   },
   {
-    "title": "不浄な白い鳥",
+    "title": "Impure Bird",
+    "titleb": "不浄な白い鳥",
     "artist": "MIssionary",
     "difficulty": "FTR",
     "constant": 9.4,
@@ -3241,7 +3298,8 @@
     "totalNotes": 853
   },
   {
-    "title": "おまじない",
+    "title": "OMAJINAI",
+    "titleb": "おまじない",
     "artist": "Tsubusare BOZZ × Madoka*",
     "difficulty": "FTR",
     "constant": 9.4,
@@ -3255,14 +3313,16 @@
     "totalNotes": 800
   },
   {
-    "title": "ピコPico*とらんすれーしょんっ！",
+    "title": "PICO-Pico-Translation!",
+    "titleb": "ピコPico*とらんすれーしょんっ！",
     "artist": "t+pazolite,ななひら,Cranky,Pico*",
     "difficulty": "FTR",
     "constant": 9.4,
     "totalNotes": 1049
   },
   {
-    "title": "レイヴンズ・プライド",
+    "title": "Raven's Pride",
+    "titleb": "レイヴンズ・プライド",
     "artist": "みーに feat. はらもりよしな",
     "difficulty": "FTR",
     "constant": 9.4,
@@ -3276,7 +3336,8 @@
     "totalNotes": 845
   },
   {
-    "title": "無機質世界に彩を",
+    "title": "Redraw the Colorless World",
+    "titleb": "無機質世界に彩を",
     "artist": "MisomyL",
     "difficulty": "FTR",
     "constant": 9.4,
@@ -3332,7 +3393,8 @@
     "totalNotes": 932
   },
   {
-    "title": "夜桜吹雪",
+    "title": "Yosakura Fubuki",
+    "titleb": "夜桜吹雪",
     "artist": "A.SAKA",
     "difficulty": "FTR",
     "constant": 9.4,
@@ -3353,14 +3415,16 @@
     "totalNotes": 1144
   },
   {
-    "title": "華麗なる死闘",
+    "title": "Death by Glamour",
+    "titleb": "華麗なる死闘",
     "artist": "Toby Fox",
     "difficulty": "ETR",
     "constant": 9.4,
     "totalNotes": 912
   },
   {
-    "title": "フレテミタイ",
+    "title": "FURETE-MITAI",
+    "titleb": "フレテミタイ",
     "artist": "みきとP",
     "difficulty": "ETR",
     "constant": 9.4,
@@ -3409,7 +3473,8 @@
     "totalNotes": 850
   },
   {
-    "title": "ベースラインやってる？w",
+    "title": "Can I Friend You On Bassbook? Lol",
+    "titleb": "ベースラインやってる？w",
     "artist": "かめりあ feat. ななひら",
     "difficulty": "FTR",
     "constant": 9.3,
@@ -3423,7 +3488,8 @@
     "totalNotes": 1043
   },
   {
-    "title": "狂言綺語",
+    "title": "False Embellishment",
+    "titleb": "狂言綺語",
     "artist": "影虎。& ikaruga_nex",
     "difficulty": "FTR",
     "constant": 9.3,
@@ -3556,7 +3622,8 @@
     "totalNotes": 831
   },
   {
-    "title": "ネコノテ・カリタガール",
+    "title": "Dancin' on A Cat's Paw",
+    "titleb": "ネコノテ・カリタガール",
     "artist": "Ino(chronoize)",
     "difficulty": "FTR",
     "constant": 9.2,
@@ -3710,14 +3777,16 @@
     "totalNotes": 1047
   },
   {
-    "title": "キャラメルポップコーンたべたいよ～",
+    "title": "Gimme Caramel Popcorn!",
+    "titleb": "キャラメルポップコーンたべたいよ～",
     "artist": "ヤミナベレコーズ feat. 繭糸",
     "difficulty": "ETR",
     "constant": 9.1,
     "totalNotes": 959
   },
   {
-    "title": "プレヤ",
+    "title": "Prayer",
+    "titleb": "プレヤ",
     "artist": "qfeileadh&レゾナンスもえこ",
     "difficulty": "ETR",
     "constant": 9.1,
@@ -3731,7 +3800,8 @@
     "totalNotes": 1042
   },
   {
-    "title": "フライブルクとエンドロウル",
+    "title": "Flyburg and Endroll",
+    "titleb": "フライブルクとエンドロウル",
     "artist": "アリスシャッハと魔法の楽団",
     "difficulty": "FTR",
     "constant": 9.0,
@@ -3752,7 +3822,8 @@
     "totalNotes": 841
   },
   {
-    "title": "神奈川電脳暗渠",
+    "title": "Kanagawa Cyber Culvert",
+    "titleb": "神奈川電脳暗渠",
     "artist": "南ゆに",
     "difficulty": "FTR",
     "constant": 9.0,
@@ -3766,7 +3837,8 @@
     "totalNotes": 831
   },
   {
-    "title": "無法地点",
+    "title": "Lawless Point",
+    "titleb": "無法地点",
     "artist": "La prière",
     "difficulty": "FTR",
     "constant": 9.0,
@@ -3871,7 +3943,8 @@
     "totalNotes": 580
   },
   {
-    "title": "九番目の迷路",
+    "title": "Maze No.9",
+    "titleb": "九番目の迷路",
     "artist": "アリスシャッハと魔法の楽団",
     "difficulty": "FTR",
     "constant": 8.9,
@@ -3899,7 +3972,8 @@
     "totalNotes": 837
   },
   {
-    "title": "最高の悪夢",
+    "title": "Your Best Nightmare",
+    "titleb": "最高の悪夢",
     "artist": "Toby Fox",
     "difficulty": "FTR",
     "constant": 8.9,
@@ -3934,7 +4008,8 @@
     "totalNotes": 773
   },
   {
-    "title": "コスモポップファンクラブ",
+    "title": "Cosmo Pop Funclub",
+    "titleb": "コスモポップファンクラブ",
     "artist": "ナユタン星人",
     "difficulty": "FTR",
     "constant": 8.8,
@@ -3955,7 +4030,8 @@
     "totalNotes": 695
   },
   {
-    "title": "だいあるのーと",
+    "title": "Dialnote",
+    "titleb": "だいあるのーと",
     "artist": "七草くりむ",
     "difficulty": "FTR",
     "constant": 8.8,
@@ -4004,14 +4080,16 @@
     "totalNotes": 906
   },
   {
-    "title": "進捗どうですか?",
+    "title": "Shinchoku Doudesuka?",
+    "titleb": "進捗どうですか?",
     "artist": "sumijun feat. ななひら",
     "difficulty": "FTR",
     "constant": 8.8,
     "totalNotes": 957
   },
   {
-    "title": "虚空の夢",
+    "title": "Solitary Dream",
+    "titleb": "虚空の夢",
     "artist": "ak+q feat. Sennzai",
     "difficulty": "FTR",
     "constant": 8.8,
@@ -4046,14 +4124,16 @@
     "totalNotes": 916
   },
   {
-    "title": "クロートーと星の観測者",
+    "title": "Clotho and the stargazer",
+    "titleb": "クロートーと星の観測者",
     "artist": "しーけー",
     "difficulty": "ETR",
     "constant": 8.8,
     "totalNotes": 1031
   },
   {
-    "title": "エピクロスの虹はもう見えない",
+    "title": "Hidden Rainbows of Epicurus",
+    "titleb": "エピクロスの虹はもう見えない",
     "artist": "SYNC․ART'S feat.Misato",
     "difficulty": "ETR",
     "constant": 8.8,
@@ -4081,7 +4161,8 @@
     "totalNotes": 791
   },
   {
-    "title": "幻想のサテライト",
+    "title": "Gensou no Satellite",
+    "titleb": "幻想のサテライト",
     "artist": "豚乙女",
     "difficulty": "FTR",
     "constant": 8.7,
@@ -4123,7 +4204,8 @@
     "totalNotes": 964
   },
   {
-    "title": "月に叢雲華に風",
+    "title": "Tsuki ni Murakumo, Hana ni Kaze",
+    "titleb": "月に叢雲華に風",
     "artist": "幽閉サテライト",
     "difficulty": "FTR",
     "constant": 8.7,
@@ -4144,21 +4226,24 @@
     "totalNotes": 861
   },
   {
-    "title": "心の痛み",
+    "title": "Heartache",
+    "titleb": "心の痛み",
     "artist": "Toby Fox",
     "difficulty": "ETR",
     "constant": 8.7,
     "totalNotes": 851
   },
   {
-    "title": "始マリノ詩",
+    "title": "Wake in Hour",
+    "titleb": "始マリノ詩",
     "artist": "有村京悟 feat. July",
     "difficulty": "ETR",
     "constant": 8.7,
     "totalNotes": 726
   },
   {
-    "title": "四月の雨",
+    "title": "April showers",
+    "titleb": "四月の雨",
     "artist": "cubesato",
     "difficulty": "FTR",
     "constant": 8.6,
@@ -4263,7 +4348,8 @@
     "totalNotes": 653
   },
   {
-    "title": "ハルトピア ~Utopia of Spring~",
+    "title": "Harutopia ~Utopia of Spring~",
+    "titleb": "ハルトピア ~Utopia of Spring~",
     "artist": "A-zu-ra",
     "difficulty": "FTR",
     "constant": 8.5,
@@ -4312,7 +4398,8 @@
     "totalNotes": 732
   },
   {
-    "title": "フレテミタイ",
+    "title": "FURETE-MITAI",
+    "titleb": "フレテミタイ",
     "artist": "みきとP",
     "difficulty": "FTR",
     "constant": 8.4,
@@ -4487,7 +4574,8 @@
     "totalNotes": 898
   },
   {
-    "title": "これでホントにサヨナラ",
+    "title": "Last Goodbye",
+    "titleb": "これでホントにサヨナラ",
     "artist": "Toby Fox",
     "difficulty": "FTR",
     "constant": 8.2,
@@ -4522,7 +4610,8 @@
     "totalNotes": 885
   },
   {
-    "title": "プレヤ",
+    "title": "Prayer",
+    "titleb": "プレヤ",
     "artist": "qfeileadh&レゾナンスもえこ",
     "difficulty": "FTR",
     "constant": 8.2,
@@ -4543,14 +4632,16 @@
     "totalNotes": 709
   },
   {
-    "title": "キャラメルポップコーンたべたいよ～",
+    "title": "Gimme Caramel Popcorn!",
+    "titleb": "キャラメルポップコーンたべたいよ～",
     "artist": "ヤミナベレコーズ feat. 繭糸",
     "difficulty": "FTR",
     "constant": 8.1,
     "totalNotes": 767
   },
   {
-    "title": "光",
+    "title": "Hikari",
+    "titleb": "光",
     "artist": "THB",
     "difficulty": "FTR",
     "constant": 8.1,
@@ -4592,14 +4683,16 @@
     "totalNotes": 787
   },
   {
-    "title": "クロートーと星の観測者",
+    "title": "Clotho and the stargazer",
+    "titleb": "クロートーと星の観測者",
     "artist": "しーけー",
     "difficulty": "FTR",
     "constant": 7.8,
     "totalNotes": 1021
   },
   {
-    "title": "華麗なる死闘",
+    "title": "Death by Glamour",
+    "titleb": "華麗なる死闘",
     "artist": "Toby Fox",
     "difficulty": "FTR",
     "constant": 7.8,
@@ -4669,7 +4762,8 @@
     "totalNotes": 788
   },
   {
-    "title": "vsキミ戦争",
+    "title": "Romance Wars",
+    "titleb": "vsキミ戦争",
     "artist": "U-ske (feat. lueur)",
     "difficulty": "FTR",
     "constant": 7.8,
@@ -4683,7 +4777,8 @@
     "totalNotes": 818
   },
   {
-    "title": "心の痛み",
+    "title": "Heartache",
+    "titleb": "心の痛み",
     "artist": "Toby Fox",
     "difficulty": "FTR",
     "constant": 7.5,
@@ -4704,14 +4799,16 @@
     "totalNotes": 673
   },
   {
-    "title": "エピクロスの虹はもう見えない",
+    "title": "Hidden Rainbows of Epicurus",
+    "titleb": "エピクロスの虹はもう見えない",
     "artist": "SYNC․ART'S feat.Misato",
     "difficulty": "FTR",
     "constant": 7.5,
     "totalNotes": 783
   },
   {
-    "title": "始マリノ詩",
+    "title": "Wake in Hour",
+    "titleb": "始マリノ詩",
     "artist": "有村京悟 feat. July",
     "difficulty": "FTR",
     "constant": 7.5,
@@ -4744,5 +4841,62 @@
     "difficulty": "FTR",
     "constant": 7.0,
     "totalNotes": 734
+  },
+
+  {
+    "title": "Ignotus Afterburn",
+    "artist": "Arcaea Sound Team",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 1028
+  }, 
+  {
+    "title": "Red and Blue and Green",
+    "artist": "fn(ArcaeaSoundTeam)",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 1508
+  }, 
+  {
+    "title": "Singularity VVVIP",
+    "artist": "Arcaea Sound Team against. ETIA.",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 770
+  }, 
+  {
+    "title": "overdead.",
+    "artist": "fn",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 1228
+  }, 
+  {
+    "title": "Mistempered Malignance",
+    "artist": "f→n",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 944
+  }, 
+  {
+    "title": "0xe0e1ccull",
+    "artist": "s-don vs. nitro (lowiro)",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 1530
+  },
+  {
+    "title": "HIVEMIND INTERLINKED",
+    "artist": "かたぎり",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 1445
+  }, 
+  {
+    "title": "Live Faster Die Younger",
+    "artist": "Dustvoxx",
+    "difficulty": "FTR",
+    "constant": "?",
+    "totalNotes": 1263
   }
 ]
