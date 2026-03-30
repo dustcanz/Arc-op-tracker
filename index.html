@@ -224,6 +224,12 @@ body.light .op-hero{background:linear-gradient(135deg,var(--surface) 0%,#dce4f0 
 body.light .lv-row.bg-s1{background:linear-gradient(90deg,#e8eef8 0%,#dce8f4 100%);border-color:#8090b0;box-shadow:none;}
 body.light .lv-row.bg-s2{background:linear-gradient(90deg,#dce8ff 0%,#c8daff 100%);border-color:#2a5fd0;box-shadow:0 0 12px rgba(42,95,208,0.15);}
 body.light .lv-row.bg-s3{background:linear-gradient(90deg,#d0f0ff 0%,#b8e8fa 100%);border-color:#0099cc;box-shadow:0 0 14px rgba(0,153,204,0.18);}
+@keyframes prismatic-row-light{
+  0%,100%{border-color:#0099cc;box-shadow:0 0 14px rgba(0,153,204,0.20);background:linear-gradient(90deg,#d0f0ff 0%,#b8e8fa 100%);}
+  33%{border-color:#6040b8;box-shadow:0 0 14px rgba(96,64,184,0.20);background:linear-gradient(90deg,#e8d8ff 0%,#d8c8f8 100%);}
+  66%{border-color:#0099cc;box-shadow:0 0 14px rgba(0,153,204,0.20);background:linear-gradient(90deg,#d0f0ff 0%,#b8e8fa 100%);}
+}
+body.light .lv-row.bg-s4{animation:prismatic-row-light 5s ease-in-out infinite;}
 
 
 /* light mode overrides */
@@ -308,6 +314,7 @@ body.light .op-hero.bg-s3{background:linear-gradient(135deg,#d0f0ff 0%,#b8e8fa 1
         <select id="f-sort" onchange="renderTable()">
           <option value="const">定数順</option>
           <option value="level">レベル順</option>
+          <option value="game">楽曲順(ゲーム内)</option>
           <option value="score">スコア順</option>
           <option value="pct">達成率順</option>
           <option value="title">楽曲名順</option>
@@ -336,7 +343,13 @@ body.light .op-hero.bg-s3{background:linear-gradient(135deg,#d0f0ff 0%,#b8e8fa 1
         <button class="btn ghost" onclick="document.getElementById('score-import-file').click()">スコアデータを復元</button>
         <input type="file" id="score-import-file" accept=".json" style="display:none" onchange="importScoreData(this)">
       </div>
-      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データは <code>songdata.json</code> を編集して管理してください。</div>
+      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データは <code>songdata.json</code> を編集して管理してください。<br><br>
+        <b>songdata.json フォーマット:</b><br>
+        <code>[{"title":"ソートキー","titleb":"表示名(省略可)","artist":"…","difficulty":"FTR/ETR/BYD","constant":0.0,"totalNotes":0}, …]</code><br>
+        ・<b>title</b>: ゲーム内ソート順の基準となる内部名。日本語曲は英語読み/内部名を入れる。スコア保存キーにも使用。<br>
+        ・<b>titleb</b>（省略可）: 画面上の表示名（日本語正式タイトル等）。設定するとtitleの代わりに表示される。<br>
+        ・同名曲は <code>"title":"Quon"</code> と <code>"title":"Quon[DJNoriken]"</code> のように区別する。
+      </div>
     </div>
     <div class="settings-section">
       <div class="settings-title">OP計算式</div>
@@ -363,34 +376,74 @@ let scores = {};
 let sortDir = 1;       // 1=降順, -1=昇順
 let activeQuery = '';  // 決定ボタンで確定した検索語
 
-// 安定キー: title と difficulty の組み合わせ（楽曲追加でズレない）
-function makeId(title, diff) { return title + '|||' + diff; }
+// 安定キー: title(内部名) + difficulty
+// 同名曲はtitleで区別: "Quon" / "Quon[DJNoriken]" 等
+function makeId(s) { return s.title + '|||' + s.difficulty; }
 
 function persist() { localStorage.setItem('aop_scores', JSON.stringify(scores)); }
 
-// 旧形式(s0, s1, …)から新形式へのマイグレーション
+// マイグレーション
+// 旧形式1: s0,s1,… → title|||diff
+// 旧形式2: title|||diff でtitleがtitlebに移動した場合 → 新title|||diff
 function migrateScores(songsArr) {
   const raw = JSON.parse(localStorage.getItem('aop_scores') || '{}');
   const keys = Object.keys(raw);
   if (keys.length === 0) return raw;
-  // 旧キー判定: s + 数字のみ
-  const hasOld = keys.some(k => /^s\d+$/.test(k));
-  if (!hasOld) return raw;
-  const migrated = {};
-  keys.forEach(k => {
-    const m = k.match(/^s(\d+)$/);
-    if (m) {
-      const idx = parseInt(m[1]);
-      if (songsArr[idx]) {
-        const newKey = makeId(songsArr[idx].title, songsArr[idx].difficulty);
-        migrated[newKey] = raw[k];
-      }
-    } else {
-      migrated[k] = raw[k]; // すでに新形式
+
+  // titlebを持つ曲: 旧キー(titleb|||diff) → 新キー(title|||diff) のマップを作る
+  const titlebRemap = {};
+  songsArr.forEach(s => {
+    if (s.titleb) {
+      const oldKey = s.titleb + '|||' + s.difficulty;
+      const newKey = s.title  + '|||' + s.difficulty;
+      if (oldKey !== newKey) titlebRemap[oldKey] = newKey;
     }
   });
-  console.log(`[OP Tracker] スコアキーをマイグレーション: ${keys.length} → ${Object.keys(migrated).length}`);
+
+  // 数値インデックス形式のルックアップ
+  const byIndex = {};
+  songsArr.forEach((s, i) => { byIndex['s' + i] = s; });
+
+  const needsMigration = keys.some(k => /^s\d+$/.test(k) || titlebRemap[k]);
+  if (!needsMigration) return raw;
+
+  const migrated = {};
+  keys.forEach(k => {
+    if (/^s\d+$/.test(k)) {
+      const s = byIndex[k];
+      if (s) migrated[makeId(s)] = raw[k];
+    } else if (titlebRemap[k]) {
+      migrated[titlebRemap[k]] = raw[k];
+    } else {
+      migrated[k] = raw[k];
+    }
+  });
+  console.log(`[OP Tracker] マイグレーション: ${keys.length} → ${Object.keys(migrated).length}`);
   return migrated;
+}
+
+// ════ In-game sort key ════
+// ゲーム内ソート順: 記号→数字→[→A-Z→~→ウムラウト→ギリシャ大→ギリシャ小→全角/日本語→○等
+function gameOrderKey(s) {
+  const str = s.title; // titleが内部ソートキー
+  // 先頭文字でカテゴリを決定
+  const cp = str.codePointAt(0);
+  let cat;
+  // 結合文字・制御文字（例: ͟͝͞Ⅱ́̕）
+  if (cp <= 0x20 || (cp >= 0x300 && cp <= 0x36f) || cp === 0x2161) cat = '0';
+  else if (cp === 0x23) cat = '1';           // #
+  else if (cp === 0x2b) cat = '2';           // +
+  else if (cp >= 0x30 && cp <= 0x39) cat = '3'; // 0-9
+  else if (cp === 0x5b) cat = '4';           // [
+  else if ((cp >= 0x41 && cp <= 0x5a) || (cp >= 0x61 && cp <= 0x7a)) cat = '5'; // A-Z a-z
+  else if (cp === 0x7e) cat = '6';           // ~
+  else if (cp >= 0xc0 && cp <= 0x2af) cat = '7'; // ウムラウト等拡張ラテン (Ä Ö Ü Ä Å Æ…)
+  else if (cp >= 0x391 && cp <= 0x3a9) cat = '8'; // ギリシャ大文字 Α-Ω (Λ Ο Σ…)
+  else if (cp >= 0x3b1 && cp <= 0x3c9) cat = '9'; // ギリシャ小文字 α-ω
+  else if (cp >= 0x3000) cat = 'a';          // 全角・CJK・日本語
+  else cat = 'b';                            // その他
+  // カテゴリ内は小文字化してlocaleCompare
+  return cat + str.toLowerCase();
 }
 
 // ════ OP Calculation ════
@@ -630,8 +683,10 @@ function renderTable() {
     if (fd && s.difficulty !== fd) return false;
     if (fl && levelStr(s.constant) !== fl) return false;
     if (activeQuery) {
-      const t = s.title.toLowerCase(), a = (s.artist || '').toLowerCase();
-      if (!t.includes(activeQuery) && !a.includes(activeQuery)) return false;
+      const t  = s.title.toLowerCase();
+      const tb = (s.titleb || '').toLowerCase();
+      const a  = (s.artist || '').toLowerCase();
+      if (!t.includes(activeQuery) && !tb.includes(activeQuery) && !a.includes(activeQuery)) return false;
     }
     return true;
   });
@@ -639,6 +694,10 @@ function renderTable() {
   list.sort((a, b) => {
     if (fs === 'title') {
       return a.title.localeCompare(b.title, 'ja') * sortDir;
+    }
+    if (fs === 'game') {
+      const ka = gameOrderKey(a), kb = gameOrderKey(b);
+      return ka < kb ? -sortDir : ka > kb ? sortDir : 0;
     }
     let va = 0, vb = 0;
     if (fs === 'const') { va = a.constant; vb = b.constant; }
@@ -670,10 +729,11 @@ function renderTable() {
     const stars = v > 0 ? scoreStars(v) : '';
     const opHtml = op != null ? opValHtml(fmt4(op), v, s.totalNotes) : '—';
     const pctHtml = pct != null ? opValHtml(fmtPct(pct), v, s.totalNotes) : '—';
+    const displayTitle = s.titleb || s.title;
     return `<tr>
       <td><span class="diff-badge d-${s.difficulty}">${s.difficulty}</span></td>
       <td>
-        <div class="song-title">${esc(s.title)}${pm ? '<span class="badge-pm">PM</span>' : fr ? '<span class="badge-fr">FR</span>' : ''}</div>
+        <div class="song-title">${esc(displayTitle)}${pm ? '<span class="badge-pm">PM</span>' : fr ? '<span class="badge-fr">FR</span>' : ''}</div>
         ${s.artist ? `<div class="song-artist">${esc(s.artist)}</div>` : ''}
       </td>
       <td class="dim mono" style="font-size:12px">Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}</td>
@@ -810,7 +870,7 @@ fetch('songdata.json')
     return r.json();
   })
   .then(data => {
-    SONGS = data.map(s => ({ ...s, id: makeId(s.title, s.difficulty) }));
+    SONGS = data.map(s => ({ ...s, id: makeId(s) }));
     scores = migrateScores(data); // 旧形式があれば自動変換
     persist();
     updateDashboard();
