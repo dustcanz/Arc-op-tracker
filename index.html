@@ -314,10 +314,10 @@ body.light .op-hero.bg-s3{background:linear-gradient(135deg,#d0f0ff 0%,#b8e8fa 1
         <select id="f-sort" onchange="renderTable()">
           <option value="const">定数順</option>
           <option value="level">レベル順</option>
-          <option value="game">楽曲順(ゲーム内)</option>
           <option value="score">スコア順</option>
           <option value="pct">達成率順</option>
           <option value="title">楽曲名順</option>
+          <option value="game">楽曲名順(ゲーム内)</option>
         </select>
         <button class="ctrl-btn" id="sort-dir-btn" onclick="toggleSortDir()" title="昇順/降順切替">↓ 降順</button>
       </div>
@@ -343,12 +343,7 @@ body.light .op-hero.bg-s3{background:linear-gradient(135deg,#d0f0ff 0%,#b8e8fa 1
         <button class="btn ghost" onclick="document.getElementById('score-import-file').click()">スコアデータを復元</button>
         <input type="file" id="score-import-file" accept=".json" style="display:none" onchange="importScoreData(this)">
       </div>
-      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。楽曲定数データは <code>songdata.json</code> を編集して管理してください。<br><br>
-        <b>songdata.json フォーマット:</b><br>
-        <code>[{"title":"ソートキー","titleb":"表示名(省略可)","artist":"…","difficulty":"FTR/ETR/BYD","constant":0.0,"totalNotes":0}, …]</code><br>
-        ・<b>title</b>: ゲーム内ソート順の基準となる内部名。日本語曲は英語読み/内部名を入れる。スコア保存キーにも使用。<br>
-        ・<b>titleb</b>（省略可）: 画面上の表示名（日本語正式タイトル等）。設定するとtitleの代わりに表示される。<br>
-        ・同名曲は <code>"title":"Quon"</code> と <code>"title":"Quon[DJNoriken]"</code> のように区別する。
+      <div class="hint" style="margin-top:10px">スコアデータのバックアップ・別端末への移行に使用します。
       </div>
     </div>
     <div class="settings-section">
