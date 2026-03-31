@@ -231,6 +231,13 @@ body.light .lv-row.bg-s3{background:linear-gradient(90deg,#d0f0ff 0%,#b8e8fa 100
 }
 body.light .lv-row.bg-s4{animation:prismatic-row-light 5s ease-in-out infinite;}
 
+/* ── April Fool ── */
+.lv-separator{height:1px;background:var(--border2);margin:4px 0;}
+.lv-row.af{opacity:.75;}
+.af-badge{display:inline-flex;align-items:center;justify-content:center;padding:2px 6px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;border:1px solid;color:#e8a832;border-color:#e8a832;background:rgba(232,168,50,0.12);}
+body.light .af-badge{color:#a07800;border-color:#a07800;}
+
+
 
 /* light mode overrides */
 body.light .sc-white{color:#8899b8;}
@@ -331,10 +338,15 @@ body.light .op-hero.bg-s3{background:linear-gradient(135deg,#d0f0ff 0%,#b8e8fa 1
   <div id="tab-settings" class="tab-content">
     <div class="settings-section">
       <div class="settings-title">表示設定</div>
-      <div style="display:flex;align-items:center;gap:14px;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
         <span class="hint" style="margin:0">カラーモード</span>
         <button class="ctrl-btn" id="theme-btn" onclick="toggleTheme()" style="min-width:120px">☽ ダークモード</button>
       </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="hint" style="margin:0">エイプリルフール楽曲 (Lv.?)</span>
+        <button class="ctrl-btn" id="af-btn" onclick="toggleAprilFool()" style="min-width:80px">非表示</button>
+      </div>
+      <div class="hint" style="margin-top:6px">ONにするとSONGSタブおよびLEVEL BREAKDOWNにLv.?楽曲が表示されます。全体OPには含まれません。</div>
     </div>
     <div class="settings-section">
       <div class="settings-title">データ管理</div>
@@ -368,8 +380,9 @@ body.light .op-hero.bg-s3{background:linear-gradient(135deg,#d0f0ff 0%,#b8e8fa 1
 // ════ State ════
 let SONGS = [];
 let scores = {};
-let sortDir = 1;       // 1=降順, -1=昇順
-let activeQuery = '';  // 決定ボタンで確定した検索語
+let sortDir = 1;
+let activeQuery = '';
+let showAprilFool = localStorage.getItem('aop_af') === '1';
 
 // 安定キー: title(内部名) + difficulty
 // 同名曲はtitleで区別: "Quon" / "Quon[DJNoriken]" 等
@@ -379,19 +392,25 @@ function persist() { localStorage.setItem('aop_scores', JSON.stringify(scores));
 
 // マイグレーション
 // 旧形式1: s0,s1,… → title|||diff
-// 旧形式2: title|||diff でtitleがtitlebに移動した場合 → 新title|||diff
+// 旧形式2: 日本語titleb → 新title (英語内部名)
 function migrateScores(songsArr) {
   const raw = JSON.parse(localStorage.getItem('aop_scores') || '{}');
   const keys = Object.keys(raw);
   if (keys.length === 0) return raw;
 
-  // titlebを持つ曲: 旧キー(titleb|||diff) → 新キー(title|||diff) のマップを作る
+  // 現行の有効キーセット（title|||diffの組み合わせ）
+  const validKeys = new Set(songsArr.map(s => makeId(s)));
+
+  // titlebRemap: 旧キー → 新キー
+  // ただし旧キーが現行の有効キーとして使われている場合はスキップ（Quon問題の防止）
   const titlebRemap = {};
   songsArr.forEach(s => {
     if (s.titleb) {
       const oldKey = s.titleb + '|||' + s.difficulty;
-      const newKey = s.title  + '|||' + s.difficulty;
-      if (oldKey !== newKey) titlebRemap[oldKey] = newKey;
+      const newKey = makeId(s);
+      if (oldKey !== newKey && !validKeys.has(oldKey)) {
+        titlebRemap[oldKey] = newKey;
+      }
     }
   });
 
@@ -510,6 +529,7 @@ function barColor(pct) {
   return '#00d4ff';
 }
 function isPM(score) { return score >= 10000000; }
+function isAprilFool(s) { return s.constant === 0; }
 
 // ════ Score tier system ════
 function scoreClass(score) {
@@ -545,9 +565,9 @@ function opValHtml(valStr, score, totalNotes) {
   return `<span class="${finalCls}">${valStr}</span>`;
 }
 
-// ヒーロー背景ステージ（Lv11+とLv12を除外した全曲チェック）
+// ヒーロー背景ステージ（Lv11+・Lv12・エイプリルフールを除外した全曲チェック）
 function heroStageClass() {
-  const target = SONGS.filter(s => { const lv = levelStr(s.constant); return lv !== '11+' && lv !== '12'; });
+  const target = SONGS.filter(s => { const lv = levelStr(s.constant); return lv !== '11+' && lv !== '12' && !isAprilFool(s); });
   if (!target.length) return '';
   const check = (th) => target.every(s => (scores[s.id]?.score || 0) >= th);
   if (check(10000000)) return 'bg-s4';
@@ -572,6 +592,7 @@ function levelStarsStr(songsInLevel) {
 function updateDashboard() {
   let tot = 0, totMax = 0, totBase = 0, pm = 0, fr = 0, scored = 0;
   SONGS.forEach(s => {
+    if (isAprilFool(s)) return; // エイプリルフールは全体OPに含まない
     const sc = scores[s.id], v = sc?.score || 0;
     totMax  += maxOP(s.constant);
     totBase += base100(s.constant);
@@ -583,7 +604,6 @@ function updateDashboard() {
     }
   });
 
-  // Dashboard %はbase100基準で0〜101%
   const pct = totBase > 0 ? tot / totBase * 100 : -1;
   const cc  = pct >= 0 ? colorClass(pct) : 'c-white';
   const pctEl = document.getElementById('d-pct');
@@ -598,7 +618,7 @@ function updateDashboard() {
   document.getElementById('d-pm').textContent     = pm;
   document.getElementById('d-fr').textContent     = fr;
   document.getElementById('d-scored').textContent = scored;
-  document.getElementById('d-total').textContent  = SONGS.length;
+  document.getElementById('d-total').textContent  = SONGS.filter(s => !isAprilFool(s)).length;
 
   // ヒーロー背景ステージ
   const hero = document.querySelector('.op-hero');
@@ -607,13 +627,17 @@ function updateDashboard() {
   if (stage) hero.classList.add(stage);
 
   // ヒーロー★（除外対象を考慮したスター）
-  const targetForStars = SONGS.filter(s => { const lv = levelStr(s.constant); return lv !== '11+' && lv !== '12'; });
+  const targetForStars = SONGS.filter(s => {
+    const lv = levelStr(s.constant);
+    return lv !== '11+' && lv !== '12' && !isAprilFool(s);
+  });
   document.getElementById('d-stars').textContent = levelStarsStr(targetForStars);
 
-  // Level breakdown
+  // Level breakdown（通常曲のみ）
   const map = {};
   const songsByLv = {};
   SONGS.forEach(s => {
+    if (isAprilFool(s)) return;
     const lv = levelStr(s.constant);
     if (!map[lv]) { map[lv] = { op: 0, base: 0, max: 0, n: 0, sc: 0 }; songsByLv[lv] = []; }
     map[lv].max  += maxOP(s.constant);
@@ -625,20 +649,15 @@ function updateDashboard() {
   });
   const levels = Object.keys(map).sort((a, b) => lvOrd(b) - lvOrd(a));
   const grid   = document.getElementById('lv-grid');
-  if (!levels.length) {
-    grid.innerHTML = '<div class="empty-state">スコアを入力するとレベル別の集計が表示されます</div>';
-    return;
-  }
-  grid.innerHTML = levels.map(lv => {
-    const d = map[lv];
-    const p = d.base > 0 ? d.op / d.base * 100 : 0;
+
+  function lvRowHtml(lv, d, songList) {
+    const p    = d.base > 0 ? d.op / d.base * 100 : 0;
     const barW = Math.min(101, p) / 101 * 100;
-    const stars = levelStarsStr(songsByLv[lv]);
-    // レベル行の背景ステージを判定
-    const allScored = songsByLv[lv].every(s => (scores[s.id]?.score || 0) >= 9200000);
+    const stars = levelStarsStr(songList);
+    const allScored = songList.every(s => (scores[s.id]?.score || 0) >= 9200000);
     let lvStage = '';
     if (allScored) {
-      const chk = th => songsByLv[lv].every(s => (scores[s.id]?.score || 0) >= th);
+      const chk = th => songList.every(s => (scores[s.id]?.score || 0) >= th);
       if (chk(10000000))     lvStage = 'bg-s4';
       else if (chk(9900000)) lvStage = 'bg-s3';
       else if (chk(9800000)) lvStage = 'bg-s2';
@@ -652,7 +671,36 @@ function updateDashboard() {
       </div>
       <div class="lv-pct ${colorClass(p)}">${d.sc > 0 ? fmtPct(p) : '—'}<div class="lv-stars">${stars}</div></div>
     </div>`;
-  }).join('');
+  }
+
+  let html = levels.map(lv => lvRowHtml(lv, map[lv], songsByLv[lv])).join('');
+
+  // Lv.?（エイプリルフール）セクション
+  if (showAprilFool) {
+    const afSongs = SONGS.filter(s => isAprilFool(s));
+    if (afSongs.length) {
+      let afOp = 0, afSc = 0;
+      afSongs.forEach(s => {
+        const v = scores[s.id]?.score || 0;
+        if (v >= 9200000) { afOp += calcOP(v, s.constant, s.totalNotes); afSc++; }
+      });
+      html += `<div class="lv-separator"></div>
+      <div class="lv-row af">
+        <div class="lv-name" style="font-size:14px">Lv ?</div>
+        <div class="lv-bar-wrap">
+          <div class="lv-bar-bg"></div>
+          <div class="lv-detail">${afSc} / ${afSongs.length} 曲入力済（全体OPに含まない）</div>
+        </div>
+        <div class="lv-pct dim">—</div>
+      </div>`;
+    }
+  }
+
+  if (!levels.length && !html) {
+    grid.innerHTML = '<div class="empty-state">スコアを入力するとレベル別の集計が表示されます</div>';
+    return;
+  }
+  grid.innerHTML = html;
 }
 
 // ════ Song Table ════
@@ -667,16 +715,22 @@ function renderTable() {
   const fl = document.getElementById('f-lv').value;
   const fs = document.getElementById('f-sort').value;
 
-  // Rebuild level filter
-  const allLvs = [...new Set(SONGS.map(s => levelStr(s.constant)))].sort((a, b) => lvOrd(b) - lvOrd(a));
+  // Rebuild level filter（エイプリルフール除外、表示設定に応じてLv?追加）
+  const allLvs = [...new Set(SONGS.filter(s => !isAprilFool(s)).map(s => levelStr(s.constant)))].sort((a, b) => lvOrd(b) - lvOrd(a));
   const flEl = document.getElementById('f-lv');
   const prevLv = flEl.value;
+  const afOption = showAprilFool ? '<option value="?">Lv ?</option>' : '';
   flEl.innerHTML = '<option value="">レベル</option>' +
-    allLvs.map(l => `<option value="${l}"${l === prevLv ? ' selected' : ''}>${l}</option>`).join('');
+    allLvs.map(l => `<option value="${l}"${l === prevLv ? ' selected' : ''}>${l}</option>`).join('') +
+    afOption;
 
   let list = SONGS.filter(s => {
+    const af = isAprilFool(s);
+    // エイプリルフールの表示制御
+    if (af && !showAprilFool) return false;
     if (fd && s.difficulty !== fd) return false;
-    if (fl && levelStr(s.constant) !== fl) return false;
+    if (fl === '?') { if (!af) return false; }
+    else if (fl) { if (af || levelStr(s.constant) !== fl) return false; }
     if (activeQuery) {
       const t  = s.title.toLowerCase();
       const tb = (s.titleb || '').toLowerCase();
@@ -717,21 +771,25 @@ function renderTable() {
   const rows = list.map(s => {
     const sc  = scores[s.id] || { score: 0, fr: false };
     const v   = sc.score || 0;
-    const op  = v >= 9200000 ? calcOP(v, s.constant, s.totalNotes) : null;
+    const af  = isAprilFool(s);
+    const op  = (!af && v >= 9200000) ? calcOP(v, s.constant, s.totalNotes) : null;
     const pct = op != null ? calcPct(op, s.constant, v) : null;
     const pm  = isPM(v), fr = sc.fr || pm;
     const maxScore = 10000000 + s.totalNotes;
     const stars = v > 0 ? scoreStars(v) : '';
-    const opHtml = op != null ? opValHtml(fmt4(op), v, s.totalNotes) : '—';
+    const opHtml  = op != null ? opValHtml(fmt4(op), v, s.totalNotes) : '—';
     const pctHtml = pct != null ? opValHtml(fmtPct(pct), v, s.totalNotes) : '—';
     const displayTitle = s.titleb || s.title;
+    const lvLabel = af
+      ? `<span class="af-badge">Lv ?</span>`
+      : `Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}`;
     return `<tr>
       <td><span class="diff-badge d-${s.difficulty}">${s.difficulty}</span></td>
       <td>
         <div class="song-title">${esc(displayTitle)}${pm ? '<span class="badge-pm">PM</span>' : fr ? '<span class="badge-fr">FR</span>' : ''}</div>
         ${s.artist ? `<div class="song-artist">${esc(s.artist)}</div>` : ''}
       </td>
-      <td class="dim mono" style="font-size:12px">Lv ${levelStr(s.constant)} / ${s.constant.toFixed(1)}</td>
+      <td class="dim mono" style="font-size:12px">${lvLabel}</td>
       <td>
         <input type="number" class="score-inp" value="${v || ''}" min="0" max="${maxScore}" placeholder="—"
           data-id="${esc(s.id)}" data-notes="${s.totalNotes}" data-max="${maxScore}"
@@ -742,7 +800,7 @@ function renderTable() {
         data-id="${esc(s.id)}"
         onchange="onFRChange(this)" title="Full Recall（LOSTなし）"></td>
       <td class="mono">${opHtml}</td>
-      <td class="mono dim" style="font-size:12px">${fmt4(maxOP(s.constant))}</td>
+      <td class="mono dim" style="font-size:12px">${af ? '—' : fmt4(maxOP(s.constant))}</td>
       <td class="mono">${pctHtml}</td>
     </tr>`;
   }).join('');
@@ -817,6 +875,21 @@ function updateThemeBtn(isLight) {
   if (btn) btn.textContent = isLight ? '☀ ライトモード' : '☽ ダークモード';
 }
 
+// ════ April Fool toggle ════
+function toggleAprilFool() {
+  showAprilFool = !showAprilFool;
+  localStorage.setItem('aop_af', showAprilFool ? '1' : '0');
+  updateAfBtn();
+  updateDashboard();
+  renderTable();
+}
+function updateAfBtn() {
+  const btn = document.getElementById('af-btn');
+  if (!btn) return;
+  btn.textContent = showAprilFool ? '表示中' : '非表示';
+  btn.classList.toggle('active-dir', showAprilFool);
+}
+
 // ════ Navigation (URL hash) ════
 const TABS = ['dashboard', 'songs', 'settings'];
 
@@ -885,6 +958,9 @@ activateTab(initTab);
 const savedTheme = localStorage.getItem('aop_theme');
 if (savedTheme === 'light') { document.body.classList.add('light'); }
 updateThemeBtn(document.body.classList.contains('light'));
+
+// Init April Fool button
+updateAfBtn();
 </script>
 </body>
 </html>
